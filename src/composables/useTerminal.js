@@ -6,6 +6,7 @@ import {
 } from "../constants/commands";
 import { loadContentJson } from "../services/contentService";
 import { escapeHtml } from "../utils/escapeHtml";
+import Typed from "typed.js"; // <--- 1. Importar Typed.js
 
 /**
  * Composable para gestionar toda la lógica de la terminal.
@@ -18,6 +19,7 @@ export function useTerminal({ outputRef, inputRef, inputLineRef }) {
   // --- Estado Reactivo ---
   const inputText = ref(""); // El texto actual en el input
   const isFocused = ref(true); // Estado de foco de la terminal
+  const isDemoMode = ref(false); // <--- 2. Estado para el modo demo
 
   // --- Estado del Modal ---
   const modalHidden = ref(true);
@@ -36,35 +38,24 @@ export function useTerminal({ outputRef, inputRef, inputLineRef }) {
   let currentLang = getInitialLang();
   const translations = ref({});
 
-  /**
-   * Obtiene el texto traducido para una clave específica.
-   * @param {string} key - Clave de traducción (ej: "welcome_title").
-   * @returns {string} - Texto traducido o la clave si no se encuentra.
-   */
   const getText = (key) =>
     (translations.value[currentLang] && translations.value[currentLang][key]) ||
     key;
 
   // --- Manipulación del Output ---
 
-  /**
-   * Añade contenido HTML al componente de output y hace scroll.
-   * @param {string} html - HTML para añadir.
-   */
   const appendHtml = (html) => {
     if (outputRef && outputRef.value && outputRef.value.appendHtml) {
       outputRef.value.appendHtml(html);
     }
   };
 
-  /** Limpia el componente de output. */
   const clearOutput = () => {
     if (outputRef && outputRef.value && outputRef.value.clear) {
       outputRef.value.clear();
     }
   };
 
-  /** Imprime el mensaje de bienvenida inicial. */
   const printWelcomeMessage = () => {
     const welcomeMessage = `
       <div class="mb-4">
@@ -79,17 +70,10 @@ export function useTerminal({ outputRef, inputRef, inputLineRef }) {
 
   // --- Lógica de Ventana/Modal ---
 
-  /**
-   * Abre la ventana modal con contenido.
-   * Desenfoca y deshabilita el input de la terminal.
-   * @param {string} command - El comando que invoca la ventana (ej: "about").
-   */
   const openWindow = (command) => {
-    // Quita el foco visual del input
     if (inputLineRef && inputLineRef.value && inputLineRef.value.classList)
       inputLineRef.value.classList.remove("is-focused");
     
-    // Deshabilita el input real para prevenir escritura
     if (inputRef && inputRef.value) {
       if (inputRef.value.inputRefLocal) {
         try {
@@ -98,12 +82,10 @@ export function useTerminal({ outputRef, inputRef, inputLineRef }) {
       }
     }
 
-    // Configura y muestra el modal
     modalTitle.value = getText(`${command}_title`);
     modalContent.value = getText(`${command}_html`);
     modalHidden.value = false;
 
-    // Refresca los iconos (lucide) dentro del modal
     nextTick(() => {
       try {
         if (window.lucide && window.lucide.createIcons)
@@ -114,30 +96,28 @@ export function useTerminal({ outputRef, inputRef, inputLineRef }) {
     });
   };
 
-  /** Cierra la ventana modal y restaura el foco en la terminal. */
   const closeWindow = () => {
     modalHidden.value = true;
     modalContent.value = "";
     
-    // Devuelve el foco visual
-    if (inputLineRef && inputLineRef.value && inputLineRef.value.classList)
-      inputLineRef.value.classList.add("is-focused");
-    
-    // Rehabilita el input
-    if (inputRef && inputRef.value) {
-      if (inputRef.value.inputRefLocal) {
-        try {
-          inputRef.value.inputRefLocal.disabled = false;
-        } catch (e) {}
+    // Solo restaura el foco si no estamos en modo demo
+    if (!isDemoMode.value) {
+      if (inputLineRef && inputLineRef.value && inputLineRef.value.classList)
+        inputLineRef.value.classList.add("is-focused");
+      
+      if (inputRef && inputRef.value) {
+        if (inputRef.value.inputRefLocal) {
+          try {
+            inputRef.value.inputRefLocal.disabled = false;
+          } catch (e) {}
+        }
       }
+      
+      isFocused.value = true;
+      nextTick(focusInput);
     }
-    
-    isFocused.value = true;
-    // Devuelve el foco programáticamente al input
-    nextTick(focusInput);
   };
 
-  /** Función helper para enfocar el input. */
   const focusInput = () => {
     nextTick(() => {
       if (
@@ -150,22 +130,99 @@ export function useTerminal({ outputRef, inputRef, inputLineRef }) {
     });
   };
   
-  /** Limpia la terminal y muestra el mensaje de bienvenida. */
   const clearTerminal = () => {
     clearOutput();
     printWelcomeMessage();
-    nextTick(focusInput);
+    // No enfocar si la demo está a punto de empezar
+    if (!isDemoMode.value) {
+      nextTick(focusInput);
+    }
   };
+
+  // --- Lógica de Demo (Typed.js) ---
+  let typedInstance = null; // Guardar la instancia para destruirla
+
+  /** Detiene y limpia la demo si está en curso. */
+  const stopDemo = () => {
+    if (typedInstance) {
+      typedInstance.destroy();
+      typedInstance = null;
+    }
+    isDemoMode.value = false;
+    nextTick(focusInput); // Devuelve el foco al input real
+  };
+
+  /** Inicia la demo automatizada. */
+  async function startDemo() {
+    if (isDemoMode.value) return; // Demo ya en curso
+
+    isDemoMode.value = true;
+    
+    // Helper para simular la ejecución de comandos
+    const runCommand = (cmd) => {
+      executeCommand(cmd); // Llama a tu función real
+      
+      // Si el comando abre una ventana, la cerramos para la demo
+      if (windowCommands.includes(cmd)) {
+          setTimeout(closeWindow, 1500); // Cierra la ventana después de 1.5s
+          return new Promise(resolve => setTimeout(resolve, 2000)); // Espera total 2s
+      }
+      // Pausa estándar para otros comandos
+      return new Promise(resolve => setTimeout(resolve, 1500));
+    };
+
+    // Espera a que el v-if en TerminalWindow.vue renderice #demo-typing
+    await nextTick(); 
+
+    try {
+      typedInstance = new Typed('#demo-typing', {
+        strings: [
+          'help^1000',      // Escribe 'help', espera 1s
+          'projects^1500',  // Borra, escribe 'projects', espera 1.5s
+          'skills^1500',    // Borra, escribe 'skills', espera 1.5s
+          'contact^1500',   // Borra, escribe 'contact', espera 1.5s
+          'clear^1000'      // Borra, escribe 'clear', espera 1s
+        ],
+        typeSpeed: 50,
+        backSpeed: 30,
+        backDelay: 1000,
+        loop: false,
+        showCursor: true,
+        cursorChar: '▋',
+        onStringTyped: async (arrayPos, self) => {
+          // Obtener el comando (sin los caracteres de pausa '^1000')
+          const cmd = self.strings[arrayPos].split('^')[0]; 
+          
+          await runCommand(cmd); // Ejecuta el comando y espera
+          
+          // Al final de la demo
+          if (arrayPos === self.strings.length - 1) {
+            setTimeout(() => {
+              stopDemo(); // Limpia y finaliza la demo
+              // Mensaje final
+              appendHtml(`<div><p>${getText("welcome_help")}</p></div>`);
+            }, 2000); // Espera 2s después del 'clear'
+          }
+        }
+      });
+    } catch (e) {
+      console.error("Error al iniciar Typed.js. ¿Existe el elemento #demo-typing en TerminalWindow.vue?", e);
+      stopDemo(); // Revierte si falla
+    }
+  }
 
   // --- Ejecución de Comandos ---
 
-  /**
-   * Parsea y ejecuta un comando ingresado por el usuario.
-   * @param {string} cmdRaw - El comando en crudo.
-   */
   const executeCommand = (cmdRaw) => {
     const cmd = String(cmdRaw);
     const [command, ...args] = cmd.split(" ").filter(Boolean);
+    
+    // --- 7. Comando especial 'demo' ---
+    if (command === "demo") {
+      clearTerminal(); // Limpia la terminal
+      startDemo();     // Inicia la demo
+      return;          // No ejecuta el resto
+    }
     
     // Imprime el comando ejecutado (eco)
     appendHtml(
@@ -176,7 +233,6 @@ export function useTerminal({ outputRef, inputRef, inputLineRef }) {
 
     // --- Enrutamiento de Comandos ---
     if (windowCommands.includes(command)) {
-      // Comandos que abren un modal
       appendHtml(
         `<div><p>${getText(
           "opening_app"
@@ -184,24 +240,21 @@ export function useTerminal({ outputRef, inputRef, inputLineRef }) {
       );
       openWindow(command);
     } else if (command === "clear") {
-      // Limpiar terminal
       clearTerminal();
     } else if (command === "lang") {
-      // Cambiar idioma
       const lang = args[0];
       if (lang === "en" || lang === "es") {
         currentLang = lang;
         localStorage.setItem("portfolioLang", lang);
         document.documentElement.lang = lang;
         appendHtml(`<div><p>${getText("lang_changed")}</p></div>`);
-        setTimeout(clearTerminal, 800); // Recarga la UI con el nuevo idioma
+        setTimeout(clearTerminal, 800);
       } else {
         appendHtml(
           `<div><p class="text-red-400 glow">${getText("lang_usage")}</p></div>`
         );
       }
     } else if (command === "help") {
-      // Mostrar ayuda
       const helpText = `
         <p class="mb-2">${getText("help_header")}</p>
         <ul class="list-disc list-inside">
@@ -236,29 +289,31 @@ export function useTerminal({ outputRef, inputRef, inputLineRef }) {
 
   // --- Manejadores de Eventos de Teclado ---
 
-  /**
-   * Manejador principal de teclado para el input.
-   * @param {KeyboardEvent} e
-   */
   const onKeyDown = (e) => {
     const key = (e.key || "").toString().toLowerCase();
+
+    // <--- 8. Bloquear input durante la demo ---
+    // Si la demo está activa, ignoramos todas las teclas.
+    // 'Escape' se maneja en onDocumentKeyDown
+    if (isDemoMode.value) {
+      e.preventDefault();
+      return;
+    }
 
     if (key === "enter") {
       e.preventDefault();
       const command = inputText.value.trim().toLowerCase();
       if (command) {
-        // Añadir al historial solo si es nuevo y diferente al último
         if (command !== commandHistory[0]) commandHistory.unshift(command);
-        historyIndex = -1; // Resetear índice de historial
+        historyIndex = -1;
         executeCommand(command);
       }
-      inputText.value = ""; // Limpiar input
+      inputText.value = "";
       nextTick(focusInput);
       return;
     }
 
     if (key === "arrowup") {
-      // Navegar historial hacia arriba (más antiguo)
       e.preventDefault();
       if (historyIndex < commandHistory.length - 1) {
         historyIndex++;
@@ -268,13 +323,11 @@ export function useTerminal({ outputRef, inputRef, inputLineRef }) {
     }
 
     if (key === "arrowdown") {
-      // Navegar historial hacia abajo (más reciente)
       e.preventDefault();
       if (historyIndex > 0) {
         historyIndex--;
         inputText.value = commandHistory[historyIndex] || "";
       } else {
-        // Volver al input vacío
         historyIndex = -1;
         inputText.value = "";
       }
@@ -282,16 +335,13 @@ export function useTerminal({ outputRef, inputRef, inputLineRef }) {
     }
 
     if (key === "tab") {
-      // Autocompletar comando
       e.preventDefault();
       const partialCommand = inputText.value.trim().toLowerCase();
       const matches = allCommands.filter((c) => c.startsWith(partialCommand));
       
       if (matches.length === 1) {
-        // Autocompletar único
         inputText.value = matches[0];
       } else if (matches.length > 1) {
-        // Mostrar múltiples opciones
         appendHtml(
           `<div class="flex"><span class="text-emerald-400 glow">manzano@portfolio:~$</span><p class="ml-2">${escapeHtml(
             partialCommand
@@ -305,39 +355,49 @@ export function useTerminal({ outputRef, inputRef, inputLineRef }) {
     }
 
     if (key === "l" && e.ctrlKey) {
-      // Atajo Ctrl+L para limpiar
       e.preventDefault();
       clearTerminal();
       return;
     }
 
     if (key === "escape" && !modalHidden.value) {
-      // Cerrar modal con Escape
       closeWindow();
       return;
     }
   };
 
-  /** Manejador global para la tecla Escape (cierra el modal). */
+  /** Manejador global para la tecla Escape (cierra el modal O detiene la demo). */
   const onDocumentKeyDown = (e) => {
-    if (
-      (e.key || "").toString().toLowerCase() === "escape" &&
-      !modalHidden.value
-    ) {
+    const key = (e.key || "").toString().toLowerCase();
+    if (key !== "escape") return; // Solo nos importa Escape
+
+    // <--- 9. 'Escape' para detener la demo ---
+    if (isDemoMode.value) {
+      e.preventDefault();
+      stopDemo();
+      appendHtml(`<div><p class="text-yellow-400 glow">Demo detenida.</p></div>`);
+      return;
+    }
+    
+    // Comportamiento original: cerrar modal
+    if (!modalHidden.value) {
       closeWindow();
     }
   };
 
   // --- Inicialización ---
 
-  /**
-   * Carga el contenido JSON (traducciones) e inicializa la terminal.
-   */
   async function loadContentAndInit() {
     document.documentElement.lang = currentLang;
     try {
       translations.value = await loadContentJson();
       printWelcomeMessage();
+      
+      // <--- 6. Añadir invitación a la demo ---
+      const langDemo = currentLang === 'es' 
+        ? '¿Es tu primera vez aquí? Escribe "<span class=\"text-yellow-400 glow\">demo</span>" para un tour rápido.'
+        : 'First time here? Type "<span class=\"text-yellow-400 glow\">demo</span>" for a quick tour.';
+      appendHtml(`<div><p>${langDemo}</p></div>`);
       
       // Inicializar iconos
       try {
@@ -362,6 +422,7 @@ export function useTerminal({ outputRef, inputRef, inputLineRef }) {
   return {
     inputText,
     isFocused,
+    isDemoMode, // <--- 3. Exponer el estado de la demo
     modalHidden,
     modalTitle,
     modalContent,

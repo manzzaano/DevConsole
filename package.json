@@ -11,6 +11,7 @@
     "deploy": "gh-pages -d dist"
   },
   "dependencies": {
+    "typed.js": "^2.1.0",
     "vue": "^3.5.22"
   },
   "devDependencies": {

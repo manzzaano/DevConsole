@@ -20,8 +20,17 @@
         @click="focusInput"
       >
         <TerminalOutput ref="outputComponent" />
-        
+
+        <div
+          v-if="isDemoMode"
+          class="flex items-center mt-2 flex-shrink-0"
+        >
+          <span class="text-emerald-400 glow">manzano@portfolio:~$</span>
+          <span id="demo-typing" class="ml-2 whitespace-pre"></span>
+        </div>
+
         <TerminalInput
+          v-if="!isDemoMode"
           ref="inputComponent"
           v-model="inputText"
           :isFocused="isFocused"
@@ -49,51 +58,43 @@ import Modal from "./Modal.vue";
 import { useTerminal } from "../composables/useTerminal";
 
 // --- Referencias a Componentes Hijos ---
-// Necesarias para que el composable pueda interactuar con ellos (ej: outputRef.value.appendHtml())
 const outputComponent = ref(null);
 const inputComponent = ref(null);
 // Ref al *elemento* HTML de la línea de input (para estilado de foco)
 const inputLineRef = ref(null);
 
 // --- Instancia del Composable ---
-// Desestructuramos toda la lógica y el estado desde useTerminal
 const {
   inputText,
   isFocused,
+  isDemoMode, // <--- 1. DESESTRUCTURAR isDemoMode
   modalHidden,
   modalTitle,
   modalContent,
-  onKeyDown, // Manejador de teclado que se pasa a TerminalInput
-  loadContentAndInit, // Función de inicialización
-  onDocumentKeyDown, // Manejador global (para 'Escape')
-  focusInput, // Función para forzar foco
-  closeWindow, // Función para cerrar modal
+  onKeyDown,
+  loadContentAndInit,
+  onDocumentKeyDown,
+  focusInput,
+  closeWindow,
 } = useTerminal({
-  outputRef: outputComponent, // Pasamos las refs al composable
+  outputRef: outputComponent,
   inputRef: inputComponent,
   inputLineRef,
 });
 
 // --- Ciclo de Vida ---
 onMounted(() => {
-  // Registrar listener global para la tecla 'Escape'
   document.addEventListener("keydown", onDocumentKeyDown);
 
-  // Esperar a que el DOM esté renderizado
   nextTick(() => {
     // Asignar la referencia al elemento HTML del input (inputLineRef)
-    // Esto es complejo porque inputComponent (TerminalInput) expone sus propias refs
     if (inputComponent.value) {
       if (inputComponent.value.inputLineRef) {
-        // Si expone la ref del contenedor
         inputLineRef.value = inputComponent.value.inputLineRef;
       } else if (inputComponent.value.inputRefLocal) {
-        // Fallback (aunque menos ideal para el estilo)
         inputLineRef.value = inputComponent.value.inputRefLocal;
       }
 
-      // Intentar enfocar el input al montar
-      // Se usa un try/catch por si la ref aún no está lista
       try {
         if (typeof inputComponent.value.focus === "function") {
           inputComponent.value.focus();
@@ -101,14 +102,14 @@ onMounted(() => {
       } catch (e) {}
     }
 
-    // Cargar contenido (traducciones, etc.) e imprimir bienvenida
     loadContentAndInit();
   });
 
-  // Un segundo intento de foco (fallback)
+  // Fallback de foco (solo si no estamos en modo demo)
   setTimeout(() => {
     try {
       if (
+        !isDemoMode.value && // <-- 2. AÑADIR CONDICIÓN
         inputComponent.value &&
         typeof inputComponent.value.focus === "function"
       )
