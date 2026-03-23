@@ -6,6 +6,43 @@
 
     <div class="grid grid-cols-1 gap-6">
       <div
+        class="project-card border border-white/10 bg-white/5 p-5 rounded-xl flex flex-col group hover:border-blue-400 transition-all duration-300"
+      >
+        <div class="flex justify-between items-start mb-4">
+          <div>
+            <span
+              class="text-[10px] text-blue-500 font-mono tracking-widest uppercase"
+              >[ {{ t.deployment }} 00 ]</span
+            >
+            <h4 class="text-xl font-bold text-blue-400">
+              ENTREREDES CONSULTORÍA TECNOLÓGICA
+            </h4>
+            <p class="text-xs text-gray-400">
+              {{ t.roleEntreredes }} | {{ t.dateEntreredes }}
+            </p>
+          </div>
+          <i data-lucide="layers" class="w-5 h-5 text-blue-500"></i>
+        </div>
+
+        <div class="space-y-2 font-mono text-xs text-gray-300 mb-4">
+          <p v-for="(task, index) in t.tasksEntreredes" :key="index">
+            <span class="text-blue-500">[ {{ task.status }} ]</span>
+            {{ task.desc }}
+          </p>
+        </div>
+
+        <div class="flex flex-wrap gap-2 pt-3 border-t border-white/5">
+          <span
+            v-for="tech in stackEntreredes"
+            :key="tech"
+            class="inline-block px-3 py-1 rounded-full text-[10px] font-mono border transition-all duration-300 cursor-default bg-blue-400/10 border-blue-400/30 text-blue-400 hover:bg-blue-400/20 hover:shadow-[0_0_12px_rgba(59,130,246,0.4)] hover:-translate-y-0.5"
+          >
+            {{ tech }}
+          </span>
+        </div>
+      </div>
+
+      <div
         class="project-card border border-white/10 bg-white/5 p-5 rounded-xl flex flex-col group hover:border-emerald-400 transition-all duration-300"
       >
         <div class="flex justify-between items-start mb-4">
@@ -102,6 +139,7 @@ const props = defineProps({
   lang: { type: String, default: "en" },
 });
 
+const stackEntreredes = ["Laravel", "PHP", "IA Models", "APIs", "Jobs"];
 const stackSavia = ["React", "Vite", "Azure", "JavaScript", "Git"];
 
 const content = {
@@ -109,7 +147,18 @@ const content = {
     initMessage: "Initializing workload execution trace...",
     deployment: "DEPLOYMENT",
     coreLabel: "OPERATIONAL_CORE",
-    roleSavia: "Developer Intern",
+    roleEntreredes: "Full Stack Developer",
+    dateEntreredes: "February 2026 - Present",
+    tasksEntreredes: [
+      {
+        status: "RUNNING",
+        desc: "Integral development of scalable web solutions",
+      },
+      { status: "OK", desc: "Third-party API & AI Model integration" },
+      { status: "OK", desc: "Software architecture with Laravel ecosystem" },
+      { status: "OK", desc: "Background task processing & Job management" },
+    ],
+    roleSavia: "Fronted Software Developer",
     dateSavia: "March - April 2025",
     tasksSavia: [
       { status: "OK", desc: "Frontend architecture with React & Vite" },
@@ -117,7 +166,7 @@ const content = {
       { status: "OK", desc: "Version control via Git/GitHub" },
       { status: "DONE", desc: "UI/UX interface optimization" },
     ],
-    roleCojali: "Tech Intern",
+    roleCojali: "Software QA Analyst",
     dateCojali: "February 2025",
     tasksCojali: [
       { status: "OK", desc: "Software testing & Bug tracking" },
@@ -125,7 +174,7 @@ const content = {
       { status: "DONE", desc: "Corporate tools integration" },
     ],
     roleKitchen: "Kitchen Assistant",
-    dateKitchen: "High-Intensity Node | Present",
+    dateKitchen: "March 2025 - Present",
     tasksKitchen: [
       { status: "HIGH", desc: "Pressure tolerance & Stress management" },
       { status: "OK", desc: "Resource & Time optimization" },
@@ -136,7 +185,18 @@ const content = {
     initMessage: "Iniciando trazado de ejecución de carga de trabajo...",
     deployment: "DESPLIEGUE",
     coreLabel: "NÚCLEO_OPERATIVO",
-    roleSavia: "Desarrollador en Prácticas",
+    roleEntreredes: "Full Stack Developer",
+    dateEntreredes: "Febrero 2026 - Actualidad",
+    tasksEntreredes: [
+      {
+        status: "EJECUTANDO",
+        desc: "Desarrollo integral de soluciones web escalables",
+      },
+      { status: "OK", desc: "Integración de APIs de terceros y modelos de IA" },
+      { status: "OK", desc: "Arquitectura de software con ecosistema Laravel" },
+      { status: "OK", desc: "Procesamiento de tareas en segundo plano (Jobs)" },
+    ],
+    roleSavia: "Fronted Software Developer",
     dateSavia: "Marzo - Abril 2025",
     tasksSavia: [
       { status: "OK", desc: "Arquitectura frontend con React & Vite" },
@@ -144,15 +204,15 @@ const content = {
       { status: "OK", desc: "Control de versiones Git/GitHub" },
       { status: "DONE", desc: "Optimización de interfaces UI/UX" },
     ],
-    roleCojali: "Técnico en Prácticas",
+    roleCojali: "Software QA Analyst",
     dateCojali: "Febrero 2025",
     tasksCojali: [
       { status: "OK", desc: "Testing de software & seguimiento de bugs" },
       { status: "OK", desc: "Aplicación de lógica & Análisis" },
       { status: "DONE", desc: "Integración en herramientas corporativas" },
     ],
-    roleKitchen: "Ayudante de Cocina",
-    dateKitchen: "Nodo de Alta Intensidad | Actualidad",
+    roleKitchen: "Ayudante de Cocina (Compaginando con estudios)",
+    dateKitchen: "Marzo 2025 - Actualidad",
     tasksKitchen: [
       { status: "ALTA", desc: "Tolerancia a la presión & gestión del estrés" },
       { status: "OK", desc: "Optimización de recursos & tiempos" },
