@@ -183,7 +183,6 @@ export function useTerminal({
           if (arrayPos === self.strings.length - 1) {
             setTimeout(() => {
               stopDemo();
-              appendHtml(`<div><p>${getText("welcome_help")}</p></div>`);
             }, 2000);
           }
         },
@@ -381,8 +380,8 @@ export function useTerminal({
     suggestionRemainder,
     modalHidden,
     modalTitle,
-    modalComponent, // Exponemos el nombre del componente activo
-    currentLang, // Exponemos el idioma para que los componentes lo usen
+    modalComponent,
+    currentLang,
     onKeyDown,
     onDocumentKeyDown,
     loadContentAndInit,
@@ -391,6 +390,6 @@ export function useTerminal({
     executeCommand,
     closeWindow,
     openWindow,
-    getText, // Exponemos la función de traducción
+    getText,
   };
 }

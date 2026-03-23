@@ -262,6 +262,8 @@ onBeforeUnmount(() => {
 </script>
 
 <style scoped>
+@reference "../assets/styles.css";
+
 .manzano-green {
   color: #34d399;
 }

@@ -29,7 +29,7 @@
     "skills_title": "<i data-lucide=\"swords\" class=\"w-6 h-6 mr-2\"></i>Technical Skills",
     "projects_title": "<i data-lucide=\"folder-git-2\" class=\"w-6 h-6 mr-2\"></i>Projects",
     "contact_title": "<i data-lucide=\"message-square-more\" class=\"w-6 h-6 mr-2\"></i>Contact",
-    "cv_title": "<i data-lucide=\"file-text\" class=\"w-6 h-6 mr-2\"></i>Download CV"
+    "cv_title": "<i data-lucide=\"file-text\" class=\"w-6 h-6 mr-2\"></i>Curriculum Vitae"
   },
   "es": {
     "welcome_title": "Bienvenido al Portafolio de Ismael Manzano León",
@@ -61,6 +61,6 @@
     "skills_title": "<i data-lucide=\"swords\" class=\"w-6 h-6 mr-2\"></i>Habilidades Técnicas",
     "projects_title": "<i data-lucide=\"folder-git-2\" class=\"w-6 h-6 mr-2\"></i>Proyectos",
     "contact_title": "<i data-lucide=\"message-square-more\" class=\"w-6 h-6 mr-2\"></i>Contacto",
-    "cv_title": "<i data-lucide=\"file-text\" class=\"w-6 h-6 mr-2\"></i>Descargar CV"
+    "cv_title": "<i data-lucide=\"file-text\" class=\"w-6 h-6 mr-2\"></i>Curriculum Vitae"
   }
 }
