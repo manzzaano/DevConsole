@@ -1,17 +1,28 @@
 <template>
   <div
-    class="bg-[#1a1b26] text-gray-300 flex items-center justify-center min-h-screen p-4"
+    class="relative text-gray-300 flex items-center justify-center min-h-screen p-4 overflow-hidden bg-black"
   >
+    <canvas
+      ref="canvasRef"
+      class="absolute inset-0 z-0 pointer-events-none w-full h-full"
+    ></canvas>
+
     <div
       id="window"
-      class="w-full max-w-4xl h-[90vh] bg-black bg-opacity-75 rounded-xl shadow-2xl flex flex-col backdrop-blur-sm border border-gray-700 relative"
+      class="w-[95%] md:w-full max-w-4xl h-[90dvh] bg-black/80 rounded-xl shadow-[0_12px_48px_rgba(0,0,0,0.8)] flex flex-col backdrop-blur-md border border-white/5 relative z-10"
     >
       <div
-        class="bg-gray-800 rounded-t-xl p-3 flex items-center gap-2 border-b border-gray-700 flex-shrink-0 z-10"
+        class="bg-white/5 rounded-t-xl p-3 flex items-center gap-2 border-b border-white/10 flex-shrink-0 z-10"
       >
-        <div class="w-3 h-3 bg-red-500 rounded-full"></div>
-        <div class="w-3 h-3 bg-yellow-500 rounded-full"></div>
-        <div class="w-3 h-3 bg-green-500 rounded-full"></div>
+        <div
+          class="w-3 h-3 bg-red-500/80 rounded-full shadow-[0_0_5px_rgba(239,68,68,0.5)]"
+        ></div>
+        <div
+          class="w-3 h-3 bg-yellow-500/80 rounded-full shadow-[0_0_5px_rgba(234,179,8,0.5)]"
+        ></div>
+        <div
+          class="w-3 h-3 bg-green-500/80 rounded-full shadow-[0_0_5px_rgba(34,197,94,0.5)]"
+        ></div>
       </div>
 
       <div
@@ -21,11 +32,8 @@
       >
         <TerminalOutput ref="outputComponent" />
 
-        <div
-          v-if="isDemoMode"
-          class="flex items-center mt-2 flex-shrink-0"
-        >
-          <span class="text-emerald-400 glow">manzano@portfolio:~$</span>
+        <div v-if="isDemoMode" class="flex items-center mt-2 flex-shrink-0">
+          <span class="manzano-green glow">manzzaano@host:~$</span>
           <span id="demo-typing" class="ml-2 whitespace-pre"></span>
         </div>
 
@@ -54,20 +62,18 @@ import { ref, onMounted, onBeforeUnmount, nextTick } from "vue";
 import TerminalOutput from "./TerminalOutput.vue";
 import TerminalInput from "./TerminalInput.vue";
 import Modal from "./Modal.vue";
-// Importamos el composable con toda la lógica
 import { useTerminal } from "../composables/useTerminal";
 
-// --- Referencias a Componentes Hijos ---
 const outputComponent = ref(null);
 const inputComponent = ref(null);
-// Ref al *elemento* HTML de la línea de input (para estilado de foco)
 const inputLineRef = ref(null);
+const canvasRef = ref(null);
+let animationFrameId = null;
 
-// --- Instancia del Composable ---
 const {
   inputText,
   isFocused,
-  isDemoMode, // <--- 1. DESESTRUCTURAR isDemoMode
+  isDemoMode,
   modalHidden,
   modalTitle,
   modalContent,
@@ -82,34 +88,144 @@ const {
   inputLineRef,
 });
 
-// --- Ciclo de Vida ---
+const initWebGLShader = () => {
+  const canvas = canvasRef.value;
+  if (!canvas) return;
+  const gl = canvas.getContext("webgl");
+  if (!gl) return;
+
+  const vsSource = `
+    attribute vec2 position;
+    void main() { gl_Position = vec4(position, 0.0, 1.0); }
+  `;
+
+  const fsSource = `
+    precision highp float;
+    uniform vec2 iResolution;
+    uniform float iTime;
+
+    vec3 colormap(float x) {
+      vec3 black = vec3(0.0, 0.0, 0.0); 
+      vec3 emerald = vec3(0.204, 0.827, 0.600); // Equivalente a #34d399
+      
+      // Ajuste para 40% negro y 60% verde
+      return mix(black, emerald, smoothstep(0.3, 0.5, x)); 
+    }
+
+    float rand(vec2 n) { return fract(sin(dot(n, vec2(12.9898, 4.1414))) * 43758.5453); }
+
+    float noise(vec2 p){
+      vec2 ip = floor(p);
+      vec2 u = fract(p);
+      u = u*u*(3.0-2.0*u);
+      float res = mix(
+        mix(rand(ip),rand(ip+vec2(1.0,0.0)),u.x),
+        mix(rand(ip+vec2(0.0,1.0)),rand(ip+vec2(1.0,1.0)),u.x),u.y);
+      return res*res;
+    }
+
+    const mat2 mtx = mat2( 0.80,  0.60, -0.60,  0.80 );
+
+    float fbm( vec2 p ) {
+      float f = 0.0;
+      f += 0.500000*noise( p + iTime * 0.03 ); p = mtx*p*2.02;
+      f += 0.031250*noise( p ); p = mtx*p*2.01;
+      f += 0.250000*noise( p ); p = mtx*p*2.03;
+      f += 0.125000*noise( p ); p = mtx*p*2.01;
+      f += 0.062500*noise( p ); p = mtx*p*2.04;
+      f += 0.015625*noise( p + sin(iTime * 0.02) );
+      return f/0.96875;
+    }
+
+    float pattern( in vec2 p ) { return fbm( p + fbm( p + fbm( p ) ) ); }
+
+    float randomGrain(vec2 uv, float time) {
+        return fract(sin(dot(uv, vec2(12.9898, 78.233)) + time) * 43758.5453);
+    }
+
+    void main() {
+      vec2 uv = (gl_FragCoord.xy - 0.5 * iResolution.xy) / min(iResolution.y, iResolution.x);
+      
+      vec2 fbm_uv = uv * 2.2; 
+      float shade = pattern(fbm_uv);
+      vec3 color = colormap(shade);
+
+      float grain = randomGrain(gl_FragCoord.xy, iTime);
+      color = mix(color, color * (1.0 + (grain - 0.5) * 0.08), 0.6); 
+
+      gl_FragColor = vec4(color, 1.0);
+    }
+  `;
+
+  const compileShader = (type, source) => {
+    const shader = gl.createShader(type);
+    gl.shaderSource(shader, source);
+    gl.compileShader(shader);
+    return shader;
+  };
+
+  const program = gl.createProgram();
+  gl.attachShader(program, compileShader(gl.VERTEX_SHADER, vsSource));
+  gl.attachShader(program, compileShader(gl.FRAGMENT_SHADER, fsSource));
+  gl.linkProgram(program);
+  gl.useProgram(program);
+
+  const vertices = new Float32Array([-1, -1, 1, -1, -1, 1, 1, 1]);
+  const buffer = gl.createBuffer();
+  gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
+  gl.bufferData(gl.ARRAY_BUFFER, vertices, gl.STATIC_DRAW);
+
+  const positionLoc = gl.getAttribLocation(program, "position");
+  gl.enableVertexAttribArray(positionLoc);
+  gl.vertexAttribPointer(positionLoc, 2, gl.FLOAT, false, 0, 0);
+
+  const iResolutionLoc = gl.getUniformLocation(program, "iResolution");
+  const iTimeLoc = gl.getUniformLocation(program, "iTime");
+
+  const render = (time) => {
+    if (
+      canvas.width !== window.innerWidth ||
+      canvas.height !== window.innerHeight
+    ) {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      gl.viewport(0, 0, canvas.width, canvas.height);
+    }
+    gl.uniform2f(iResolutionLoc, canvas.width, canvas.height);
+    gl.uniform1f(iTimeLoc, time / 1000.0);
+
+    gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+    animationFrameId = requestAnimationFrame(render);
+  };
+
+  requestAnimationFrame(render);
+};
+
 onMounted(() => {
   document.addEventListener("keydown", onDocumentKeyDown);
 
+  initWebGLShader();
+
   nextTick(() => {
-    // Asignar la referencia al elemento HTML del input (inputLineRef)
     if (inputComponent.value) {
       if (inputComponent.value.inputLineRef) {
         inputLineRef.value = inputComponent.value.inputLineRef;
       } else if (inputComponent.value.inputRefLocal) {
         inputLineRef.value = inputComponent.value.inputRefLocal;
       }
-
       try {
         if (typeof inputComponent.value.focus === "function") {
           inputComponent.value.focus();
         }
       } catch (e) {}
     }
-
     loadContentAndInit();
   });
 
-  // Fallback de foco (solo si no estamos en modo demo)
   setTimeout(() => {
     try {
       if (
-        !isDemoMode.value && // <-- 2. AÑADIR CONDICIÓN
+        !isDemoMode.value &&
         inputComponent.value &&
         typeof inputComponent.value.focus === "function"
       )
@@ -118,8 +234,16 @@ onMounted(() => {
   }, 120);
 });
 
-// Limpieza al desmontar el componente
 onBeforeUnmount(() => {
   document.removeEventListener("keydown", onDocumentKeyDown);
+  if (animationFrameId) {
+    cancelAnimationFrame(animationFrameId);
+  }
 });
 </script>
+
+<style scoped>
+.manzano-green {
+  color: #34d399; /* Asegúrate de que este es el hexadecimal de tu título */
+}
+</style>

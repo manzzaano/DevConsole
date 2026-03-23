@@ -4,39 +4,47 @@ body {
   background-color: #1a1b26; /* Retro page background */
 }
 
+/* Color de selección de texto */
+::selection {
+  background-color: rgba(52, 211, 153, 0.3); /* Emerald translúcido */
+  color: #fff;
+}
+
+/* Animación para el fondo dinámico */
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.animate-gradient {
+  animation: gradient 15s ease infinite;
+}
+
 /* Minimalist scrollbar styling */
 ::-webkit-scrollbar {
   width: 8px;
 }
 ::-webkit-scrollbar-track {
-  background: #111827;
+  background: transparent; /* Mejor para el efecto cristal */
 }
 ::-webkit-scrollbar-thumb {
-  background: #34d399;
+  background: rgba(52, 211, 153, 0.5); /* Translúcido */
   border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #6ee7b7;
+  background: rgba(110, 231, 183, 0.8);
 }
 
 /* CRT glow effect for text */
 .glow {
   text-shadow: 0 0 5px currentColor;
-}
-
-/* Scanlines effect over the terminal window */
-#window::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%);
-  background-size: 100% 4px;
-  z-index: 1;
-  pointer-events: none;
-  border-radius: 0.75rem;
 }
 
 /* Blinking cursor animation */
@@ -85,4 +93,17 @@ body {
     transform: translateY(0);
     opacity: 1;
   }
+}
+
+/* Interactividad (Hover) en tarjetas de proyectos y botones de contacto */
+#modal-content .grid > div,
+#modal-content a.flex-col {
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+#modal-content .grid > div:hover,
+#modal-content a.flex-col:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(52, 211, 153, 0.15);
 }
