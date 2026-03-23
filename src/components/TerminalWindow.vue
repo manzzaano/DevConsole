@@ -27,13 +27,14 @@
 
       <div
         id="terminal"
-        class="p-4 md:p-6 flex-grow flex flex-col overflow-hidden z-10"
+        ref="terminalElement"
+        class="p-4 md:p-6 flex-grow flex flex-col overflow-y-auto z-10 scroll-smooth"
         @click="focusInput"
       >
         <TerminalOutput ref="outputComponent" />
 
         <div v-if="isDemoMode" class="flex items-center mt-2 flex-shrink-0">
-          <span class="manzano-green glow">manzzaano@host:~$</span>
+          <span class="manzano-green glow">manzzaano@portfolio:~$</span>
           <span id="demo-typing" class="ml-2 whitespace-pre"></span>
         </div>
 
@@ -69,13 +70,14 @@ const outputComponent = ref(null);
 const inputComponent = ref(null);
 const inputLineRef = ref(null);
 const canvasRef = ref(null);
+const terminalElement = ref(null); // 2. CAMBIO: Nueva referencia para el elemento de la terminal
 let animationFrameId = null;
 
 const {
   inputText,
   isFocused,
   isDemoMode,
-  suggestionRemainder, // <--- ¡AQUÍ ESTÁ LA NUEVA VARIABLE!
+  suggestionRemainder,
   modalHidden,
   modalTitle,
   modalContent,
@@ -88,8 +90,10 @@ const {
   outputRef: outputComponent,
   inputRef: inputComponent,
   inputLineRef,
+  terminalRef: terminalElement, // 3. CAMBIO: Pasamos la referencia al composable
 });
 
+// ... (Resto de tu lógica de WebGL Shader y Ciclo de vida igual)
 const initWebGLShader = () => {
   const canvas = canvasRef.value;
   if (!canvas) return;
@@ -108,9 +112,7 @@ const initWebGLShader = () => {
 
     vec3 colormap(float x) {
       vec3 black = vec3(0.0, 0.0, 0.0); 
-      vec3 emerald = vec3(0.204, 0.827, 0.600); // Equivalente a #34d399
-      
-      // Ajuste para 40% negro y 60% verde
+      vec3 emerald = vec3(0.204, 0.827, 0.600); 
       return mix(black, emerald, smoothstep(0.3, 0.5, x)); 
     }
 
@@ -147,14 +149,11 @@ const initWebGLShader = () => {
 
     void main() {
       vec2 uv = (gl_FragCoord.xy - 0.5 * iResolution.xy) / min(iResolution.y, iResolution.x);
-      
       vec2 fbm_uv = uv * 2.2; 
       float shade = pattern(fbm_uv);
       vec3 color = colormap(shade);
-
       float grain = randomGrain(gl_FragCoord.xy, iTime);
       color = mix(color, color * (1.0 + (grain - 0.5) * 0.08), 0.6); 
-
       gl_FragColor = vec4(color, 1.0);
     }
   `;
@@ -195,19 +194,15 @@ const initWebGLShader = () => {
     }
     gl.uniform2f(iResolutionLoc, canvas.width, canvas.height);
     gl.uniform1f(iTimeLoc, time / 1000.0);
-
     gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
     animationFrameId = requestAnimationFrame(render);
   };
-
   requestAnimationFrame(render);
 };
 
 onMounted(() => {
   document.addEventListener("keydown", onDocumentKeyDown);
-
   initWebGLShader();
-
   nextTick(() => {
     if (inputComponent.value) {
       if (inputComponent.value.inputLineRef) {
@@ -246,6 +241,6 @@ onBeforeUnmount(() => {
 
 <style scoped>
 .manzano-green {
-  color: #34d399; /* Asegúrate de que este es el hexadecimal de tu título */
+  color: #34d399;
 }
 </style>

@@ -1,4 +1,5 @@
-import { ref, nextTick, computed } from "vue"; // <--- Añadido 'computed'
+import { neofetchData } from "../data/content.js";
+import { ref, nextTick, computed } from "vue";
 import {
   windowCommands,
   terminalCommandsList,
@@ -6,20 +7,21 @@ import {
 } from "../constants/commands";
 import { loadContentJson } from "../services/contentService";
 import { escapeHtml } from "../utils/escapeHtml";
-import Typed from "typed.js"; // <--- 1. Importar Typed.js
+import Typed from "typed.js";
 
 /**
  * Composable para gestionar toda la lógica de la terminal.
- * @param {object} refs - Referencias a componentes y elementos del DOM.
- * @param {import('vue').Ref<object|null>} refs.outputRef - Ref al componente TerminalOutput.
- * @param {import('vue').Ref<object|null>} refs.inputRef - Ref al componente TerminalInput.
- * @param {import('vue').Ref<HTMLElement|null>} refs.inputLineRef - Ref al elemento contenedor de la línea de input.
  */
-export function useTerminal({ outputRef, inputRef, inputLineRef }) {
+export function useTerminal({
+  outputRef,
+  inputRef,
+  inputLineRef,
+  terminalRef,
+}) {
   // --- Estado Reactivo ---
-  const inputText = ref(""); // El texto actual en el input
-  const isFocused = ref(true); // Estado de foco de la terminal
-  const isDemoMode = ref(false); // <--- 2. Estado para el modo demo
+  const inputText = ref("");
+  const isFocused = ref(true);
+  const isDemoMode = ref(false);
 
   // --- Lógica para sugerencia visual (Ghost text) ---
   const suggestionRemainder = computed(() => {
@@ -36,7 +38,7 @@ export function useTerminal({ outputRef, inputRef, inputLineRef }) {
 
   // --- Historial de Comandos ---
   let commandHistory = [];
-  let historyIndex = -1; // -1 = nuevo comando, 0 = último, etc.
+  let historyIndex = -1;
 
   // --- Internacionalización (i18n) ---
   const getInitialLang = () => {
@@ -50,11 +52,20 @@ export function useTerminal({ outputRef, inputRef, inputLineRef }) {
     (translations.value[currentLang] && translations.value[currentLang][key]) ||
     key;
 
-  // --- Manipulación del Output ---
+  // --- Lógica de Scroll Automático ---
+  const scrollToBottom = () => {
+    nextTick(() => {
+      if (terminalRef && terminalRef.value) {
+        terminalRef.value.scrollTop = terminalRef.value.scrollHeight;
+      }
+    });
+  };
 
+  // --- Manipulación del Output ---
   const appendHtml = (html) => {
     if (outputRef && outputRef.value && outputRef.value.appendHtml) {
       outputRef.value.appendHtml(html);
+      scrollToBottom();
     }
   };
 
@@ -67,9 +78,7 @@ export function useTerminal({ outputRef, inputRef, inputLineRef }) {
   const printWelcomeMessage = () => {
     const welcomeMessage = `
       <div class="mb-4">
-        <p class="text-2xl font-bold text-emerald-400 glow">${getText(
-          "welcome_title",
-        )}</p>
+        <p class="text-2xl font-bold text-emerald-400 glow">${getText("welcome_title")}</p>
         <p>${getText("welcome_help")}</p>
         <p>${getText("welcome_shortcuts")}</p>
       </div>`;
@@ -77,7 +86,6 @@ export function useTerminal({ outputRef, inputRef, inputLineRef }) {
   };
 
   // --- Lógica de Ventana/Modal ---
-
   const openWindow = (command) => {
     if (inputLineRef && inputLineRef.value && inputLineRef.value.classList)
       inputLineRef.value.classList.remove("is-focused");
@@ -108,7 +116,6 @@ export function useTerminal({ outputRef, inputRef, inputLineRef }) {
     modalHidden.value = true;
     modalContent.value = "";
 
-    // Solo restaura el foco si no estamos en modo demo
     if (!isDemoMode.value) {
       if (inputLineRef && inputLineRef.value && inputLineRef.value.classList)
         inputLineRef.value.classList.add("is-focused");
@@ -141,55 +148,48 @@ export function useTerminal({ outputRef, inputRef, inputLineRef }) {
   const clearTerminal = () => {
     clearOutput();
     printWelcomeMessage();
-    // No enfocar si la demo está a punto de empezar
     if (!isDemoMode.value) {
       nextTick(focusInput);
     }
   };
 
-  // --- Lógica de Demo (Typed.js) ---
-  let typedInstance = null; // Guardar la instancia para destruirla
+  // --- Lógica de Demo ---
+  let typedInstance = null;
 
-  /** Detiene y limpia la demo si está en curso. */
   const stopDemo = () => {
     if (typedInstance) {
       typedInstance.destroy();
       typedInstance = null;
     }
     isDemoMode.value = false;
-    nextTick(focusInput); // Devuelve el foco al input real
+    nextTick(focusInput);
   };
 
-  /** Inicia la demo automatizada. */
   async function startDemo() {
-    if (isDemoMode.value) return; // Demo ya en curso
-
+    if (isDemoMode.value) return;
     isDemoMode.value = true;
 
-    // Helper para simular la ejecución de comandos
     const runCommand = (cmd) => {
-      executeCommand(cmd); // Llama a tu función real
-
-      // Si el comando abre una ventana, la cerramos para la demo
+      executeCommand(cmd);
       if (windowCommands.includes(cmd)) {
-        setTimeout(closeWindow, 1500); // Cierra la ventana después de 1.5s
-        return new Promise((resolve) => setTimeout(resolve, 2000)); // Espera total 2s
+        setTimeout(closeWindow, 1500);
+        return new Promise((resolve) => setTimeout(resolve, 2000));
       }
-      // Pausa estándar para otros comandos
       return new Promise((resolve) => setTimeout(resolve, 1500));
     };
 
-    // Espera a que el v-if en TerminalWindow.vue renderice #demo-typing
     await nextTick();
 
     try {
       typedInstance = new Typed("#demo-typing", {
         strings: [
-          "help^1000", // Escribe 'help', espera 1s
-          "projects^1500", // Borra, escribe 'projects', espera 1.5s
-          "skills^1500", // Borra, escribe 'skills', espera 1.5s
-          "contact^1500", // Borra, escribe 'contact', espera 1.5s
-          "clear^1000", // Borra, escribe 'clear', espera 1s
+          "help^1000",
+          "about^1500",
+          "neofetch^2000",
+          "projects^1500",
+          "skills^1500",
+          "contact^1500",
+          "clear^1000",
         ],
         typeSpeed: 50,
         backSpeed: 30,
@@ -198,58 +198,72 @@ export function useTerminal({ outputRef, inputRef, inputLineRef }) {
         showCursor: true,
         cursorChar: "▋",
         onStringTyped: async (arrayPos, self) => {
-          // Obtener el comando (sin los caracteres de pausa '^1000')
           const cmd = self.strings[arrayPos].split("^")[0];
-
-          await runCommand(cmd); // Ejecuta el comando y espera
-
-          // Al final de la demo
+          await runCommand(cmd);
           if (arrayPos === self.strings.length - 1) {
             setTimeout(() => {
-              stopDemo(); // Limpia y finaliza la demo
-              // Mensaje final
+              stopDemo();
               appendHtml(`<div><p>${getText("welcome_help")}</p></div>`);
-            }, 2000); // Espera 2s después del 'clear'
+            }, 2000);
           }
         },
       });
     } catch (e) {
-      console.error(
-        "Error al iniciar Typed.js. ¿Existe el elemento #demo-typing en TerminalWindow.vue?",
-        e,
-      );
-      stopDemo(); // Revierte si falla
+      console.error("Error al iniciar Typed.js", e);
+      stopDemo();
     }
   }
 
   // --- Ejecución de Comandos ---
-
   const executeCommand = (cmdRaw) => {
     const cmd = String(cmdRaw);
     const [command, ...args] = cmd.split(" ").filter(Boolean);
 
-    // --- 7. Comando especial 'demo' ---
     if (command === "demo") {
-      clearTerminal(); // Limpia la terminal
-      startDemo(); // Inicia la demo
-      return; // No ejecuta el resto
+      clearTerminal();
+      startDemo();
+      return;
     }
 
-    // Imprime el comando ejecutado (eco)
     appendHtml(
-      `<div class="flex"><span class="text-emerald-400 glow">manzano@portfolio:~$</span><p class="ml-2">${escapeHtml(
-        cmd,
-      )}</p></div>`,
+      `<div class="flex"><span class="text-emerald-400 glow">manzzaano@portfolio:~$</span><p class="ml-2">${escapeHtml(cmd)}</p></div>`,
     );
 
-    // --- Enrutamiento de Comandos ---
     if (windowCommands.includes(command)) {
       appendHtml(
-        `<div><p>${getText(
-          "opening_app",
-        )} <span class="text-yellow-400">${command}</span>...</p></div>`,
+        `<div><p>${getText("opening_app")} <span class="text-yellow-400">${command}</span>...</p></div>`,
       );
       openWindow(command);
+    } else if (command === "neofetch") {
+      const asciiHtml = `
+        <pre class="text-emerald-400 glow leading-[1.1] font-bold 
+                   text-[2.2vw] sm:text-[12px] md:text-[14px] 
+                   overflow-hidden mb-2">${neofetchData.ascii}</pre>
+      `;
+
+      const statsHtml = neofetchData.stats
+        .map((stat) => {
+          // Lógica de traducción para valores con 'key'
+          const displayValue = stat.key ? getText(stat.key) : stat.value;
+
+          const valueHtml = stat.url
+            ? `<a href="${stat.url}" target="_blank" class="text-cyan-400 hover:underline hover:text-cyan-300 transition-colors">${displayValue}</a>`
+            : `<span class="text-gray-300">${displayValue}</span>`;
+
+          return `<div><span class="text-emerald-400 font-bold">${stat.label}:</span> ${valueHtml}</div>`;
+        })
+        .join("");
+
+      const finalHtml = `
+        <div class="flex flex-col my-4 overflow-hidden">
+          ${asciiHtml}
+          <div class="flex flex-col whitespace-nowrap ml-2">
+            <div class="text-gray-500 mb-2">--------------------------------</div>
+            ${statsHtml}
+          </div>
+        </div>
+      `;
+      appendHtml(finalHtml);
     } else if (command === "clear") {
       clearTerminal();
     } else if (command === "lang") {
@@ -269,43 +283,24 @@ export function useTerminal({ outputRef, inputRef, inputLineRef }) {
       const helpText = `
         <p class="mb-2">${getText("help_header")}</p>
         <ul class="list-disc list-inside">
-          ${windowCommands
-            .map(
-              (c) =>
-                `<li><span class="text-emerald-400 glow">${c}</span> - ${getText(
-                  "help_" + c,
-                )}</li>`,
-            )
-            .join("")}
-          <li><span class="text-emerald-400 glow">lang</span> - ${getText(
-            "help_lang",
-          )}</li>
-          <li><span class="text-emerald-400 glow">clear</span> - ${getText(
-            "help_clear",
-          )}</li>
-          <li><span class="text-yellow-400 glow">Ctrl+L</span> - ${getText(
-            "help_clear_shortcut",
-          )}</li>
+          ${windowCommands.map((c) => `<li><span class="text-emerald-400 glow">${c}</span> - ${getText("help_" + c)}</li>`).join("")}
+          <li><span class="text-emerald-400 glow">lang</span> - ${getText("help_lang")}</li>
+          <li><span class="text-emerald-400 glow">neofetch</span> - ${getText("help_neofetch")}</li>
+          <li><span class="text-emerald-400 glow">clear</span> - ${getText("help_clear")}</li>
+          <li><span class="text-yellow-400 glow">Ctrl+L</span> - ${getText("help_clear_shortcut")}</li>
         </ul>`;
       appendHtml(`<div>${helpText}</div>`);
     } else {
-      // Comando no encontrado
       appendHtml(
-        `<div><p class="text-red-400 glow">${getText(
-          "command_not_found",
-        )} '${escapeHtml(command)}'. ${getText("type_help")}</p></div>`,
+        `<div><p class="text-red-400 glow">${getText("command_not_found")} '${escapeHtml(command)}'. ${getText("type_help")}</p></div>`,
       );
     }
   };
 
   // --- Manejadores de Eventos de Teclado ---
-
   const onKeyDown = (e) => {
     const key = (e.key || "").toString().toLowerCase();
 
-    // <--- 8. Bloquear input durante la demo ---
-    // Si la demo está activa, ignoramos todas las teclas.
-    // 'Escape' se maneja en onDocumentKeyDown
     if (isDemoMode.value) {
       e.preventDefault();
       return;
@@ -345,33 +340,24 @@ export function useTerminal({ outputRef, inputRef, inputLineRef }) {
       return;
     }
 
-    // Aceptar sugerencia con Flecha Derecha
-    if (key === "arrowright") {
-      if (suggestionRemainder.value) {
-        e.preventDefault();
-        inputText.value += suggestionRemainder.value;
-      }
+    if (key === "arrowright" && suggestionRemainder.value) {
+      e.preventDefault();
+      inputText.value += suggestionRemainder.value;
       return;
     }
 
     if (key === "tab") {
       e.preventDefault();
-
-      // Si hay una sugerencia visual, la aplicamos primero
       if (suggestionRemainder.value) {
         inputText.value += suggestionRemainder.value;
       } else {
-        // Lógica original para múltiples coincidencias
         const partialCommand = inputText.value.trim().toLowerCase();
         const matches = allCommands.filter((c) => c.startsWith(partialCommand));
-
         if (matches.length === 1) {
           inputText.value = matches[0];
         } else if (matches.length > 1) {
           appendHtml(
-            `<div class="flex"><span class="text-emerald-400 glow">manzano@portfolio:~$</span><p class="ml-2">${escapeHtml(
-              partialCommand,
-            )}</p></div>`,
+            `<div class="flex"><span class="text-emerald-400 glow">manzzaano@portfolio:~$</span><p class="ml-2">${escapeHtml(partialCommand)}</p></div>`,
           );
           appendHtml(
             `<div class="flex flex-wrap gap-x-4">${matches.join(" ")}</div>`,
@@ -386,19 +372,15 @@ export function useTerminal({ outputRef, inputRef, inputLineRef }) {
       clearTerminal();
       return;
     }
-
     if (key === "escape" && !modalHidden.value) {
       closeWindow();
       return;
     }
   };
 
-  /** Manejador global para la tecla Escape (cierra el modal O detiene la demo). */
   const onDocumentKeyDown = (e) => {
     const key = (e.key || "").toString().toLowerCase();
-    if (key !== "escape") return; // Solo nos importa Escape
-
-    // <--- 9. 'Escape' para detener la demo ---
+    if (key !== "escape") return;
     if (isDemoMode.value) {
       e.preventDefault();
       stopDemo();
@@ -407,37 +389,25 @@ export function useTerminal({ outputRef, inputRef, inputLineRef }) {
       );
       return;
     }
-
-    // Comportamiento original: cerrar modal
-    if (!modalHidden.value) {
-      closeWindow();
-    }
+    if (!modalHidden.value) closeWindow();
   };
-
-  // --- Inicialización ---
 
   async function loadContentAndInit() {
     document.documentElement.lang = currentLang;
     try {
       translations.value = await loadContentJson();
       printWelcomeMessage();
-
-      // <--- 6. Añadir invitación a la demo ---
       const langDemo =
         currentLang === "es"
-          ? '¿Es tu primera vez aquí? Escribe "<span class=\"text-yellow-400 glow\">demo</span>" para un tour rápido.'
-          : 'First time here? Type "<span class=\"text-yellow-400 glow\">demo</span>" for a quick tour.';
+          ? '¿Es tu primera vez aquí? Escribe "<span class="text-yellow-400 glow">demo</span>" para un tour rápido.'
+          : 'First time here? Type "<span class="text-yellow-400 glow">demo</span>" for a quick tour.';
       appendHtml(`<div><p>${langDemo}</p></div>`);
-
-      // Inicializar iconos
       try {
         if (window.lucide && window.lucide.createIcons)
           window.lucide.createIcons();
       } catch (err) {
         console.error("lucide init error:", err);
       }
-
-      // Foco inicial
       nextTick(focusInput);
     } catch (e) {
       appendHtml(
@@ -447,12 +417,11 @@ export function useTerminal({ outputRef, inputRef, inputLineRef }) {
     }
   }
 
-  // --- API Expuesta por el Composable ---
   return {
     inputText,
     isFocused,
-    isDemoMode, // <--- 3. Exponer el estado de la demo
-    suggestionRemainder, // <--- AÑADIDO PARA LA VISTA
+    isDemoMode,
+    suggestionRemainder,
     modalHidden,
     modalTitle,
     modalContent,

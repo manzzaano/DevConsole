@@ -8,5 +8,11 @@ export const windowCommands = [
   "cv",
 ];
 
-export const terminalCommandsList = ["help", "clear", "lang", "demo"];
+export const terminalCommandsList = [
+  "help",
+  "clear",
+  "lang",
+  "demo",
+  "neofetch",
+];
 export const allCommands = [...windowCommands, ...terminalCommandsList];

@@ -7,7 +7,7 @@
       isFocused ? 'is-focused' : '',
     ]"
   >
-    <span class="manzano-green glow">manzzaano@host:~$</span>
+    <span class="manzano-green glow">manzzaano@portfolio:~$</span>
 
     <div class="relative ml-2 flex-grow h-6">
       <div class="absolute inset-0 flex items-center whitespace-pre">
