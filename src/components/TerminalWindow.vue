@@ -1,6 +1,6 @@
 <template>
   <div
-    class="relative text-gray-300 flex items-center justify-center min-h-screen p-4 overflow-hidden bg-black"
+    class="relative text-gray-300 flex items-center justify-center min-h-screen p-2 md:p-4 overflow-hidden bg-black"
   >
     <canvas
       ref="canvasRef"
@@ -9,7 +9,7 @@
 
     <div
       id="window"
-      class="w-[95%] md:w-full max-w-4xl h-[90dvh] bg-black/80 rounded-xl shadow-[0_12px_48px_rgba(0,0,0,0.8)] flex flex-col backdrop-blur-md border border-white/5 relative z-10"
+      class="w-full max-w-4xl h-[92dvh] md:h-[90dvh] bg-black/80 rounded-xl shadow-[0_12px_48px_rgba(0,0,0,0.8)] flex flex-col backdrop-blur-md border border-white/5 relative z-10"
     >
       <div
         class="bg-white/5 rounded-t-xl p-3 flex items-center gap-2 border-b border-white/10 flex-shrink-0 z-10"
@@ -23,30 +23,60 @@
         <div
           class="w-3 h-3 bg-green-500/80 rounded-full shadow-[0_0_5px_rgba(34,197,94,0.5)]"
         ></div>
+        <div class="ml-2 text-xs text-gray-500 font-mono hidden sm:block">
+          manzzaano@portfolio
+        </div>
       </div>
 
       <div
         id="terminal"
         ref="terminalElement"
-        class="p-4 md:p-6 flex-grow flex flex-col overflow-y-auto z-10 scroll-smooth"
+        class="p-4 md:p-6 flex-grow flex flex-col overflow-y-auto z-10 scroll-smooth custom-scrollbar"
         @click="focusInput"
       >
         <TerminalOutput ref="outputComponent" />
 
-        <div v-if="isDemoMode" class="flex items-center mt-2 flex-shrink-0">
+        <div
+          v-if="isDemoMode"
+          class="flex items-center mt-2 flex-shrink-0 text-sm md:text-base"
+        >
           <span class="manzano-green glow">manzzaano@portfolio:~$</span>
           <span id="demo-typing" class="ml-2 whitespace-pre"></span>
         </div>
 
-        <TerminalInput
-          v-if="!isDemoMode"
-          ref="inputComponent"
-          v-model="inputText"
-          :isFocused="isFocused"
-          :suggestionRemainder="suggestionRemainder"
-          :inputLineId="'input-line'"
-          @keydown="onKeyDown"
-        />
+        <div v-if="!isDemoMode" class="mt-2">
+          <div
+            class="md:hidden flex flex-wrap gap-2 mb-4 p-2 bg-white/5 rounded-lg border border-white/10"
+          >
+            <button @click.stop="handleMobileKey('tab')" class="mobile-btn">
+              TAB
+            </button>
+            <button @click.stop="handleMobileKey('arrowup')" class="mobile-btn">
+              <span class="text-xs">▲</span> UP
+            </button>
+            <button
+              @click.stop="handleMobileKey('arrowdown')"
+              class="mobile-btn"
+            >
+              <span class="text-xs">▼</span> DWN
+            </button>
+            <button
+              @click.stop="handleMobileKey('l', true)"
+              class="mobile-btn text-red-400"
+            >
+              CLS
+            </button>
+          </div>
+
+          <TerminalInput
+            ref="inputComponent"
+            v-model="inputText"
+            :isFocused="isFocused"
+            :suggestionRemainder="suggestionRemainder"
+            :inputLineId="'input-line'"
+            @keydown="onKeyDown"
+          />
+        </div>
       </div>
     </div>
 
@@ -70,7 +100,7 @@ const outputComponent = ref(null);
 const inputComponent = ref(null);
 const inputLineRef = ref(null);
 const canvasRef = ref(null);
-const terminalElement = ref(null); // 2. CAMBIO: Nueva referencia para el elemento de la terminal
+const terminalElement = ref(null);
 let animationFrameId = null;
 
 const {
@@ -90,10 +120,21 @@ const {
   outputRef: outputComponent,
   inputRef: inputComponent,
   inputLineRef,
-  terminalRef: terminalElement, // 3. CAMBIO: Pasamos la referencia al composable
+  terminalRef: terminalElement,
 });
 
-// ... (Resto de tu lógica de WebGL Shader y Ciclo de vida igual)
+/** * Manejador para los botones de la barra móvil.
+ * Simula eventos de teclado para reutilizar la lógica de useTerminal.
+ */
+const handleMobileKey = (key, ctrl = false) => {
+  onKeyDown({
+    key,
+    ctrlKey: ctrl,
+    preventDefault: () => {},
+  });
+  focusInput();
+};
+
 const initWebGLShader = () => {
   const canvas = canvasRef.value;
   if (!canvas) return;
@@ -242,5 +283,27 @@ onBeforeUnmount(() => {
 <style scoped>
 .manzano-green {
   color: #34d399;
+}
+
+/* Estilos para los botones móviles */
+.mobile-btn {
+  @apply bg-white/10 hover:bg-white/20 active:bg-emerald-500/50 
+         px-4 py-2 rounded text-xs font-mono font-bold 
+         transition-colors border border-white/5;
+}
+
+/* Scrollbar personalizada para que no sea intrusiva */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 6px;
+}
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(52, 211, 153, 0.2);
+  border-radius: 10px;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: rgba(52, 211, 153, 0.4);
 }
 </style>
