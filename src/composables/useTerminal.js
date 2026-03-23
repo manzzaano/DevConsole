@@ -1,16 +1,12 @@
 import { neofetchData } from "../data/content.js";
 import { ref, nextTick, computed } from "vue";
-import {
-  windowCommands,
-  terminalCommandsList,
-  allCommands,
-} from "../constants/commands";
+import { windowCommands, allCommands } from "../constants/commands";
 import { loadContentJson } from "../services/contentService";
 import { escapeHtml } from "../utils/escapeHtml";
 import Typed from "typed.js";
 
 /**
- * Composable para gestionar toda la lógica de la terminal.
+ * Composable para gestionar toda la lógica de la terminal y navegación.
  */
 export function useTerminal({
   outputRef,
@@ -31,10 +27,10 @@ export function useTerminal({
     return match ? match.slice(val.length) : "";
   });
 
-  // --- Estado del Modal ---
+  // --- Estado del Modal (Refactorizado para Componentes) ---
   const modalHidden = ref(true);
   const modalTitle = ref("");
-  const modalContent = ref("");
+  const modalComponent = ref(null); // Ahora almacena el nombre del componente
 
   // --- Historial de Comandos ---
   let commandHistory = [];
@@ -45,11 +41,13 @@ export function useTerminal({
     const savedLang = localStorage.getItem("portfolioLang");
     return savedLang === "en" || savedLang === "es" ? savedLang : "en";
   };
-  let currentLang = getInitialLang();
+
+  const currentLang = ref(getInitialLang());
   const translations = ref({});
 
   const getText = (key) =>
-    (translations.value[currentLang] && translations.value[currentLang][key]) ||
+    (translations.value[currentLang.value] &&
+      translations.value[currentLang.value][key]) ||
     key;
 
   // --- Lógica de Scroll Automático ---
@@ -90,42 +88,28 @@ export function useTerminal({
     if (inputLineRef && inputLineRef.value && inputLineRef.value.classList)
       inputLineRef.value.classList.remove("is-focused");
 
-    if (inputRef && inputRef.value) {
-      if (inputRef.value.inputRefLocal) {
-        try {
-          inputRef.value.inputRefLocal.disabled = true;
-        } catch (e) {}
-      }
+    if (inputRef && inputRef.value && inputRef.value.inputRefLocal) {
+      inputRef.value.inputRefLocal.disabled = true;
     }
 
+    // Seteamos el título desde el JSON (solo texto plano ahora)
     modalTitle.value = getText(`${command}_title`);
-    modalContent.value = getText(`${command}_html`);
-    modalHidden.value = false;
 
-    nextTick(() => {
-      try {
-        if (window.lucide && window.lucide.createIcons)
-          window.lucide.createIcons();
-      } catch (e) {
-        console.error("lucide createIcons error:", e);
-      }
-    });
+    // Identificamos qué componente cargar (p.e. 'about', 'projects')
+    modalComponent.value = command;
+    modalHidden.value = false;
   };
 
   const closeWindow = () => {
     modalHidden.value = true;
-    modalContent.value = "";
+    modalComponent.value = null;
 
     if (!isDemoMode.value) {
       if (inputLineRef && inputLineRef.value && inputLineRef.value.classList)
         inputLineRef.value.classList.add("is-focused");
 
-      if (inputRef && inputRef.value) {
-        if (inputRef.value.inputRefLocal) {
-          try {
-            inputRef.value.inputRefLocal.disabled = false;
-          } catch (e) {}
-        }
+      if (inputRef && inputRef.value && inputRef.value.inputRefLocal) {
+        inputRef.value.inputRefLocal.disabled = false;
       }
 
       isFocused.value = true;
@@ -135,11 +119,7 @@ export function useTerminal({
 
   const focusInput = () => {
     nextTick(() => {
-      if (
-        inputRef &&
-        inputRef.value &&
-        typeof inputRef.value.focus === "function"
-      ) {
+      if (inputRef?.value?.focus) {
         inputRef.value.focus();
       }
     });
@@ -235,41 +215,27 @@ export function useTerminal({
       );
       openWindow(command);
     } else if (command === "neofetch") {
-      const asciiHtml = `
-        <pre class="text-emerald-400 glow leading-[1.1] font-bold 
-                   text-[2.2vw] sm:text-[12px] md:text-[14px] 
-                   overflow-hidden mb-2">${neofetchData.ascii}</pre>
-      `;
+      const asciiHtml = `<pre class="text-emerald-400 glow leading-[1.1] font-bold text-[2.2vw] sm:text-[12px] md:text-[14px] overflow-hidden mb-2">${neofetchData.ascii}</pre>`;
 
       const statsHtml = neofetchData.stats
         .map((stat) => {
-          // Lógica de traducción para valores con 'key'
           const displayValue = stat.key ? getText(stat.key) : stat.value;
-
           const valueHtml = stat.url
             ? `<a href="${stat.url}" target="_blank" class="text-cyan-400 hover:underline hover:text-cyan-300 transition-colors">${displayValue}</a>`
             : `<span class="text-gray-300">${displayValue}</span>`;
-
           return `<div><span class="text-emerald-400 font-bold">${stat.label}:</span> ${valueHtml}</div>`;
         })
         .join("");
 
-      const finalHtml = `
-        <div class="flex flex-col my-4 overflow-hidden">
-          ${asciiHtml}
-          <div class="flex flex-col whitespace-nowrap ml-2">
-            <div class="text-gray-500 mb-2">--------------------------------</div>
-            ${statsHtml}
-          </div>
-        </div>
-      `;
-      appendHtml(finalHtml);
+      appendHtml(
+        `<div class="flex flex-col my-4 overflow-hidden">${asciiHtml}<div class="flex flex-col whitespace-nowrap ml-2"><div class="text-gray-500 mb-2">--------------------------------</div>${statsHtml}</div></div>`,
+      );
     } else if (command === "clear") {
       clearTerminal();
     } else if (command === "lang") {
       const lang = args[0];
       if (lang === "en" || lang === "es") {
-        currentLang = lang;
+        currentLang.value = lang;
         localStorage.setItem("portfolioLang", lang);
         document.documentElement.lang = lang;
         appendHtml(`<div><p>${getText("lang_changed")}</p></div>`);
@@ -297,10 +263,8 @@ export function useTerminal({
     }
   };
 
-  // --- Manejadores de Eventos de Teclado ---
   const onKeyDown = (e) => {
     const key = (e.key || "").toString().toLowerCase();
-
     if (isDemoMode.value) {
       e.preventDefault();
       return;
@@ -393,27 +357,20 @@ export function useTerminal({
   };
 
   async function loadContentAndInit() {
-    document.documentElement.lang = currentLang;
+    document.documentElement.lang = currentLang.value;
     try {
       translations.value = await loadContentJson();
       printWelcomeMessage();
       const langDemo =
-        currentLang === "es"
+        currentLang.value === "es"
           ? '¿Es tu primera vez aquí? Escribe "<span class="text-yellow-400 glow">demo</span>" para un tour rápido.'
           : 'First time here? Type "<span class="text-yellow-400 glow">demo</span>" for a quick tour.';
       appendHtml(`<div><p>${langDemo}</p></div>`);
-      try {
-        if (window.lucide && window.lucide.createIcons)
-          window.lucide.createIcons();
-      } catch (err) {
-        console.error("lucide init error:", err);
-      }
       nextTick(focusInput);
     } catch (e) {
       appendHtml(
-        `<p class="text-red-400 glow">Error: No se pudo cargar el contenido del portafolio. Por favor, refresca la página.</p>`,
+        `<p class="text-red-400 glow">Error: No se pudo cargar el contenido. Por favor, refresca la página.</p>`,
       );
-      console.error(e);
     }
   }
 
@@ -424,7 +381,8 @@ export function useTerminal({
     suggestionRemainder,
     modalHidden,
     modalTitle,
-    modalContent,
+    modalComponent, // Exponemos el nombre del componente activo
+    currentLang, // Exponemos el idioma para que los componentes lo usen
     onKeyDown,
     onDocumentKeyDown,
     loadContentAndInit,
@@ -433,5 +391,6 @@ export function useTerminal({
     executeCommand,
     closeWindow,
     openWindow,
+    getText, // Exponemos la función de traducción
   };
 }

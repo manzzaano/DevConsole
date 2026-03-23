@@ -52,13 +52,13 @@
               TAB
             </button>
             <button @click.stop="handleMobileKey('arrowup')" class="mobile-btn">
-              <span class="text-xs">▲</span> UP
+              ▲ UP
             </button>
             <button
               @click.stop="handleMobileKey('arrowdown')"
               class="mobile-btn"
             >
-              <span class="text-xs">▼</span> DWN
+              ▼ DWN
             </button>
             <button
               @click.stop="handleMobileKey('l', true)"
@@ -83,7 +83,8 @@
     <Modal
       :modalHidden="modalHidden"
       :title="modalTitle"
-      :content="modalContent"
+      :componentName="modalComponent"
+      :currentLang="currentLang"
       @close="closeWindow"
     />
   </div>
@@ -103,6 +104,7 @@ const canvasRef = ref(null);
 const terminalElement = ref(null);
 let animationFrameId = null;
 
+// Extraemos los nuevos valores reactivos para la Modal
 const {
   inputText,
   isFocused,
@@ -110,7 +112,8 @@ const {
   suggestionRemainder,
   modalHidden,
   modalTitle,
-  modalContent,
+  modalComponent, // <--- Nueva prop dinámica
+  currentLang, // <--- Idioma para los componentes de contenido
   onKeyDown,
   loadContentAndInit,
   onDocumentKeyDown,
@@ -123,9 +126,6 @@ const {
   terminalRef: terminalElement,
 });
 
-/** * Manejador para los botones de la barra móvil.
- * Simula eventos de teclado para reutilizar la lógica de useTerminal.
- */
 const handleMobileKey = (key, ctrl = false) => {
   onKeyDown({
     key,
@@ -135,6 +135,7 @@ const handleMobileKey = (key, ctrl = false) => {
   focusInput();
 };
 
+// --- Lógica WebGL (Sin cambios para mantener el estilo visual) ---
 const initWebGLShader = () => {
   const canvas = canvasRef.value;
   if (!canvas) return;
@@ -246,37 +247,17 @@ onMounted(() => {
   initWebGLShader();
   nextTick(() => {
     if (inputComponent.value) {
-      if (inputComponent.value.inputLineRef) {
-        inputLineRef.value = inputComponent.value.inputLineRef;
-      } else if (inputComponent.value.inputRefLocal) {
-        inputLineRef.value = inputComponent.value.inputRefLocal;
-      }
-      try {
-        if (typeof inputComponent.value.focus === "function") {
-          inputComponent.value.focus();
-        }
-      } catch (e) {}
+      inputLineRef.value =
+        inputComponent.value.inputLineRef || inputComponent.value.inputRefLocal;
+      inputComponent.value.focus?.();
     }
     loadContentAndInit();
   });
-
-  setTimeout(() => {
-    try {
-      if (
-        !isDemoMode.value &&
-        inputComponent.value &&
-        typeof inputComponent.value.focus === "function"
-      )
-        inputComponent.value.focus();
-    } catch (e) {}
-  }, 120);
 });
 
 onBeforeUnmount(() => {
   document.removeEventListener("keydown", onDocumentKeyDown);
-  if (animationFrameId) {
-    cancelAnimationFrame(animationFrameId);
-  }
+  if (animationFrameId) cancelAnimationFrame(animationFrameId);
 });
 </script>
 
@@ -284,26 +265,16 @@ onBeforeUnmount(() => {
 .manzano-green {
   color: #34d399;
 }
-
-/* Estilos para los botones móviles */
 .mobile-btn {
   @apply bg-white/10 hover:bg-white/20 active:bg-emerald-500/50 
          px-4 py-2 rounded text-xs font-mono font-bold 
          transition-colors border border-white/5;
 }
-
-/* Scrollbar personalizada para que no sea intrusiva */
 .custom-scrollbar::-webkit-scrollbar {
   width: 6px;
-}
-.custom-scrollbar::-webkit-scrollbar-track {
-  background: transparent;
 }
 .custom-scrollbar::-webkit-scrollbar-thumb {
   background: rgba(52, 211, 153, 0.2);
   border-radius: 10px;
-}
-.custom-scrollbar::-webkit-scrollbar-thumb:hover {
-  background: rgba(52, 211, 153, 0.4);
 }
 </style>

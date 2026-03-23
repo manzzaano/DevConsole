@@ -1,4 +1,40 @@
-/* Custom terminal styles */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  /* Contenedor del Perfil (About) */
+  .profile-container {
+    @apply w-40 h-40 aspect-square rounded-full bg-cover bg-center border-4 border-emerald-400 shadow-[0_0_15px_rgba(52,211,153,0.2)];
+  }
+
+  /* Base para todos los Badges */
+  .badge-base {
+    @apply inline-block px-3 py-1 rounded-full text-xs font-mono border transition-all duration-300 cursor-default no-underline;
+  }
+
+  /* Variantes de Color para Badges (Skills, Education, Contact) */
+  .skill-badge,
+  .tag-badge {
+    @apply badge-base bg-emerald-400/10 border-emerald-400/30 text-emerald-400 hover:bg-emerald-400/20 hover:shadow-[0_0_12px_rgba(52,211,153,0.4)] hover:-translate-y-0.5;
+  }
+
+  .skill-badge-yellow,
+  .tag-badge-yellow {
+    @apply badge-base bg-yellow-400/10 border-yellow-400/30 text-yellow-400 hover:bg-yellow-400/20 hover:shadow-[0_0_12px_rgba(234,179,8,0.4)] hover:-translate-y-0.5;
+  }
+
+  .skill-badge-cyan,
+  .tag-badge-cyan {
+    @apply badge-base bg-cyan-400/10 border-cyan-400/30 text-cyan-400 hover:bg-cyan-400/20 hover:shadow-[0_0_12px_rgba(34,211,238,0.4)] hover:-translate-y-0.5;
+  }
+
+  .skill-badge-purple {
+    @apply badge-base bg-purple-500/10 border-purple-500/30 text-purple-500 hover:bg-purple-500/20 hover:shadow-[0_0_12px_rgba(168,85,247,0.4)] hover:-translate-y-0.5;
+  }
+}
+
+/* Custom terminal base styles */
 body {
   font-family: "Fira Code", monospace;
   background-color: #1a1b26; /* Retro page background */
@@ -27,24 +63,28 @@ body {
   animation: gradient 15s ease infinite;
 }
 
-/* Minimalist scrollbar styling */
-::-webkit-scrollbar {
-  width: 8px;
+/* Minimalist scrollbar styling (Usada en la terminal y modals) */
+::-webkit-scrollbar,
+.custom-scrollbar::-webkit-scrollbar {
+  width: 6px;
 }
-::-webkit-scrollbar-track {
-  background: transparent; /* Mejor para el efecto cristal */
+::-webkit-scrollbar-track,
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
 }
-::-webkit-scrollbar-thumb {
-  background: rgba(52, 211, 153, 0.5); /* Translúcido */
-  border-radius: 4px;
+::-webkit-scrollbar-thumb,
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(52, 211, 153, 0.3);
+  border-radius: 10px;
 }
-::-webkit-scrollbar-thumb:hover {
+::-webkit-scrollbar-thumb:hover,
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
   background: rgba(110, 231, 183, 0.8);
 }
 
-/* CRT glow effect for text */
+/* CRT glow effect for text (Aprovechamos currentColor para que sirva con cualquier texto de Tailwind) */
 .glow {
-  text-shadow: 0 0 5px currentColor;
+  text-shadow: 0 0 8px currentColor;
 }
 
 /* Blinking cursor animation */
@@ -64,46 +104,4 @@ body {
 }
 #input-line.is-focused > span {
   text-shadow: 0 0 8px currentColor;
-}
-
-/* Modal window animations */
-#modal-window.hidden {
-  display: none;
-}
-#modal-window {
-  animation: fadeIn 0.3s ease-out;
-}
-#modal-container {
-  animation: slideIn 0.3s ease-out;
-}
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-@keyframes slideIn {
-  from {
-    transform: translateY(-30px);
-    opacity: 0;
-  }
-  to {
-    transform: translateY(0);
-    opacity: 1;
-  }
-}
-
-/* Interactividad (Hover) en tarjetas de proyectos y botones de contacto */
-#modal-content .grid > div,
-#modal-content a.flex-col {
-  transition:
-    transform 0.2s ease,
-    box-shadow 0.2s ease;
-}
-#modal-content .grid > div:hover,
-#modal-content a.flex-col:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 8px 24px rgba(52, 211, 153, 0.15);
 }
