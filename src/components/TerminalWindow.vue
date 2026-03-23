@@ -42,6 +42,7 @@
           ref="inputComponent"
           v-model="inputText"
           :isFocused="isFocused"
+          :suggestionRemainder="suggestionRemainder"
           :inputLineId="'input-line'"
           @keydown="onKeyDown"
         />
@@ -74,6 +75,7 @@ const {
   inputText,
   isFocused,
   isDemoMode,
+  suggestionRemainder, // <--- ¡AQUÍ ESTÁ LA NUEVA VARIABLE!
   modalHidden,
   modalTitle,
   modalContent,

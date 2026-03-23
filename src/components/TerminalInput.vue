@@ -13,6 +13,7 @@
       <div class="absolute inset-0 flex items-center whitespace-pre">
         <span id="input-text">{{ modelValue }}</span>
         <span class="bg-manzano-green w-2 h-5 blink glow"></span>
+        <span class="text-gray-500/50">{{ suggestionRemainder }}</span>
       </div>
 
       <input
@@ -41,6 +42,7 @@ const props = defineProps({
   modelValue: { type: String, default: "" },
   isFocused: { type: Boolean, default: true },
   inputLineId: { type: String, default: "input-line" },
+  suggestionRemainder: { type: String, default: "" }, // <--- AÑADIDO: Prop para recibir la sugerencia
 });
 const emit = defineEmits(["update:modelValue", "keydown", "input"]);
 

@@ -1,4 +1,4 @@
-import { ref, nextTick } from "vue";
+import { ref, nextTick, computed } from "vue"; // <--- Añadido 'computed'
 import {
   windowCommands,
   terminalCommandsList,
@@ -20,6 +20,14 @@ export function useTerminal({ outputRef, inputRef, inputLineRef }) {
   const inputText = ref(""); // El texto actual en el input
   const isFocused = ref(true); // Estado de foco de la terminal
   const isDemoMode = ref(false); // <--- 2. Estado para el modo demo
+
+  // --- Lógica para sugerencia visual (Ghost text) ---
+  const suggestionRemainder = computed(() => {
+    const val = inputText.value.toLowerCase();
+    if (!val || val.includes(" ")) return "";
+    const match = allCommands.find((c) => c.startsWith(val));
+    return match ? match.slice(val.length) : "";
+  });
 
   // --- Estado del Modal ---
   const modalHidden = ref(true);
@@ -60,7 +68,7 @@ export function useTerminal({ outputRef, inputRef, inputLineRef }) {
     const welcomeMessage = `
       <div class="mb-4">
         <p class="text-2xl font-bold text-emerald-400 glow">${getText(
-          "welcome_title"
+          "welcome_title",
         )}</p>
         <p>${getText("welcome_help")}</p>
         <p>${getText("welcome_shortcuts")}</p>
@@ -73,7 +81,7 @@ export function useTerminal({ outputRef, inputRef, inputLineRef }) {
   const openWindow = (command) => {
     if (inputLineRef && inputLineRef.value && inputLineRef.value.classList)
       inputLineRef.value.classList.remove("is-focused");
-    
+
     if (inputRef && inputRef.value) {
       if (inputRef.value.inputRefLocal) {
         try {
@@ -99,12 +107,12 @@ export function useTerminal({ outputRef, inputRef, inputLineRef }) {
   const closeWindow = () => {
     modalHidden.value = true;
     modalContent.value = "";
-    
+
     // Solo restaura el foco si no estamos en modo demo
     if (!isDemoMode.value) {
       if (inputLineRef && inputLineRef.value && inputLineRef.value.classList)
         inputLineRef.value.classList.add("is-focused");
-      
+
       if (inputRef && inputRef.value) {
         if (inputRef.value.inputRefLocal) {
           try {
@@ -112,7 +120,7 @@ export function useTerminal({ outputRef, inputRef, inputLineRef }) {
           } catch (e) {}
         }
       }
-      
+
       isFocused.value = true;
       nextTick(focusInput);
     }
@@ -129,7 +137,7 @@ export function useTerminal({ outputRef, inputRef, inputLineRef }) {
       }
     });
   };
-  
+
   const clearTerminal = () => {
     clearOutput();
     printWelcomeMessage();
@@ -157,44 +165,44 @@ export function useTerminal({ outputRef, inputRef, inputLineRef }) {
     if (isDemoMode.value) return; // Demo ya en curso
 
     isDemoMode.value = true;
-    
+
     // Helper para simular la ejecución de comandos
     const runCommand = (cmd) => {
       executeCommand(cmd); // Llama a tu función real
-      
+
       // Si el comando abre una ventana, la cerramos para la demo
       if (windowCommands.includes(cmd)) {
-          setTimeout(closeWindow, 1500); // Cierra la ventana después de 1.5s
-          return new Promise(resolve => setTimeout(resolve, 2000)); // Espera total 2s
+        setTimeout(closeWindow, 1500); // Cierra la ventana después de 1.5s
+        return new Promise((resolve) => setTimeout(resolve, 2000)); // Espera total 2s
       }
       // Pausa estándar para otros comandos
-      return new Promise(resolve => setTimeout(resolve, 1500));
+      return new Promise((resolve) => setTimeout(resolve, 1500));
     };
 
     // Espera a que el v-if en TerminalWindow.vue renderice #demo-typing
-    await nextTick(); 
+    await nextTick();
 
     try {
-      typedInstance = new Typed('#demo-typing', {
+      typedInstance = new Typed("#demo-typing", {
         strings: [
-          'help^1000',      // Escribe 'help', espera 1s
-          'projects^1500',  // Borra, escribe 'projects', espera 1.5s
-          'skills^1500',    // Borra, escribe 'skills', espera 1.5s
-          'contact^1500',   // Borra, escribe 'contact', espera 1.5s
-          'clear^1000'      // Borra, escribe 'clear', espera 1s
+          "help^1000", // Escribe 'help', espera 1s
+          "projects^1500", // Borra, escribe 'projects', espera 1.5s
+          "skills^1500", // Borra, escribe 'skills', espera 1.5s
+          "contact^1500", // Borra, escribe 'contact', espera 1.5s
+          "clear^1000", // Borra, escribe 'clear', espera 1s
         ],
         typeSpeed: 50,
         backSpeed: 30,
         backDelay: 1000,
         loop: false,
         showCursor: true,
-        cursorChar: '▋',
+        cursorChar: "▋",
         onStringTyped: async (arrayPos, self) => {
           // Obtener el comando (sin los caracteres de pausa '^1000')
-          const cmd = self.strings[arrayPos].split('^')[0]; 
-          
+          const cmd = self.strings[arrayPos].split("^")[0];
+
           await runCommand(cmd); // Ejecuta el comando y espera
-          
+
           // Al final de la demo
           if (arrayPos === self.strings.length - 1) {
             setTimeout(() => {
@@ -203,10 +211,13 @@ export function useTerminal({ outputRef, inputRef, inputLineRef }) {
               appendHtml(`<div><p>${getText("welcome_help")}</p></div>`);
             }, 2000); // Espera 2s después del 'clear'
           }
-        }
+        },
       });
     } catch (e) {
-      console.error("Error al iniciar Typed.js. ¿Existe el elemento #demo-typing en TerminalWindow.vue?", e);
+      console.error(
+        "Error al iniciar Typed.js. ¿Existe el elemento #demo-typing en TerminalWindow.vue?",
+        e,
+      );
       stopDemo(); // Revierte si falla
     }
   }
@@ -216,27 +227,27 @@ export function useTerminal({ outputRef, inputRef, inputLineRef }) {
   const executeCommand = (cmdRaw) => {
     const cmd = String(cmdRaw);
     const [command, ...args] = cmd.split(" ").filter(Boolean);
-    
+
     // --- 7. Comando especial 'demo' ---
     if (command === "demo") {
       clearTerminal(); // Limpia la terminal
-      startDemo();     // Inicia la demo
-      return;          // No ejecuta el resto
+      startDemo(); // Inicia la demo
+      return; // No ejecuta el resto
     }
-    
+
     // Imprime el comando ejecutado (eco)
     appendHtml(
       `<div class="flex"><span class="text-emerald-400 glow">manzano@portfolio:~$</span><p class="ml-2">${escapeHtml(
-        cmd
-      )}</p></div>`
+        cmd,
+      )}</p></div>`,
     );
 
     // --- Enrutamiento de Comandos ---
     if (windowCommands.includes(command)) {
       appendHtml(
         `<div><p>${getText(
-          "opening_app"
-        )} <span class="text-yellow-400">${command}</span>...</p></div>`
+          "opening_app",
+        )} <span class="text-yellow-400">${command}</span>...</p></div>`,
       );
       openWindow(command);
     } else if (command === "clear") {
@@ -251,7 +262,7 @@ export function useTerminal({ outputRef, inputRef, inputLineRef }) {
         setTimeout(clearTerminal, 800);
       } else {
         appendHtml(
-          `<div><p class="text-red-400 glow">${getText("lang_usage")}</p></div>`
+          `<div><p class="text-red-400 glow">${getText("lang_usage")}</p></div>`,
         );
       }
     } else if (command === "help") {
@@ -262,18 +273,18 @@ export function useTerminal({ outputRef, inputRef, inputLineRef }) {
             .map(
               (c) =>
                 `<li><span class="text-emerald-400 glow">${c}</span> - ${getText(
-                  "help_" + c
-                )}</li>`
+                  "help_" + c,
+                )}</li>`,
             )
             .join("")}
           <li><span class="text-emerald-400 glow">lang</span> - ${getText(
-            "help_lang"
+            "help_lang",
           )}</li>
           <li><span class="text-emerald-400 glow">clear</span> - ${getText(
-            "help_clear"
+            "help_clear",
           )}</li>
           <li><span class="text-yellow-400 glow">Ctrl+L</span> - ${getText(
-            "help_clear_shortcut"
+            "help_clear_shortcut",
           )}</li>
         </ul>`;
       appendHtml(`<div>${helpText}</div>`);
@@ -281,8 +292,8 @@ export function useTerminal({ outputRef, inputRef, inputLineRef }) {
       // Comando no encontrado
       appendHtml(
         `<div><p class="text-red-400 glow">${getText(
-          "command_not_found"
-        )} '${escapeHtml(command)}'. ${getText("type_help")}</p></div>`
+          "command_not_found",
+        )} '${escapeHtml(command)}'. ${getText("type_help")}</p></div>`,
       );
     }
   };
@@ -334,22 +345,38 @@ export function useTerminal({ outputRef, inputRef, inputLineRef }) {
       return;
     }
 
+    // Aceptar sugerencia con Flecha Derecha
+    if (key === "arrowright") {
+      if (suggestionRemainder.value) {
+        e.preventDefault();
+        inputText.value += suggestionRemainder.value;
+      }
+      return;
+    }
+
     if (key === "tab") {
       e.preventDefault();
-      const partialCommand = inputText.value.trim().toLowerCase();
-      const matches = allCommands.filter((c) => c.startsWith(partialCommand));
-      
-      if (matches.length === 1) {
-        inputText.value = matches[0];
-      } else if (matches.length > 1) {
-        appendHtml(
-          `<div class="flex"><span class="text-emerald-400 glow">manzano@portfolio:~$</span><p class="ml-2">${escapeHtml(
-            partialCommand
-          )}</p></div>`
-        );
-        appendHtml(
-          `<div class="flex flex-wrap gap-x-4">${matches.join(" ")}</div>`
-        );
+
+      // Si hay una sugerencia visual, la aplicamos primero
+      if (suggestionRemainder.value) {
+        inputText.value += suggestionRemainder.value;
+      } else {
+        // Lógica original para múltiples coincidencias
+        const partialCommand = inputText.value.trim().toLowerCase();
+        const matches = allCommands.filter((c) => c.startsWith(partialCommand));
+
+        if (matches.length === 1) {
+          inputText.value = matches[0];
+        } else if (matches.length > 1) {
+          appendHtml(
+            `<div class="flex"><span class="text-emerald-400 glow">manzano@portfolio:~$</span><p class="ml-2">${escapeHtml(
+              partialCommand,
+            )}</p></div>`,
+          );
+          appendHtml(
+            `<div class="flex flex-wrap gap-x-4">${matches.join(" ")}</div>`,
+          );
+        }
       }
       return;
     }
@@ -375,10 +402,12 @@ export function useTerminal({ outputRef, inputRef, inputLineRef }) {
     if (isDemoMode.value) {
       e.preventDefault();
       stopDemo();
-      appendHtml(`<div><p class="text-yellow-400 glow">Demo detenida.</p></div>`);
+      appendHtml(
+        `<div><p class="text-yellow-400 glow">Demo detenida.</p></div>`,
+      );
       return;
     }
-    
+
     // Comportamiento original: cerrar modal
     if (!modalHidden.value) {
       closeWindow();
@@ -392,13 +421,14 @@ export function useTerminal({ outputRef, inputRef, inputLineRef }) {
     try {
       translations.value = await loadContentJson();
       printWelcomeMessage();
-      
+
       // <--- 6. Añadir invitación a la demo ---
-      const langDemo = currentLang === 'es' 
-        ? '¿Es tu primera vez aquí? Escribe "<span class=\"text-yellow-400 glow\">demo</span>" para un tour rápido.'
-        : 'First time here? Type "<span class=\"text-yellow-400 glow\">demo</span>" for a quick tour.';
+      const langDemo =
+        currentLang === "es"
+          ? '¿Es tu primera vez aquí? Escribe "<span class=\"text-yellow-400 glow\">demo</span>" para un tour rápido.'
+          : 'First time here? Type "<span class=\"text-yellow-400 glow\">demo</span>" for a quick tour.';
       appendHtml(`<div><p>${langDemo}</p></div>`);
-      
+
       // Inicializar iconos
       try {
         if (window.lucide && window.lucide.createIcons)
@@ -406,13 +436,12 @@ export function useTerminal({ outputRef, inputRef, inputLineRef }) {
       } catch (err) {
         console.error("lucide init error:", err);
       }
-      
+
       // Foco inicial
       nextTick(focusInput);
-
     } catch (e) {
       appendHtml(
-        `<p class="text-red-400 glow">Error: No se pudo cargar el contenido del portafolio. Por favor, refresca la página.</p>`
+        `<p class="text-red-400 glow">Error: No se pudo cargar el contenido del portafolio. Por favor, refresca la página.</p>`,
       );
       console.error(e);
     }
@@ -423,6 +452,7 @@ export function useTerminal({ outputRef, inputRef, inputLineRef }) {
     inputText,
     isFocused,
     isDemoMode, // <--- 3. Exponer el estado de la demo
+    suggestionRemainder, // <--- AÑADIDO PARA LA VISTA
     modalHidden,
     modalTitle,
     modalContent,
