@@ -15,7 +15,7 @@
       >
         <h2
           id="modal-title"
-          class="text-lg font-bold flex items-center text-white"
+          class="text-lg font-bold flex items-center heading-gradient"
           v-html="title"
         ></h2>
 
