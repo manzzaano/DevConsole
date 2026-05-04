@@ -12,6 +12,14 @@ dist
 dist-ssr
 *.local
 
+# Tooling artifacts
+.playwright-mcp
+.claude
+*.output
+*.png
+!src/**/*.png
+!public/**/*.png
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json

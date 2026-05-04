@@ -73,7 +73,7 @@ export function useTerminal({
   const printWelcomeMessage = () => {
     const welcomeMessage = `
       <div class="mb-4">
-        <p class="text-2xl font-bold text-white glow">${getText("welcome_title")}</p>
+        <p class="text-2xl font-bold heading-gradient">${getText("welcome_title")}</p>
         <p class="text-white/70">${getText("welcome_help")}</p>
         <p class="text-white/70">${getText("welcome_shortcuts")}</p>
       </div>`;
@@ -202,7 +202,7 @@ export function useTerminal({
     }
 
     appendHtml(
-      `<div class="flex"><span class="text-white glow">manzzaano@portfolio:~$</span><p class="ml-2 text-white/70">${escapeHtml(cmd)}</p></div>`,
+      `<div class="flex"><span class="accent-cool font-bold">manzzaano@portfolio</span><span class="text-white/70">:</span><span class="accent-warm">~</span><span class="text-white/70">$</span><p class="ml-2 text-white">${escapeHtml(cmd)}</p></div>`,
     );
 
     if (windowCommands.includes(command)) {
@@ -211,15 +211,15 @@ export function useTerminal({
       );
       openWindow(command);
     } else if (command === "neofetch") {
-      const asciiHtml = `<pre class="text-white glow leading-[1.1] font-bold text-[2.2vw] sm:text-[12px] md:text-[14px] overflow-hidden mb-2">${neofetchData.ascii}</pre>`;
+      const asciiHtml = `<pre class="accent-cool leading-[1.1] font-bold text-[2.2vw] sm:text-[12px] md:text-[14px] overflow-hidden mb-2">${neofetchData.ascii}</pre>`;
 
       const statsHtml = neofetchData.stats
         .map((stat) => {
           const displayValue = stat.key ? getText(stat.key) : stat.value;
           const valueHtml = stat.url
-            ? `<a href="${stat.url}" target="_blank" class="text-white/60 underline underline-offset-2 hover:text-white transition-colors">${displayValue}</a>`
-            : `<span class="text-white/70">${displayValue}</span>`;
-          return `<div><span class="text-white/50 font-bold">${stat.label}:</span> ${valueHtml}</div>`;
+            ? `<a href="${stat.url}" target="_blank" class="accent-cool underline underline-offset-2 hover:text-white transition-colors">${displayValue}</a>`
+            : `<span class="text-white/85">${displayValue}</span>`;
+          return `<div><span class="accent-warm font-bold">${stat.label}:</span> ${valueHtml}</div>`;
         })
         .join("");
 
@@ -243,13 +243,13 @@ export function useTerminal({
       }
     } else if (command === "help") {
       const helpText = `
-        <p class="mb-2 text-white/70">${getText("help_header")}</p>
-        <ul class="list-disc list-inside space-y-0.5">
-          ${windowCommands.map((c) => `<li class="text-white/60"><span class="text-white glow">${c}</span> — ${getText("help_" + c)}</li>`).join("")}
-          <li class="text-white/60"><span class="text-white glow">lang</span> — ${getText("help_lang")}</li>
-          <li class="text-white/60"><span class="text-white glow">neofetch</span> — ${getText("help_neofetch")}</li>
-          <li class="text-white/60"><span class="text-white glow">clear</span> — ${getText("help_clear")}</li>
-          <li class="text-white/60"><span class="text-white/80">Ctrl+L</span> — ${getText("help_clear_shortcut")}</li>
+        <p class="mb-2 accent-warm">${getText("help_header")}</p>
+        <ul class="list-disc list-inside space-y-0.5 marker:text-white/30">
+          ${windowCommands.map((c) => `<li class="text-white/60"><span class="accent-cool font-bold">${c}</span> <span class="text-white/30">—</span> ${getText("help_" + c)}</li>`).join("")}
+          <li class="text-white/60"><span class="accent-cool font-bold">lang</span> <span class="text-white/30">—</span> ${getText("help_lang")}</li>
+          <li class="text-white/60"><span class="accent-cool font-bold">neofetch</span> <span class="text-white/30">—</span> ${getText("help_neofetch")}</li>
+          <li class="text-white/60"><span class="accent-cool font-bold">clear</span> <span class="text-white/30">—</span> ${getText("help_clear")}</li>
+          <li class="text-white/60"><span class="accent-violet font-bold">Ctrl+L</span> <span class="text-white/30">—</span> ${getText("help_clear_shortcut")}</li>
         </ul>`;
       appendHtml(`<div>${helpText}</div>`);
     } else {

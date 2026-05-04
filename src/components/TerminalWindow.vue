@@ -2,10 +2,12 @@
   <div
     class="relative text-white flex items-center justify-center min-h-screen p-2 md:p-4 overflow-hidden"
   >
-    <canvas
-      ref="canvasRef"
-      class="fixed inset-0 z-0 pointer-events-none"
-    ></canvas>
+    <div class="bg-aurora fixed inset-0 z-0 pointer-events-none"></div>
+    <div class="bg-conic fixed inset-0 z-0 pointer-events-none mix-blend-screen"></div>
+    <div class="bg-beam fixed inset-0 z-0 pointer-events-none mix-blend-screen"></div>
+    <div class="bg-stars fixed inset-0 z-0 pointer-events-none"></div>
+    <div class="bg-grid fixed inset-0 z-0 pointer-events-none"></div>
+    <div class="bg-scanlines fixed inset-0 z-[1] pointer-events-none"></div>
     <div class="fixed inset-0 z-[1] pointer-events-none opacity-[0.045] bg-[url('data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%27200%27 height=%27200%27%3E%3Cfilter id=%27n%27%3E%3CfeTurbulence type=%27fractalNoise%27 baseFrequency=%270.65%27 numOctaves=%274%27 stitchTiles=%27stitch%27/%3E%3C/filter%3E%3Crect width=%27200%27 height=%27200%27 filter=%27url(%23n)%27/%3E%3C/svg%3E')] bg-repeat bg-[length:200px_200px]"></div>
 
     <div
@@ -24,8 +26,8 @@
         <div
           class="w-3 h-3 bg-white/12 rounded-full shadow-[0_0_4px_rgba(255,255,255,0.1)]"
         ></div>
-        <div class="ml-2 text-xs text-white/30 font-mono hidden sm:block">
-          manzzaano@portfolio
+        <div class="ml-2 text-xs font-mono hidden sm:block">
+          <span class="accent-cool">manzzaano</span><span class="text-white/30">@</span><span class="accent-warm">portfolio</span>
         </div>
       </div>
 
@@ -41,8 +43,8 @@
           v-if="isDemoMode"
           class="flex items-center mt-2 flex-shrink-0 text-sm md:text-base"
         >
-          <span class="text-white glow">manzzaano@portfolio:~$</span>
-          <span id="demo-typing" class="ml-2 whitespace-pre"></span>
+          <span class="accent-cool font-bold">manzzaano@portfolio</span><span class="text-white/70">:</span><span class="accent-warm">~</span><span class="text-white/70">$</span>
+          <span id="demo-typing" class="ml-2 whitespace-pre text-white"></span>
         </div>
 
         <div v-if="!isDemoMode" class="mt-2">
@@ -97,15 +99,11 @@ import TerminalOutput from "./TerminalOutput.vue";
 import TerminalInput from "./TerminalInput.vue";
 import Modal from "./Modal.vue";
 import { useTerminal } from "../composables/useTerminal";
-import { useBackground } from "../composables/useBackground";
 
 const outputComponent = ref(null);
 const inputComponent = ref(null);
 const inputLineRef = ref(null);
-const canvasRef = ref(null);
 const terminalElement = ref(null);
-
-useBackground(canvasRef);
 
 const {
   inputText,

@@ -7,7 +7,7 @@
       isFocused ? 'is-focused' : '',
     ]"
   >
-    <span class="text-white glow">manzzaano@portfolio:~$</span>
+    <span class="accent-cool font-bold">manzzaano@portfolio</span><span class="text-white/70">:</span><span class="accent-warm">~</span><span class="text-white/70">$</span>
 
     <div class="relative ml-2 flex-grow h-6">
       <div class="absolute inset-0 flex items-center whitespace-pre">

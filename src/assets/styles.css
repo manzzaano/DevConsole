@@ -29,8 +29,8 @@
 @layer components {
   .glass-panel {
     background: var(--surface);
-    -webkit-backdrop-filter: blur(16px);
-    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);
     border: 1px solid var(--border);
     border-radius: 24px;
     box-shadow: var(--shadow-drop), var(--shadow-inner);
@@ -39,8 +39,8 @@
 
   .glass-card {
     background: var(--surface);
-    -webkit-backdrop-filter: blur(16px);
-    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);
     border: 1px solid var(--border);
     border-radius: 24px;
     box-shadow: var(--shadow-drop), var(--shadow-inner);
@@ -57,8 +57,8 @@
   .glass-btn {
     display: inline-block;
     background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0) 100%);
-    -webkit-backdrop-filter: blur(16px);
-    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);
     border: 1px solid var(--border);
     border-radius: 9999px;
     box-shadow: var(--shadow-drop), var(--shadow-inner);
@@ -79,8 +79,8 @@
   .glass-btn-sm {
     display: inline-block;
     background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0) 100%);
-    -webkit-backdrop-filter: blur(16px);
-    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);
     border: 1px solid var(--border);
     border-radius: 9999px;
     box-shadow: var(--shadow-drop), var(--shadow-inner);
@@ -105,8 +105,8 @@
     width: 48px;
     height: 48px;
     background: var(--surface);
-    -webkit-backdrop-filter: blur(16px);
-    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);
     border: 1px solid var(--border);
     border-radius: 9999px;
     box-shadow: var(--shadow-drop), var(--shadow-inner);
@@ -150,6 +150,55 @@
   .glow {
     text-shadow: 0 0 8px currentColor;
   }
+
+  /* Theme accents — derived from theme.json palette */
+  .accent-cool {
+    color: rgb(160, 185, 210);
+    text-shadow: 0 0 10px rgba(160, 185, 210, 0.4);
+  }
+
+  .accent-warm {
+    color: rgb(240, 230, 215);
+    text-shadow: 0 0 10px rgba(240, 230, 215, 0.35);
+  }
+
+  .accent-violet {
+    color: rgb(190, 170, 220);
+    text-shadow: 0 0 10px rgba(190, 170, 220, 0.35);
+  }
+
+  .heading-gradient {
+    background: linear-gradient(120deg, rgb(160, 185, 210) 0%, rgb(255, 255, 255) 45%, rgb(240, 230, 215) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .glass-card-accent {
+    background: var(--surface);
+    backdrop-filter: blur(16px);
+    border: 1px solid var(--border);
+    border-radius: 24px;
+    box-shadow: var(--shadow-drop), var(--shadow-inner), inset 0 0 0 1px rgba(160, 185, 210, 0.06);
+    padding: 24px;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .glass-card-accent::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 80% 60% at 0% 0%, rgba(160, 185, 210, 0.08), transparent 60%);
+    pointer-events: none;
+  }
+
+  .glass-card-accent:hover {
+    border-color: rgba(160, 185, 210, 0.45);
+    box-shadow: var(--shadow-drop), var(--shadow-inner), 0 0 30px rgba(160, 185, 210, 0.18);
+  }
 }
 
 @keyframes gradient {
@@ -190,6 +239,156 @@
 }
 #input-line.is-focused > span {
   text-shadow: 0 0 8px currentColor;
+}
+
+/* Aurora — animated cool/warm radial gradients on near-black bg */
+.bg-aurora {
+  background-color: var(--bg);
+  background-image:
+    radial-gradient(ellipse 55% 45% at var(--a-x, 18%) var(--a-y, 55%), rgba(160, 185, 210, 0.50), transparent 65%),
+    radial-gradient(ellipse 50% 40% at var(--b-x, 82%) var(--b-y, 42%), rgba(160, 185, 210, 0.42), transparent 65%),
+    radial-gradient(ellipse 40% 35% at var(--c-x, 50%) var(--c-y, 88%), rgba(122, 163, 204, 0.34), transparent 70%),
+    radial-gradient(ellipse 45% 35% at var(--d-x, 65%) var(--d-y, 15%), rgba(240, 230, 215, 0.12), transparent 70%),
+    radial-gradient(ellipse 30% 28% at var(--e-x, 30%) var(--e-y, 25%), rgba(180, 160, 220, 0.18), transparent 70%);
+  animation: aurora 28s ease-in-out infinite alternate;
+}
+
+@property --a-x { syntax: "<percentage>"; inherits: false; initial-value: 18%; }
+@property --a-y { syntax: "<percentage>"; inherits: false; initial-value: 55%; }
+@property --b-x { syntax: "<percentage>"; inherits: false; initial-value: 82%; }
+@property --b-y { syntax: "<percentage>"; inherits: false; initial-value: 42%; }
+@property --c-x { syntax: "<percentage>"; inherits: false; initial-value: 50%; }
+@property --c-y { syntax: "<percentage>"; inherits: false; initial-value: 88%; }
+@property --d-x { syntax: "<percentage>"; inherits: false; initial-value: 65%; }
+@property --d-y { syntax: "<percentage>"; inherits: false; initial-value: 15%; }
+@property --e-x { syntax: "<percentage>"; inherits: false; initial-value: 30%; }
+@property --e-y { syntax: "<percentage>"; inherits: false; initial-value: 25%; }
+
+@keyframes aurora {
+  0% {
+    --a-x: 12%; --a-y: 60%;
+    --b-x: 85%; --b-y: 38%;
+    --c-x: 45%; --c-y: 90%;
+    --d-x: 70%; --d-y: 12%;
+    --e-x: 25%; --e-y: 22%;
+  }
+  50% {
+    --a-x: 28%; --a-y: 40%;
+    --b-x: 70%; --b-y: 60%;
+    --c-x: 60%; --c-y: 75%;
+    --d-x: 50%; --d-y: 25%;
+    --e-x: 75%; --e-y: 30%;
+  }
+  100% {
+    --a-x: 20%; --a-y: 70%;
+    --b-x: 88%; --b-y: 30%;
+    --c-x: 35%; --c-y: 85%;
+    --d-x: 80%; --d-y: 20%;
+    --e-x: 40%; --e-y: 18%;
+  }
+}
+
+/* Conic shimmer — slow rotating multi-color tint, screen-blended */
+.bg-conic {
+  background:
+    conic-gradient(
+      from var(--conic-rot, 0deg) at 50% 50%,
+      rgba(160, 185, 210, 0)    0deg,
+      rgba(160, 185, 210, 0.18) 60deg,
+      rgba(180, 160, 220, 0.10) 140deg,
+      rgba(160, 185, 210, 0)    220deg,
+      rgba(240, 230, 215, 0.08) 290deg,
+      rgba(160, 185, 210, 0)    360deg
+    );
+  filter: blur(60px);
+  animation: conic-spin 80s linear infinite;
+}
+
+@property --conic-rot { syntax: "<angle>"; inherits: false; initial-value: 0deg; }
+
+@keyframes conic-spin {
+  to { --conic-rot: 360deg; }
+}
+
+/* Diagonal light beam sweeping across — screen-blended, very subtle */
+.bg-beam {
+  background: linear-gradient(
+    115deg,
+    transparent 30%,
+    rgba(160, 185, 210, 0.12) 48%,
+    rgba(240, 230, 215, 0.06) 50%,
+    rgba(160, 185, 210, 0.12) 52%,
+    transparent 70%
+  );
+  background-size: 280% 280%;
+  background-position: 0% 0%;
+  filter: blur(2px);
+  animation: beam-sweep 22s ease-in-out infinite;
+  opacity: 0.55;
+}
+
+@keyframes beam-sweep {
+  0%   { background-position: 120% -20%; opacity: 0; }
+  20%  { opacity: 0.55; }
+  50%  { background-position: -20% 120%; opacity: 0.55; }
+  60%  { opacity: 0; }
+  100% { background-position: -20% 120%; opacity: 0; }
+}
+
+/* Star drift — tiny cool/warm pinpoint dots, slow parallax drift */
+.bg-stars {
+  background-image:
+    radial-gradient(1px 1px at 12% 18%, rgba(160, 185, 210, 0.7), transparent 60%),
+    radial-gradient(1px 1px at 28% 72%, rgba(240, 230, 215, 0.5), transparent 60%),
+    radial-gradient(1px 1px at 47% 33%, rgba(160, 185, 210, 0.6), transparent 60%),
+    radial-gradient(1px 1px at 64% 88%, rgba(180, 160, 220, 0.55), transparent 60%),
+    radial-gradient(1px 1px at 78% 22%, rgba(160, 185, 210, 0.65), transparent 60%),
+    radial-gradient(1px 1px at 89% 60%, rgba(240, 230, 215, 0.4), transparent 60%),
+    radial-gradient(1px 1px at 6% 92%, rgba(160, 185, 210, 0.5), transparent 60%),
+    radial-gradient(2px 2px at 38% 14%, rgba(160, 185, 210, 0.85), transparent 55%),
+    radial-gradient(2px 2px at 72% 48%, rgba(240, 230, 215, 0.7), transparent 55%),
+    radial-gradient(2px 2px at 18% 56%, rgba(180, 160, 220, 0.7), transparent 55%);
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  animation: stars-drift 60s linear infinite, stars-pulse 5s ease-in-out infinite;
+  opacity: 0.85;
+}
+
+@keyframes stars-drift {
+  0%   { transform: translate3d(0, 0, 0); }
+  100% { transform: translate3d(-30px, -20px, 0); }
+}
+
+@keyframes stars-pulse {
+  0%, 100% { filter: brightness(1); }
+  50%      { filter: brightness(1.35); }
+}
+
+/* Tech grid — ultra-faint dot grid, terminal/circuit vibe */
+.bg-grid {
+  background-image:
+    radial-gradient(circle at center, rgba(160, 185, 210, 0.06) 1px, transparent 1.6px);
+  background-size: 36px 36px;
+  mask-image: radial-gradient(ellipse 80% 60% at 50% 50%, black 30%, transparent 100%);
+  -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 50%, black 30%, transparent 100%);
+  animation: grid-shift 90s linear infinite;
+}
+
+@keyframes grid-shift {
+  0%   { background-position: 0 0; }
+  100% { background-position: 36px 36px; }
+}
+
+/* Scanlines — terminal CRT vibe, ultra subtle */
+.bg-scanlines {
+  background-image: repeating-linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.018) 0px,
+    rgba(255, 255, 255, 0.018) 1px,
+    transparent 1px,
+    transparent 3px
+  );
+  opacity: 0.6;
 }
 
 /* Grain overlay — photographic texture over canvas background */

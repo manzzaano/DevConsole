@@ -1,8 +1,8 @@
 {
   "en": {
     "welcome_title": "Welcome to the Portfolio of Ismael Manzano León",
-    "welcome_help": "Type '<span class=\"text-yellow-400 glow\">help</span>' to see the list of available commands.",
-    "welcome_shortcuts": "Use '<span class=\"text-yellow-400 glow\">Tab</span>' to autocomplete and <span class=\"text-yellow-400 glow\">arrow keys</span> to navigate history.",
+    "welcome_help": "Type '<span class=\"accent-cool\">help</span>' to see the list of available commands.",
+    "welcome_shortcuts": "Use '<span class=\"accent-cool\">Tab</span>' to autocomplete and <span class=\"accent-cool\">arrow keys</span> to navigate history.",
     "opening_app": "Opening application:",
     "command_not_found": "Command not found:",
     "type_help": "Type 'help' for assistance.",
@@ -33,8 +33,8 @@
   },
   "es": {
     "welcome_title": "Bienvenido al Portafolio de Ismael Manzano León",
-    "welcome_help": "Escribe '<span class=\"text-yellow-400 glow\">help</span>' para ver la lista de comandos disponibles.",
-    "welcome_shortcuts": "Usa '<span class=\"text-yellow-400 glow\">Tab</span>' para autocompletar y las <span class=\"text-yellow-400 glow\">flechas</span> para navegar el historial.",
+    "welcome_help": "Escribe '<span class=\"accent-cool\">help</span>' para ver la lista de comandos disponibles.",
+    "welcome_shortcuts": "Usa '<span class=\"accent-cool\">Tab</span>' para autocompletar y las <span class=\"accent-cool\">flechas</span> para navegar el historial.",
     "opening_app": "Abriendo aplicación:",
     "command_not_found": "Comando no encontrado:",
     "type_help": "Escribe 'help' para obtener ayuda.",
