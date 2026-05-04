@@ -1,75 +1,165 @@
+:root {
+  --bg: #050505;
+  --surface: rgba(255, 255, 255, 0.03);
+  --surface-hover: rgba(255, 255, 255, 0.08);
+  --border: rgba(255, 255, 255, 0.15);
+  --border-highlight: rgba(255, 255, 255, 0.4);
+  --text-primary: #ffffff;
+  --text-secondary: rgba(255, 255, 255, 0.6);
+  --glow-cool: rgba(160, 185, 210, 0.5);
+  --glow-warm: rgba(240, 230, 215, 0.5);
+  --shadow-drop: 0 8px 32px 0 rgba(0, 0, 0, 0.4);
+  --shadow-inner: inset 0 1px 1px rgba(255, 255, 255, 0.1);
+}
+
 @import "tailwindcss";
 
-/* 1. Definimos las utilidades personalizadas con @utility */
-/* Esto las registra en el motor de Tailwind v4 correctamente */
-@utility badge-base {
-  @apply inline-block px-3 py-1 rounded-full text-xs font-mono border transition-all duration-300 cursor-default no-underline;
+@layer base {
+  body {
+    font-family: "Fira Code", monospace;
+    background-color: var(--bg);
+  }
+
+  ::selection {
+    background-color: rgba(160, 185, 210, 0.25);
+    color: #fff;
+  }
 }
 
-@utility profile-container {
-  @apply w-40 h-40 aspect-square rounded-full bg-cover bg-center border-4 border-emerald-400 shadow-[0_0_15px_rgba(52,211,153,0.2)];
-}
-
-@utility glow {
-  text-shadow: 0 0 8px currentColor;
-}
-
-/* 2. Ahora aplicamos las utilidades registradas a tus clases finales */
 @layer components {
-  .skill-badge,
-  .tag-badge {
-    @apply badge-base bg-emerald-400/10 border-emerald-400/30 text-emerald-400 hover:bg-emerald-400/20 hover:shadow-[0_0_12px_rgba(52,211,153,0.4)] hover:-translate-y-0.5;
+  .glass-panel {
+    background: var(--surface);
+    -webkit-backdrop-filter: blur(16px);
+    backdrop-filter: blur(16px);
+    border: 1px solid var(--border);
+    border-radius: 24px;
+    box-shadow: var(--shadow-drop), var(--shadow-inner);
+    transition: none;
   }
 
-  .skill-badge-yellow,
-  .tag-badge-yellow {
-    @apply badge-base bg-yellow-400/10 border-yellow-400/30 text-yellow-400 hover:bg-yellow-400/20 hover:shadow-[0_0_12px_rgba(234,179,8,0.4)] hover:-translate-y-0.5;
+  .glass-card {
+    background: var(--surface);
+    -webkit-backdrop-filter: blur(16px);
+    backdrop-filter: blur(16px);
+    border: 1px solid var(--border);
+    border-radius: 24px;
+    box-shadow: var(--shadow-drop), var(--shadow-inner);
+    padding: 24px;
+    transition: all 0.3s ease;
   }
 
-  .skill-badge-cyan,
-  .tag-badge-cyan {
-    @apply badge-base bg-cyan-400/10 border-cyan-400/30 text-cyan-400 hover:bg-cyan-400/20 hover:shadow-[0_0_12px_rgba(34,211,238,0.4)] hover:-translate-y-0.5;
+  .glass-card:hover {
+    background: var(--surface-hover);
+    border-color: var(--border-highlight);
+    box-shadow: var(--shadow-drop), var(--shadow-inner), 0 0 30px rgba(160, 185, 210, 0.10);
   }
 
-  .skill-badge-purple {
-    @apply badge-base bg-purple-500/10 border-purple-500/30 text-purple-500 hover:bg-purple-500/20 hover:shadow-[0_0_12px_rgba(168,85,247,0.4)] hover:-translate-y-0.5;
+  .glass-btn {
+    display: inline-block;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0) 100%);
+    -webkit-backdrop-filter: blur(16px);
+    backdrop-filter: blur(16px);
+    border: 1px solid var(--border);
+    border-radius: 9999px;
+    box-shadow: var(--shadow-drop), var(--shadow-inner);
+    color: var(--text-primary);
+    padding: 12px 32px;
+    font-family: "Fira Code", monospace;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    text-align: center;
+  }
+
+  .glass-btn:hover {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.10) 0%, rgba(255, 255, 255, 0.05) 100%);
+    border-color: var(--border-highlight);
+    box-shadow: var(--shadow-drop), var(--shadow-inner), 0 0 20px rgba(160, 185, 210, 0.30);
+  }
+
+  .glass-btn-sm {
+    display: inline-block;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0) 100%);
+    -webkit-backdrop-filter: blur(16px);
+    backdrop-filter: blur(16px);
+    border: 1px solid var(--border);
+    border-radius: 9999px;
+    box-shadow: var(--shadow-drop), var(--shadow-inner);
+    color: var(--text-primary);
+    padding: 8px 20px;
+    font-size: 0.75rem;
+    font-family: "Fira Code", monospace;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    text-align: center;
+  }
+
+  .glass-btn-sm:hover {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.10) 0%, rgba(255, 255, 255, 0.05) 100%);
+    border-color: var(--border-highlight);
+  }
+
+  .glass-fab {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    background: var(--surface);
+    -webkit-backdrop-filter: blur(16px);
+    backdrop-filter: blur(16px);
+    border: 1px solid var(--border);
+    border-radius: 9999px;
+    box-shadow: var(--shadow-drop), var(--shadow-inner);
+    color: var(--text-secondary);
+    transition: all 0.3s ease;
+    cursor: pointer;
+  }
+
+  .glass-fab:hover {
+    background: var(--surface-hover);
+    border-color: var(--border-highlight);
+    color: var(--text-primary);
+    transform: scale(1.1);
+    box-shadow: var(--shadow-drop), var(--shadow-inner), 0 0 20px rgba(160, 185, 210, 0.40);
+  }
+
+  .glass-tag {
+    display: inline-block;
+    background: var(--surface);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 9999px;
+    color: var(--text-secondary);
+    padding: 6px 16px;
+    font-size: 0.75rem;
+    font-family: "Fira Code", monospace;
+    transition: all 0.3s ease;
+    cursor: default;
+  }
+
+  .glass-tag:hover {
+    background: var(--surface-hover);
+    border-color: var(--border);
+    color: var(--text-primary);
+    transform: translateY(-2px);
   }
 
   .blink {
     animation: blink-animation 1s steps(2, start) infinite;
   }
-}
 
-/* 3. Estilos Globales */
-@layer base {
-  body {
-    font-family: "Fira Code", monospace;
-    background-color: #1a1b26;
-  }
-
-  ::selection {
-    background-color: rgba(52, 211, 153, 0.3);
-    color: #fff;
+  .glow {
+    text-shadow: 0 0 8px currentColor;
   }
 }
 
-/* 4. Animaciones y Scrollbars (CSS estándar) */
 @keyframes gradient {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
 
 @keyframes blink-animation {
-  to {
-    visibility: hidden;
-  }
+  to { visibility: hidden; }
 }
 
 .animate-gradient {
@@ -86,18 +176,30 @@
 }
 ::-webkit-scrollbar-thumb,
 .custom-scrollbar::-webkit-scrollbar-thumb {
-  background: rgba(52, 211, 153, 0.3);
+  background: rgba(255, 255, 255, 0.12);
   border-radius: 10px;
 }
 ::-webkit-scrollbar-thumb:hover,
 .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-  background: rgba(110, 231, 183, 0.8);
+  background: rgba(255, 255, 255, 0.25);
 }
 
 #input-line.is-focused {
-  background-color: rgba(52, 211, 153, 0.1);
+  background-color: rgba(255, 255, 255, 0.04);
   border-radius: 4px;
 }
 #input-line.is-focused > span {
   text-shadow: 0 0 8px currentColor;
+}
+
+/* Grain overlay — photographic texture over canvas background */
+.grain-layer {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0.05;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 200px 200px;
 }

@@ -1,6 +1,6 @@
 <template>
   <div
-    class="w-full h-full bg-[#525659] flex justify-center overflow-y-auto custom-scrollbar p-2 md:p-8 relative"
+    class="w-full h-full bg-[#050505] flex justify-center overflow-y-auto custom-scrollbar p-2 md:p-8 relative"
   >
     <div
       v-if="isLoading"
@@ -8,9 +8,9 @@
     >
       <i
         data-lucide="loader-2"
-        class="w-8 h-8 text-emerald-400 animate-spin mb-4"
+        class="w-8 h-8 text-white/40 animate-spin mb-4"
       ></i>
-      <p class="text-emerald-400 animate-pulse font-mono text-sm">
+      <p class="text-white/40 animate-pulse font-mono text-sm">
         [ SYSTEM: RENDERING_PDF_MODULE ]
       </p>
     </div>
@@ -27,7 +27,7 @@
     </div>
 
     <div
-      class="fixed bottom-6 left-1/2 transform -translate-x-1/2 flex items-center gap-3 px-6 py-3 bg-slate-900/90 backdrop-blur-md border border-emerald-400 text-emerald-400 font-mono text-xs rounded-full shadow-[0_0_20px_rgba(52,211,153,0.3)] transition-all duration-500 z-50 pointer-events-none"
+      class="fixed bottom-6 left-1/2 transform -translate-x-1/2 flex items-center gap-3 glass-btn text-xs pointer-events-none z-50 transition-all duration-500"
       :class="
         isDownloaded ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'
       "
@@ -42,12 +42,12 @@
       <a
         href="./documents/Ismael_Manzano_CV.pdf"
         target="_blank"
-        class="flex items-center justify-center w-12 h-12 bg-slate-900/90 backdrop-blur-md text-cyan-400 border border-cyan-400/30 rounded-full hover:bg-cyan-400 hover:text-black hover:scale-110 hover:shadow-[0_0_20px_rgba(34,211,238,0.5)] transition-all duration-300 group"
+        class="glass-fab group"
         :title="t.openRaw"
       >
         <i data-lucide="external-link" class="w-5 h-5"></i>
         <span
-          class="absolute right-14 bg-slate-900 border border-cyan-400/30 text-cyan-400 text-[10px] font-mono px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap hidden md:block pointer-events-none"
+          class="absolute right-14 bg-black/80 border border-white/[15%] text-white/60 text-[10px] font-mono px-2 py-1 rounded-full opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap hidden md:block pointer-events-none"
         >
           {{ t.openRaw }}
         </span>
@@ -55,12 +55,12 @@
 
       <button
         @click="forceDownload"
-        class="flex items-center justify-center w-12 h-12 bg-slate-900/90 backdrop-blur-md text-emerald-400 border border-emerald-400/30 rounded-full hover:bg-emerald-400 hover:text-black hover:scale-110 hover:shadow-[0_0_20px_rgba(52,211,153,0.5)] transition-all duration-300 group"
+        class="glass-fab group"
         :title="t.download"
       >
         <i data-lucide="download" class="w-5 h-5"></i>
         <span
-          class="absolute right-14 bg-slate-900 border border-emerald-400/30 text-emerald-400 text-[10px] font-mono px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap hidden md:block pointer-events-none"
+          class="absolute right-14 bg-black/80 border border-white/[15%] text-white/60 text-[10px] font-mono px-2 py-1 rounded-full opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap hidden md:block pointer-events-none"
         >
           {{ t.download }}
         </span>
@@ -78,7 +78,7 @@ const props = defineProps({
 });
 
 const isLoading = ref(true);
-const isDownloaded = ref(false); // Estado para controlar el Toast
+const isDownloaded = ref(false);
 
 const content = {
   en: {
@@ -99,7 +99,6 @@ const handleRendered = () => {
   isLoading.value = false;
 };
 
-// Función para forzar la descarga del PDF y mostrar notificación
 const forceDownload = async () => {
   try {
     const response = await fetch("./documents/Ismael_Manzano_CV.pdf");
@@ -117,11 +116,10 @@ const forceDownload = async () => {
     window.URL.revokeObjectURL(url);
     document.body.removeChild(a);
 
-    // Lanzar notificación de éxito
     isDownloaded.value = true;
     setTimeout(() => {
       isDownloaded.value = false;
-    }, 3000); // El Toast desaparece a los 3 segundos
+    }, 3000);
   } catch (error) {
     console.error("Error al forzar la descarga del PDF:", error);
   }

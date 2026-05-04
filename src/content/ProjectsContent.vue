@@ -3,27 +3,14 @@
     <div
       v-for="(project, index) in t.projectList"
       :key="index"
-      :class="[
-        'project-card border border-white/10 bg-white/5 p-5 rounded-xl backdrop-blur-md transition-all flex flex-col group',
-        project.hoverClass,
-      ]"
+      :class="['glass-card p-5 flex flex-col group']"
     >
       <div class="flex justify-between items-start mb-3 gap-4">
         <div>
-          <span
-            :class="[
-              'text-[10px] font-mono tracking-widest uppercase',
-              project.idColor,
-            ]"
-          >
+            <span class="text-[10px] font-mono tracking-widest uppercase text-white/40">
             [ {{ project.id }} ]
           </span>
-          <h4
-            :class="[
-              'text-xl font-bold transition-all group-hover:glow',
-              project.titleColor,
-            ]"
-          >
+          <h4 class="text-xl font-bold text-white transition-all">
             {{ project.title }}
           </h4>
         </div>
@@ -32,7 +19,7 @@
           <a
             :href="project.github"
             target="_blank"
-            class="text-gray-400 hover:text-white transition-colors block"
+            class="text-white/40 hover:text-white transition-colors block"
             :aria-label="'View ' + project.title + ' on GitHub'"
           >
             <svg
@@ -56,15 +43,15 @@
       </div>
 
       <p
-        class="text-sm text-gray-300 mb-4 flex-grow leading-relaxed"
+        class="text-sm text-white/70 mb-4 flex-grow leading-relaxed"
         v-html="project.description"
       ></p>
 
-      <div class="flex flex-wrap gap-2 mt-auto pt-4 border-t border-white/5">
+      <div class="flex flex-wrap gap-2 mt-auto pt-4 border-t border-white/[8%]">
         <span
           v-for="tag in project.tags"
           :key="tag"
-          :class="tagClasses[project.tagTheme]"
+          class="glass-tag"
         >
           {{ tag }}
         </span>
@@ -80,15 +67,6 @@ const props = defineProps({
   lang: { type: String, default: "en" },
 });
 
-// Clases calcadas de SkillsContent.vue para mantener 100% de coherencia (sin depender de style.css)
-const tagClasses = {
-  emerald:
-    "inline-block px-3 py-1 rounded-full text-xs font-mono border transition-all duration-300 cursor-default bg-emerald-400/10 border-emerald-400/30 text-emerald-400 hover:bg-emerald-400/20 hover:shadow-[0_0_12px_rgba(52,211,153,0.4)] hover:-translate-y-0.5",
-  yellow:
-    "inline-block px-3 py-1 rounded-full text-xs font-mono border transition-all duration-300 cursor-default bg-yellow-400/10 border-yellow-400/30 text-yellow-400 hover:bg-yellow-400/20 hover:shadow-[0_0_12px_rgba(234,179,8,0.4)] hover:-translate-y-0.5",
-  cyan: "inline-block px-3 py-1 rounded-full text-xs font-mono border transition-all duration-300 cursor-default bg-cyan-400/10 border-cyan-400/30 text-cyan-400 hover:bg-cyan-400/20 hover:shadow-[0_0_12px_rgba(34,211,238,0.4)] hover:-translate-y-0.5",
-};
-
 const content = {
   en: {
     projectList: [
@@ -97,36 +75,24 @@ const content = {
         title: "Regicide",
         github: "https://github.com/manzzaano/REGICIDE",
         description:
-          'Card game developed in <span class="text-emerald-400">Java with JavaFX</span>. Includes JSON data persistence and CSV statistics. Deep focus on game logic and design patterns.',
+          'Card game developed in <strong>Java with JavaFX</strong>. Includes JSON data persistence and CSV statistics. Deep focus on game logic and design patterns.',
         tags: ["Java", "JavaFX", "JSON"],
-        hoverClass: "hover:border-emerald-400",
-        idColor: "text-emerald-500",
-        titleColor: "text-emerald-400",
-        tagTheme: "emerald",
       },
       {
         id: "Project_02",
         title: "Pokédex",
         github: "https://github.com/manzzaano/POKEDEX",
         description:
-          'Dynamic Pokémon explorer built with <span class="text-yellow-400">React and Vite</span>. Consumes PokéAPI with asynchronous rendering and smooth navigation.',
+          'Dynamic Pokémon explorer built with <strong>React and Vite</strong>. Consumes PokéAPI with asynchronous rendering and smooth navigation.',
         tags: ["React", "Vite", "API"],
-        hoverClass: "hover:border-yellow-400",
-        idColor: "text-yellow-500",
-        titleColor: "text-yellow-400",
-        tagTheme: "yellow",
       },
       {
         id: "Project_03",
         title: "Terminal Portfolio",
         github: "https://github.com/manzzaano/PortafolioTerminal",
         description:
-          'This very portfolio. Interactive retro-futuristic interface with <span class="text-cyan-400">Vue 3 and WebGL</span>. Real command system and bilingual support.',
+          'This very portfolio. Interactive retro-futuristic interface with <strong>Vue 3 and WebGL</strong>. Real command system and bilingual support.',
         tags: ["Vue 3", "Tailwind", "WebGL"],
-        hoverClass: "hover:border-cyan-400",
-        idColor: "text-cyan-500",
-        titleColor: "text-cyan-400",
-        tagTheme: "cyan",
       },
     ],
   },
@@ -137,36 +103,24 @@ const content = {
         title: "Regicide",
         github: "https://github.com/manzzaano/REGICIDE",
         description:
-          'Juego de cartas desarrollado en <span class="text-emerald-400">Java con JavaFX</span>. Incluye guardado de partidas en JSON y estadísticas en CSV. Fuerte enfoque en patrones de diseño.',
+          'Juego de cartas desarrollado en <strong>Java con JavaFX</strong>. Incluye guardado de partidas en JSON y estadísticas en CSV. Fuerte enfoque en patrones de diseño.',
         tags: ["Java", "JavaFX", "JSON"],
-        hoverClass: "hover:border-emerald-400",
-        idColor: "text-emerald-500",
-        titleColor: "text-emerald-400",
-        tagTheme: "emerald",
       },
       {
         id: "Proyecto_02",
         title: "Pokédex",
         github: "https://github.com/manzzaano/POKEDEX",
         description:
-          'Explorador dinámico de Pokémon con <span class="text-yellow-400">React y Vite</span>. Consume la PokéAPI con renderizado asíncrono y navegación fluida.',
+          'Explorador dinámico de Pokémon con <strong>React y Vite</strong>. Consume la PokéAPI con renderizado asíncrono y navegación fluida.',
         tags: ["React", "Vite", "API"],
-        hoverClass: "hover:border-yellow-400",
-        idColor: "text-yellow-500",
-        titleColor: "text-yellow-400",
-        tagTheme: "yellow",
       },
       {
         id: "Proyecto_03",
         title: "PortfolioTerminal",
         github: "https://github.com/manzzaano/PortafolioTerminal",
         description:
-          'Este mismo portafolio. Interfaz interactiva retro-futurista con <span class="text-cyan-400">Vue 3 y WebGL</span>. Sistema de comandos real y soporte bilingüe.',
+          'Este mismo portafolio. Interfaz interactiva retro-futurista con <strong>Vue 3 y WebGL</strong>. Sistema de comandos real y soporte bilingüe.',
         tags: ["Vue 3", "Tailwind", "WebGL"],
-        hoverClass: "hover:border-cyan-400",
-        idColor: "text-cyan-500",
-        titleColor: "text-cyan-400",
-        tagTheme: "cyan",
       },
     ],
   },

@@ -1,61 +1,49 @@
 <template>
   <div
     id="modal-window"
-    class="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 transition-all duration-300"
-    :class="[
-      modalHidden ? 'opacity-0 pointer-events-none' : 'opacity-100',
-      isExpanded ? 'p-0' : 'p-4',
-    ]"
+    class="fixed inset-0 bg-black/60 flex items-center justify-center z-50 transition-opacity duration-300 p-4"
+    :class="modalHidden ? 'opacity-0 pointer-events-none' : 'opacity-100'"
     @click.self="close"
   >
     <div
       id="modal-container"
-      class="bg-black/40 backdrop-blur-md border border-white/10 text-gray-200 shadow-[0_8px_32px_rgba(0,0,0,0.5)] flex flex-col transition-all duration-500 ease-in-out relative"
-      :class="[
-        isExpanded
-          ? 'w-full h-full max-w-none max-h-none rounded-none border-none'
-          : 'w-full max-w-3xl max-h-[85vh] rounded-xl',
-      ]"
+      class="glass-panel p-0 text-white flex flex-col w-full max-w-3xl max-h-[85vh] rounded-[24px] transition-all duration-300"
+      :class="modalHidden ? 'scale-95' : 'scale-100'"
     >
       <div
-        class="bg-white/5 p-4 flex justify-between items-center border-b border-white/10 shrink-0 z-20"
-        :class="[isExpanded ? 'bg-slate-900/90' : 'rounded-t-xl']"
+        class="bg-white/[3%] rounded-t-[24px] p-4 flex justify-between items-center border-b border-white/[15%] shrink-0 z-20"
       >
         <h2
           id="modal-title"
-          class="text-lg font-bold font-sans flex items-center"
+          class="text-lg font-bold flex items-center text-white"
           v-html="title"
         ></h2>
 
-        <div class="flex items-center gap-4">
-          <button
-            id="modal-close-btn"
-            class="text-gray-400 hover:text-white transition-colors"
-            @click="close"
-          >
-            <i data-lucide="x" class="w-6 h-6"></i>
-          </button>
-        </div>
+        <button
+          id="modal-close-btn"
+          class="text-white/40 hover:text-white transition-colors"
+          @click="close"
+        >
+          <i data-lucide="x" class="w-6 h-6"></i>
+        </button>
       </div>
 
       <div
         id="modal-content"
-        class="flex-grow overflow-y-auto font-sans relative custom-scrollbar"
-        :class="[isExpanded ? 'p-0 bg-white' : 'p-6']"
+        class="flex-grow overflow-y-auto relative custom-scrollbar"
+        :class="componentName === 'cv' ? 'p-0' : 'p-6'"
       >
         <component
           :is="activeComponent"
           v-if="activeComponent"
           :lang="currentLang"
-          :isExpanded="isExpanded"
-          @toggle-expand="isExpanded = !isExpanded"
         />
 
         <div
           v-else-if="!modalHidden"
           class="flex items-center justify-center py-10"
         >
-          <p class="text-emerald-400 animate-pulse font-mono">
+          <p class="text-white/60 animate-pulse font-mono">
             Initializing module...
           </p>
         </div>
@@ -75,35 +63,22 @@ const props = defineProps({
 });
 
 const emit = defineEmits(["close"]);
-const isExpanded = ref(false);
 
-const close = () => {
-  isExpanded.value = false;
-  emit("close");
-};
+const close = () => emit("close");
 
 const activeComponent = shallowRef(null);
 
 const componentsMap = {
   about: defineAsyncComponent(() => import("../content/AboutContent.vue")),
-  education: defineAsyncComponent(
-    () => import("../content/EducationContent.vue"),
-  ),
-  experience: defineAsyncComponent(
-    () => import("../content/ExperienceContent.vue"),
-  ),
+  education: defineAsyncComponent(() => import("../content/EducationContent.vue")),
+  experience: defineAsyncComponent(() => import("../content/ExperienceContent.vue")),
   skills: defineAsyncComponent(() => import("../content/SkillsContent.vue")),
-  projects: defineAsyncComponent(
-    () => import("../content/ProjectsContent.vue"),
-  ),
+  projects: defineAsyncComponent(() => import("../content/ProjectsContent.vue")),
   contact: defineAsyncComponent(() => import("../content/ContactContent.vue")),
   cv: defineAsyncComponent(() => import("../content/CvContent.vue")),
 };
 
 const applyTiltEffect = () => {
-  // Si la modal está expandida, no aplicamos el efecto 3D para no romper el layout nativo
-  if (isExpanded.value) return;
-
   const cards = document.querySelectorAll("#modal-content .grid > div");
   if (!cards.length) return;
 
@@ -112,7 +87,6 @@ const applyTiltEffect = () => {
     card.style.willChange = "transform";
 
     card.onmousemove = (e) => {
-      if (isExpanded.value) return;
       const rect = card.getBoundingClientRect();
       const x = e.clientX - rect.left;
       const y = e.clientY - rect.top;
@@ -122,35 +96,14 @@ const applyTiltEffect = () => {
       const rotateY = ((x - centerX) / centerX) * 6;
 
       card.style.transform = `perspective(1000px) scale(1.01) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
-      card.style.transition =
-        "transform 0.1s ease-out, box-shadow 0.1s ease-out";
-
-      // Lógica de sombras dinámica
-      if (
-        card.classList.contains("hover:border-emerald-400") ||
-        card.classList.contains("border-emerald-500/20")
-      ) {
-        card.style.boxShadow = "0 10px 30px rgba(52, 211, 153, 0.15)";
-      } else if (card.classList.contains("hover:border-yellow-400")) {
-        card.style.boxShadow = "0 10px 30px rgba(234, 179, 8, 0.15)";
-      } else if (
-        card.classList.contains("hover:border-cyan-400") ||
-        card.classList.contains("border-cyan-500/20")
-      ) {
-        card.style.boxShadow = "0 10px 30px rgba(34, 211, 238, 0.15)";
-      } else if (card.classList.contains("hover:border-purple-400")) {
-        card.style.boxShadow = "0 10px 30px rgba(168, 85, 247, 0.15)";
-      } else {
-        card.style.boxShadow = "0 10px 30px rgba(34, 211, 238, 0.1)";
-      }
+      card.style.transition = "transform 0.1s ease-out, box-shadow 0.1s ease-out";
+      card.style.boxShadow = "0 10px 30px rgba(160, 185, 210, 0.12)";
       card.style.zIndex = "10";
     };
 
     card.onmouseleave = () => {
-      card.style.transform =
-        "perspective(1000px) scale(1) rotateX(0deg) rotateY(0deg)";
-      card.style.transition =
-        "transform 0.5s ease-out, box-shadow 0.5s ease-out";
+      card.style.transform = "perspective(1000px) scale(1) rotateX(0deg) rotateY(0deg)";
+      card.style.transition = "transform 0.5s ease-out, box-shadow 0.5s ease-out";
       card.style.boxShadow = "";
       card.style.zIndex = "1";
     };
@@ -160,17 +113,12 @@ const applyTiltEffect = () => {
 watch(
   () => props.componentName,
   (newName) => {
-    isExpanded.value = false;
-    if (newName && componentsMap[newName]) {
-      activeComponent.value = componentsMap[newName];
-    } else {
-      activeComponent.value = null;
-    }
+    activeComponent.value = newName && componentsMap[newName] ? componentsMap[newName] : null;
   },
 );
 
 watch(
-  [() => props.modalHidden, activeComponent, isExpanded],
+  [() => props.modalHidden, activeComponent],
   async ([hidden, comp]) => {
     if (!hidden && comp) {
       await nextTick();

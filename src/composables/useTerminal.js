@@ -5,9 +5,6 @@ import { loadContentJson } from "../services/contentService";
 import { escapeHtml } from "../utils/escapeHtml";
 import Typed from "typed.js";
 
-/**
- * Composable para gestionar toda la lógica de la terminal y navegación.
- */
 export function useTerminal({
   outputRef,
   inputRef,
@@ -76,9 +73,9 @@ export function useTerminal({
   const printWelcomeMessage = () => {
     const welcomeMessage = `
       <div class="mb-4">
-        <p class="text-2xl font-bold text-emerald-400 glow">${getText("welcome_title")}</p>
-        <p>${getText("welcome_help")}</p>
-        <p>${getText("welcome_shortcuts")}</p>
+        <p class="text-2xl font-bold text-white glow">${getText("welcome_title")}</p>
+        <p class="text-white/70">${getText("welcome_help")}</p>
+        <p class="text-white/70">${getText("welcome_shortcuts")}</p>
       </div>`;
     appendHtml(welcomeMessage);
   };
@@ -205,29 +202,29 @@ export function useTerminal({
     }
 
     appendHtml(
-      `<div class="flex"><span class="text-emerald-400 glow">manzzaano@portfolio:~$</span><p class="ml-2">${escapeHtml(cmd)}</p></div>`,
+      `<div class="flex"><span class="text-white glow">manzzaano@portfolio:~$</span><p class="ml-2 text-white/70">${escapeHtml(cmd)}</p></div>`,
     );
 
     if (windowCommands.includes(command)) {
       appendHtml(
-        `<div><p>${getText("opening_app")} <span class="text-yellow-400">${command}</span>...</p></div>`,
+        `<div><p class="text-white/50">${getText("opening_app")} <span class="text-white/80">${command}</span>...</p></div>`,
       );
       openWindow(command);
     } else if (command === "neofetch") {
-      const asciiHtml = `<pre class="text-emerald-400 glow leading-[1.1] font-bold text-[2.2vw] sm:text-[12px] md:text-[14px] overflow-hidden mb-2">${neofetchData.ascii}</pre>`;
+      const asciiHtml = `<pre class="text-white glow leading-[1.1] font-bold text-[2.2vw] sm:text-[12px] md:text-[14px] overflow-hidden mb-2">${neofetchData.ascii}</pre>`;
 
       const statsHtml = neofetchData.stats
         .map((stat) => {
           const displayValue = stat.key ? getText(stat.key) : stat.value;
           const valueHtml = stat.url
-            ? `<a href="${stat.url}" target="_blank" class="text-cyan-400 hover:underline hover:text-cyan-300 transition-colors">${displayValue}</a>`
-            : `<span class="text-gray-300">${displayValue}</span>`;
-          return `<div><span class="text-emerald-400 font-bold">${stat.label}:</span> ${valueHtml}</div>`;
+            ? `<a href="${stat.url}" target="_blank" class="text-white/60 underline underline-offset-2 hover:text-white transition-colors">${displayValue}</a>`
+            : `<span class="text-white/70">${displayValue}</span>`;
+          return `<div><span class="text-white/50 font-bold">${stat.label}:</span> ${valueHtml}</div>`;
         })
         .join("");
 
       appendHtml(
-        `<div class="flex flex-col my-4 overflow-hidden">${asciiHtml}<div class="flex flex-col whitespace-nowrap ml-2"><div class="text-gray-500 mb-2">--------------------------------</div>${statsHtml}</div></div>`,
+        `<div class="flex flex-col my-4 overflow-hidden">${asciiHtml}<div class="flex flex-col whitespace-nowrap ml-2"><div class="text-white/[12%] mb-2">--------------------------------</div>${statsHtml}</div></div>`,
       );
     } else if (command === "clear") {
       clearTerminal();
@@ -246,13 +243,13 @@ export function useTerminal({
       }
     } else if (command === "help") {
       const helpText = `
-        <p class="mb-2">${getText("help_header")}</p>
-        <ul class="list-disc list-inside">
-          ${windowCommands.map((c) => `<li><span class="text-emerald-400 glow">${c}</span> - ${getText("help_" + c)}</li>`).join("")}
-          <li><span class="text-emerald-400 glow">lang</span> - ${getText("help_lang")}</li>
-          <li><span class="text-emerald-400 glow">neofetch</span> - ${getText("help_neofetch")}</li>
-          <li><span class="text-emerald-400 glow">clear</span> - ${getText("help_clear")}</li>
-          <li><span class="text-yellow-400 glow">Ctrl+L</span> - ${getText("help_clear_shortcut")}</li>
+        <p class="mb-2 text-white/70">${getText("help_header")}</p>
+        <ul class="list-disc list-inside space-y-0.5">
+          ${windowCommands.map((c) => `<li class="text-white/60"><span class="text-white glow">${c}</span> — ${getText("help_" + c)}</li>`).join("")}
+          <li class="text-white/60"><span class="text-white glow">lang</span> — ${getText("help_lang")}</li>
+          <li class="text-white/60"><span class="text-white glow">neofetch</span> — ${getText("help_neofetch")}</li>
+          <li class="text-white/60"><span class="text-white glow">clear</span> — ${getText("help_clear")}</li>
+          <li class="text-white/60"><span class="text-white/80">Ctrl+L</span> — ${getText("help_clear_shortcut")}</li>
         </ul>`;
       appendHtml(`<div>${helpText}</div>`);
     } else {
@@ -320,10 +317,10 @@ export function useTerminal({
           inputText.value = matches[0];
         } else if (matches.length > 1) {
           appendHtml(
-            `<div class="flex"><span class="text-emerald-400 glow">manzzaano@portfolio:~$</span><p class="ml-2">${escapeHtml(partialCommand)}</p></div>`,
+            `<div class="flex"><span class="text-white glow">manzzaano@portfolio:~$</span><p class="ml-2 text-white/70">${escapeHtml(partialCommand)}</p></div>`,
           );
           appendHtml(
-            `<div class="flex flex-wrap gap-x-4">${matches.join(" ")}</div>`,
+            `<div class="flex flex-wrap gap-x-4 text-white/60">${matches.join(" ")}</div>`,
           );
         }
       }
@@ -348,7 +345,7 @@ export function useTerminal({
       e.preventDefault();
       stopDemo();
       appendHtml(
-        `<div><p class="text-yellow-400 glow">Demo detenida.</p></div>`,
+        `<div><p class="text-white/50">Demo detenida.</p></div>`,
       );
       return;
     }
@@ -362,9 +359,9 @@ export function useTerminal({
       printWelcomeMessage();
       const langDemo =
         currentLang.value === "es"
-          ? '¿Es tu primera vez aquí? Escribe "<span class="text-yellow-400 glow">demo</span>" para un tour rápido.'
-          : 'First time here? Type "<span class="text-yellow-400 glow">demo</span>" for a quick tour.';
-      appendHtml(`<div><p>${langDemo}</p></div>`);
+          ? '<p class="text-white/50">¿Es tu primera vez aquí? Escribe <span class="text-white glow">demo</span> para un tour rápido.</p>'
+          : '<p class="text-white/50">First time here? Type <span class="text-white glow">demo</span> for a quick tour.</p>';
+      appendHtml(`<div>${langDemo}</div>`);
       nextTick(focusInput);
     } catch (e) {
       appendHtml(

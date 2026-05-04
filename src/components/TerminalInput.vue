@@ -7,13 +7,13 @@
       isFocused ? 'is-focused' : '',
     ]"
   >
-    <span class="manzano-green glow">manzzaano@portfolio:~$</span>
+    <span class="text-white glow">manzzaano@portfolio:~$</span>
 
     <div class="relative ml-2 flex-grow h-6">
       <div class="absolute inset-0 flex items-center whitespace-pre">
         <span id="input-text">{{ modelValue }}</span>
-        <span class="bg-manzano-green w-2 h-5 blink glow"></span>
-        <span class="text-gray-500/50">{{ suggestionRemainder }}</span>
+        <span class="bg-white w-2 h-5 blink"></span>
+        <span class="text-white/20">{{ suggestionRemainder }}</span>
       </div>
 
       <input
@@ -36,13 +36,12 @@
 
 <script setup>
 import { ref, watch, nextTick } from "vue";
-import { defineProps, defineEmits, defineExpose } from "vue";
 
 const props = defineProps({
   modelValue: { type: String, default: "" },
   isFocused: { type: Boolean, default: true },
   inputLineId: { type: String, default: "input-line" },
-  suggestionRemainder: { type: String, default: "" }, // <--- AÑADIDO: Prop para recibir la sugerencia
+  suggestionRemainder: { type: String, default: "" },
 });
 const emit = defineEmits(["update:modelValue", "keydown", "input"]);
 
@@ -86,12 +85,3 @@ nextTick(() => {
   }
 });
 </script>
-
-<style scoped>
-.manzano-green {
-  color: #34d399;
-}
-.bg-manzano-green {
-  background-color: #34d399;
-}
-</style>
