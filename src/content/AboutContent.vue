@@ -71,6 +71,16 @@ const props = defineProps({
   lang: { type: String, default: "en" },
 });
 
+const BIRTH = new Date("2005-04-26");
+
+function calcAge() {
+  const today = new Date();
+  let age = today.getFullYear() - BIRTH.getFullYear();
+  const m = today.getMonth() - BIRTH.getMonth();
+  if (m < 0 || (m === 0 && today.getDate() < BIRTH.getDate())) age--;
+  return age;
+}
+
 const content = {
   en: {
     userLabel: "USER",
@@ -84,7 +94,6 @@ const content = {
     statusLabel: "STATUS",
     statusValue: "Active @ Entreredes",
     ageLabel: "AGE",
-    ageValue: "20 years",
     logTitle: "Identity_Logs_v1.1.2",
     bio1: "Software Developer with a strict engineering focus. I prioritize understanding the technical <strong>'why'</strong> to build logical, efficient, and clean systems that stand the test of time.",
     bio2: "High-productivity developer committed to technical excellence. I design architectures that prioritize <strong>performance and scalability</strong>, ensuring every line of code adds measurable value to the system.",
@@ -102,7 +111,6 @@ const content = {
     statusLabel: "ESTADO",
     statusValue: "Activo en Entreredes",
     ageLabel: "EDAD",
-    ageValue: "20 años",
     logTitle: "Registros_de_Identidad_v1.1.2",
     bio1: "Software Developer con un estricto enfoque en ingeniería. Priorizo entender el <strong>'porqué'</strong> técnico para construir sistemas lógicos, eficientes y limpios.",
     bio2: "Desarrollador de alta productividad comprometido con la excelencia técnica. Diseño arquitecturas que priorizan el <strong>rendimiento y la escalabilidad</strong>, garantizando que cada línea de código aporte valor real.",
@@ -110,5 +118,9 @@ const content = {
   },
 };
 
-const t = computed(() => content[props.lang] || content.en);
+const t = computed(() => {
+  const c = content[props.lang] || content.en;
+  const suffix = props.lang === "es" ? `${calcAge()} a\u00f1os` : `${calcAge()} years`;
+  return { ...c, ageValue: suffix };
+});
 </script>
