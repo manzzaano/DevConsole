@@ -1,7 +1,6 @@
 import { neofetchData } from "../data/content.js";
-import { resolvePath, getPromptPath } from "../data/filesystem.js";
 import { ref, nextTick, computed } from "vue";
-import { windowCommands, allCommands, unixCommands } from "../constants/commands";
+import { windowCommands, allCommands } from "../constants/commands";
 import { loadContentJson } from "../services/contentService";
 import { escapeHtml } from "../utils/escapeHtml";
 import Typed from "typed.js";
@@ -16,9 +15,8 @@ export function useTerminal({
   const inputText = ref("");
   const isFocused = ref(true);
   const isDemoMode = ref(false);
-  const currentPath = ref("~");
 
-  const promptPath = computed(() => getPromptPath(currentPath.value));
+  const promptPath = "~";
 
   // --- Lógica para sugerencia visual (Ghost text) ---
   const suggestionRemainder = computed(() => {
@@ -77,7 +75,7 @@ export function useTerminal({
   const printWelcomeMessage = () => {
     const welcomeMessage = `
       <div class="mb-4">
-        <p class="text-2xl font-bold heading-gradient">${getText("welcome_title")}</p>
+        <p class="text-xl sm:text-2xl font-bold heading-gradient">${getText("welcome_title")}</p>
         <p class="text-white/70">${getText("welcome_help")}</p>
         <p class="text-white/70">${getText("welcome_shortcuts")}</p>
       </div>`;
@@ -128,7 +126,6 @@ export function useTerminal({
 
   const clearTerminal = () => {
     clearOutput();
-    currentPath.value = "~";
     printWelcomeMessage();
     if (!isDemoMode.value) {
       nextTick(focusInput);
@@ -166,16 +163,12 @@ export function useTerminal({
       typedInstance = new Typed("#demo-typing", {
         strings: [
           "help^1000",
-          "ls -l^1500",
-          "cat perfil.txt^2000",
-          "cd proyectos/^1200",
-          "ls^1500",
-          "cd ..^1200",
-          "pwd^1000",
-          "about^1500",
           "neofetch^2000",
-          "projects^1500",
+          "about^1500",
           "skills^1500",
+          "projects^1500",
+          "education^1500",
+          "experience^1500",
           "contact^1500",
           "clear^1000",
         ],
@@ -213,7 +206,7 @@ export function useTerminal({
     }
 
     appendHtml(
-      `<div class="flex"><span class="accent-teal font-bold">manzzaano@portfolio</span><span class="text-white/70">:</span><span class="accent-warm">${escapeHtml(promptPath.value)}</span><span class="text-white/70">$</span><p class="ml-2 text-white">${escapeHtml(cmd)}</p></div>`,
+      `<div class="flex"><span class="accent-teal font-bold">manzzaano@portfolio</span><span class="text-white/70">:</span><span class="accent-warm">${escapeHtml(promptPath)}</span><span class="text-white/70">$</span><p class="ml-2 text-white">${escapeHtml(cmd)}</p></div>`,
     );
 
     if (windowCommands.includes(command)) {
@@ -258,111 +251,16 @@ export function useTerminal({
         <ul class="list-disc list-inside space-y-0.5 marker:text-white/30">
           ${windowCommands.map((c) => `<li class="text-white/60"><span class="accent-teal font-bold">${c}</span> <span class="text-white/30">—</span> ${getText("help_" + c)}</li>`).join("")}
           <li class="text-white/60"><span class="accent-teal font-bold">lang</span> <span class="text-white/30">—</span> ${getText("help_lang")}</li>
+          <li class="text-white/60"><span class="accent-teal font-bold">demo</span> <span class="text-white/30">—</span> ${getText("help_demo")}</li>
           <li class="text-white/60"><span class="accent-teal font-bold">neofetch</span> <span class="text-white/30">—</span> ${getText("help_neofetch")}</li>
           <li class="text-white/60"><span class="accent-teal font-bold">clear</span> <span class="text-white/30">—</span> ${getText("help_clear")}</li>
           <li class="text-white/60"><span class="accent-violet font-bold">Ctrl+L</span> <span class="text-white/30">—</span> ${getText("help_clear_shortcut")}</li>
-          <li class="text-white/30 mt-2 italic">── Unix ──</li>
-          <li class="text-white/60"><span class="accent-cyan font-bold">ls</span> <span class="text-white/30">—</span> List directory contents</li>
-          <li class="text-white/60"><span class="accent-cyan font-bold">cat &lt;file&gt;</span> <span class="text-white/30">—</span> Print file contents</li>
-          <li class="text-white/60"><span class="accent-cyan font-bold">cd &lt;dir&gt;</span> <span class="text-white/30">—</span> Change directory</li>
-          <li class="text-white/60"><span class="accent-cyan font-bold">pwd</span> <span class="text-white/30">—</span> Print working directory</li>
         </ul>`;
       appendHtml(`<div>${helpText}</div>`);
-    } else if (command === "ls") {
-      const showLong = args.includes("-l");
-      const dir = resolvePath(currentPath.value);
-      if (!dir || dir.type !== "dir") {
-        appendHtml(`<div><p class="text-red-400 glow">ls: cannot access '${escapeHtml(currentPath.value)}': Not a directory</p></div>`);
-        return;
-      }
-      const entries = Object.entries(dir.children);
-      if (entries.length === 0) {
-        appendHtml(`<div><p class="text-white/40">(empty)</p></div>`);
-        return;
-      }
-      const lines = entries.map(([name, node]) => {
-        if (node.type === "dir") {
-          const desc = showLong && node.description
-            ? ` <span class="text-white/20 text-[10px]">// ${escapeHtml(node.description)}</span>`
-            : "";
-          return `<div><span class="dir-name">${escapeHtml(name)}/</span>${desc}</div>`;
-        }
-        if (node.executable) {
-          const desc = showLong && node.description
-            ? ` <span class="text-white/20 text-[10px]">// ${escapeHtml(node.description)}</span>`
-            : "";
-          return `<div><span class="file-exe">*${escapeHtml(name)}</span>${desc}</div>`;
-        }
-        if (node.binary) {
-          const desc = showLong && node.description
-            ? ` <span class="text-white/20 text-[10px]">// ${escapeHtml(node.description)}</span>`
-            : "";
-          return `<div><span class="file-bin">${escapeHtml(name)}</span>${desc}</div>`;
-        }
-        const desc = showLong && node.description
-          ? ` <span class="text-white/20 text-[10px]">// ${escapeHtml(node.description)}</span>`
-          : "";
-        return `<div><span class="file-regular">${escapeHtml(name)}</span>${desc}</div>`;
-      });
-      appendHtml(`<div>${lines.join("")}</div>`);
-    } else if (command === "cat") {
-      if (args.length === 0) {
-        appendHtml(`<div><p class="text-red-400 glow">cat: missing operand. Usage: cat &lt;file&gt;</p></div>`);
-        return;
-      }
-      const fileName = args[0];
-      const dir = resolvePath(currentPath.value);
-      if (!dir || dir.type !== "dir") {
-        appendHtml(`<div><p class="text-red-400 glow">cat: cannot access '${escapeHtml(fileName)}': Not a directory</p></div>`);
-        return;
-      }
-      const file = dir.children[fileName];
-      if (!file) {
-        appendHtml(`<div><p class="text-red-400 glow">cat: ${escapeHtml(fileName)}: No such file</p></div>`);
-        return;
-      }
-      if (file.type === "dir") {
-        appendHtml(`<div><p class="text-red-400 glow">cat: ${escapeHtml(fileName)}: Is a directory</p></div>`);
-        return;
-      }
-      const summary = file.summary?.[currentLang.value] || file.summary?.en || "(no content)";
-      const hint = file.modal
-        ? (currentLang.value === "es"
-            ? `<p class="text-white/30 text-[10px] mt-2">Usa '<span class="accent-teal">${file.modal}</span>' para vista completa.</p>`
-            : `<p class="text-white/30 text-[10px] mt-2">Use '<span class="accent-teal">${file.modal}</span>' for full view.</p>`)
-        : "";
-      appendHtml(`<div><p class="text-white/80 leading-relaxed">${escapeHtml(summary)}</p>${hint}</div>`);
-    } else if (command === "cd") {
-      if (args.length === 0) {
-        currentPath.value = "~";
-        return;
-      }
-      const target = args[0];
-      if (target === "~" || target === "~/" || target === "/") {
-        currentPath.value = "~";
-        return;
-      }
-      if (target === "..") {
-        if (currentPath.value === "~") return;
-        const parts = currentPath.value.replace(/^~\/?/, "").split("/").filter(Boolean);
-        if (parts.length === 0) return;
-        parts.pop();
-        currentPath.value = parts.length > 0 ? "~/" + parts.join("/") : "~";
-        return;
-      }
-      const targetClean = target.replace(/\/$/, "");
-      const dir = resolvePath(currentPath.value);
-      if (!dir || dir.type !== "dir") return;
-      const child = dir.children[targetClean];
-      if (!child || child.type !== "dir") {
-        appendHtml(`<div><p class="text-red-400 glow">cd: ${escapeHtml(target)}: No such directory</p></div>`);
-        return;
-      }
-      const newPathParts = currentPath.value.replace(/^~\/?/, "").split("/").filter(Boolean);
-      newPathParts.push(targetClean);
-      currentPath.value = "~/" + newPathParts.join("/");
-    } else if (command === "pwd") {
-      appendHtml(`<div><p class="accent-cyan">${escapeHtml(promptPath.value)}</p></div>`);
+    } else if (command === "ls" || command === "cat" || command === "cd" || command === "pwd") {
+      appendHtml(
+        `<div><p class="text-white/50 italic">${getText("unix_removed")}</p></div>`,
+      );
     } else {
       appendHtml(
         `<div><p class="text-red-400 glow">${getText("command_not_found")} '${escapeHtml(command)}'. ${getText("type_help")}</p></div>`,
@@ -428,7 +326,7 @@ export function useTerminal({
           inputText.value = matches[0];
         } else if (matches.length > 1) {
           appendHtml(
-            `<div class="flex"><span class="accent-teal font-bold">manzzaano@portfolio</span><span class="text-white/70">:</span><span class="accent-warm">${escapeHtml(promptPath.value)}</span><span class="text-white/70">$</span><p class="ml-2 text-white/70">${escapeHtml(partialCommand)}</p></div>`,
+            `<div class="flex"><span class="accent-teal font-bold">manzzaano@portfolio</span><span class="text-white/70">:</span><span class="accent-warm">${escapeHtml(promptPath)}</span><span class="text-white/70">$</span><p class="ml-2 text-white/70">${escapeHtml(partialCommand)}</p></div>`,
           );
           appendHtml(
             `<div class="flex flex-wrap gap-x-4 text-white/60">${matches.join(" ")}</div>`,
@@ -487,7 +385,6 @@ export function useTerminal({
     isDemoMode,
     suggestionRemainder,
     promptPath,
-    currentPath,
     modalHidden,
     modalTitle,
     modalComponent,

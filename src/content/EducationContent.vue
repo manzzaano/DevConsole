@@ -23,13 +23,13 @@
           class="flex flex-col md:flex-row md:items-start justify-between gap-x-6 gap-y-3 mb-2"
         >
           <h4
-            class="text-lg font-bold text-white leading-tight flex-grow max-w-full md:max-w-[75%]"
+            class="text-base sm:text-lg font-bold text-white leading-tight flex-grow max-w-full md:max-w-[75%]"
           >
             {{ edu.title }}
           </h4>
           <div class="flex-shrink-0">
             <span
-            class="glass-tag accent-teal text-[10px] md:text-xs whitespace-nowrap tracking-tight"
+            class="glass-tag accent-teal text-[10px] sm:text-xs md:text-xs whitespace-nowrap tracking-tight"
             >
               [ {{ edu.status }} ]
             </span>
@@ -44,7 +44,7 @@
           <span
             v-for="tag in edu.tags"
             :key="tag"
-            class="glass-tag accent-teal text-[10px]"
+            class="glass-tag accent-teal text-[10px] sm:text-xs"
           >
             {{ tag }}
           </span>

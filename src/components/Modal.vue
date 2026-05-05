@@ -7,7 +7,7 @@
   >
     <div
       id="modal-container"
-      class="glass-panel p-0 text-white flex flex-col w-full max-w-3xl max-h-[85vh] rounded-[24px] transition-all duration-300"
+      class="glass-panel p-0 text-white flex flex-col w-full max-w-3xl max-h-[90vh] sm:max-h-[85vh] mx-2 sm:mx-4 rounded-[24px] transition-all duration-300"
       :class="modalHidden ? 'scale-95' : 'scale-100'"
     >
       <div
@@ -31,7 +31,7 @@
       <div
         id="modal-content"
         class="flex-grow overflow-y-auto relative custom-scrollbar"
-        :class="componentName === 'cv' ? 'p-0' : 'p-6'"
+        :class="componentName === 'cv' ? 'p-0' : 'p-4 sm:p-6'"
       >
         <component
           :is="activeComponent"

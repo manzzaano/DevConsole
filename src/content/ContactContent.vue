@@ -4,7 +4,7 @@
       // {{ t.uplinkMessage }}
     </p>
 
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
       <div
         v-for="method in t.methods"
         :key="method.name"
@@ -16,7 +16,7 @@
           <span v-html="method.svg" class="text-[#2AFFB0]/70 group-hover:text-[#2AFFB0]"></span>
         </div>
 
-        <h4 class="font-bold text-white mb-2 text-lg tracking-wide">
+          <h4 class="font-bold text-white mb-2 text-base sm:text-lg tracking-wide">
           {{ method.name }}
         </h4>
 

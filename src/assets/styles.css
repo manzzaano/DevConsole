@@ -24,6 +24,10 @@
     background-color: var(--bg);
   }
 
+  .font-mono {
+    font-family: "Fira Code", monospace;
+  }
+
   ::selection {
     background-color: var(--cmd-teal);
     color: #000;

@@ -14,12 +14,6 @@ export const terminalCommandsList = [
   "lang",
   "demo",
   "neofetch",
-  "ls",
-  "cat",
-  "cd",
-  "pwd",
 ];
-
-export const unixCommands = ["ls", "cat", "cd", "pwd"];
 
 export const allCommands = [...windowCommands, ...terminalCommandsList];

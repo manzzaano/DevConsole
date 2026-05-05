@@ -6,7 +6,7 @@
 
     <div
       id="window"
-      class="glass-panel p-0 w-full max-w-4xl h-[92dvh] md:h-[90dvh] flex flex-col relative z-10"
+      class="glass-panel p-0 w-full max-w-4xl h-[95dvh] sm:h-[92dvh] md:h-[90dvh] flex flex-col relative z-10 mx-0 sm:mx-2"
     >
       <div
         class="bg-white/[3%] rounded-t-[24px] p-3 flex items-center gap-2 border-b border-white/[15%] flex-shrink-0 z-10"
@@ -28,7 +28,7 @@
       <div
         id="terminal"
         ref="terminalElement"
-        class="p-4 md:p-6 flex-grow flex flex-col overflow-y-auto z-10 scroll-smooth custom-scrollbar"
+        class="p-3 sm:p-4 md:p-6 flex-grow flex flex-col overflow-y-auto z-10 scroll-smooth custom-scrollbar"
         @click="focusInput"
       >
         <TerminalOutput ref="outputComponent" />
@@ -37,29 +37,29 @@
           v-if="isDemoMode"
           class="flex items-center mt-2 flex-shrink-0 text-sm md:text-base"
         >
-          <span class="accent-teal font-bold">manzzaano@portfolio</span><span class="text-white/70">:</span><span class="accent-warm">{{ promptPath }}</span><span class="text-white/70">$</span>
-          <span id="demo-typing" class="ml-2 whitespace-pre text-white"></span>
+          <span class="accent-teal font-bold text-xs sm:text-sm md:text-base">manzzaano@portfolio</span><span class="text-white/70 text-xs sm:text-sm md:text-base">:</span><span class="accent-warm text-xs sm:text-sm md:text-base">{{ promptPath }}</span><span class="text-white/70 text-xs sm:text-sm md:text-base">$</span>
+          <span id="demo-typing" class="ml-2 whitespace-pre text-white text-xs sm:text-sm md:text-base"></span>
         </div>
 
         <div v-if="!isDemoMode" class="mt-2">
           <div
-            class="md:hidden flex flex-wrap gap-2 mb-4 p-2 bg-white/[3%] rounded-[24px] border border-white/[15%]"
+            class="md:hidden flex flex-wrap gap-1.5 mb-4 p-2 bg-white/[3%] rounded-[24px] border border-white/[15%] justify-center"
           >
-            <button @click.stop="handleMobileKey('tab')" class="glass-btn-sm font-bold">
+            <button @click.stop="handleMobileKey('tab')" class="glass-btn-sm font-bold min-w-[44px] min-h-[44px] flex items-center justify-center text-[11px] px-3">
               TAB
             </button>
-            <button @click.stop="handleMobileKey('arrowup')" class="glass-btn-sm font-bold">
-              ▲ UP
+            <button @click.stop="handleMobileKey('arrowup')" class="glass-btn-sm font-bold min-w-[44px] min-h-[44px] flex items-center justify-center text-[11px] px-3">
+              ▲
             </button>
             <button
               @click.stop="handleMobileKey('arrowdown')"
-              class="glass-btn-sm font-bold"
+              class="glass-btn-sm font-bold min-w-[44px] min-h-[44px] flex items-center justify-center text-[11px] px-3"
             >
-              ▼ DWN
+              ▼
             </button>
             <button
               @click.stop="handleMobileKey('l', true)"
-              class="glass-btn-sm font-bold"
+              class="glass-btn-sm font-bold min-w-[44px] min-h-[44px] flex items-center justify-center text-[11px] px-3"
             >
               CLS
             </button>
