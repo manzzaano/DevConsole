@@ -7,7 +7,7 @@
       isFocused ? 'is-focused' : '',
     ]"
   >
-    <span class="accent-cool font-bold">manzzaano@portfolio</span><span class="text-white/70">:</span><span class="accent-warm">~</span><span class="text-white/70">$</span>
+    <span class="accent-teal font-bold">manzzaano@portfolio</span><span class="text-white/70">:</span><span class="accent-warm">{{ promptPath }}</span><span class="text-white/70">$</span>
 
     <div class="relative ml-2 flex-grow h-6">
       <div class="absolute inset-0 flex items-center whitespace-pre">
@@ -42,6 +42,7 @@ const props = defineProps({
   isFocused: { type: Boolean, default: true },
   inputLineId: { type: String, default: "input-line" },
   suggestionRemainder: { type: String, default: "" },
+  promptPath: { type: String, default: "~" },
 });
 const emit = defineEmits(["update:modelValue", "keydown", "input"]);
 

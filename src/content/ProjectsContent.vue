@@ -3,7 +3,7 @@
     <div
       v-for="(project, index) in t.projectList"
       :key="index"
-      :class="['glass-card p-5 flex flex-col group']"
+      :class="['glass-card p-5 flex flex-col group block-invert']"
     >
       <div class="flex justify-between items-start mb-3 gap-4">
         <div>
@@ -19,7 +19,7 @@
           <a
             :href="project.github"
             target="_blank"
-            class="text-white/40 hover:text-white transition-colors block"
+            class="text-white/40 hover:text-[#2AFFB0] transition-colors block accent-cyan"
             :aria-label="'View ' + project.title + ' on GitHub'"
           >
             <svg
@@ -91,8 +91,8 @@ const content = {
         title: "Terminal Portfolio",
         github: "https://github.com/manzzaano/PortafolioTerminal",
         description:
-          'This very portfolio. Interactive retro-futuristic interface with <strong>Vue 3 and WebGL</strong>. Real command system and bilingual support.',
-        tags: ["Vue 3", "Tailwind", "WebGL"],
+          'This very portfolio. Interactive terminal emulator with <strong>Vue 3 and TailwindCSS</strong>. UNIX command system (ls, cat, cd, pwd) over a virtual filesystem, glassmorphism fluid design, and bilingual support.',
+        tags: ["Vue 3", "Tailwind", "CLI"],
       },
     ],
   },
@@ -119,8 +119,8 @@ const content = {
         title: "PortfolioTerminal",
         github: "https://github.com/manzzaano/PortafolioTerminal",
         description:
-          'Este mismo portafolio. Interfaz interactiva retro-futurista con <strong>Vue 3 y WebGL</strong>. Sistema de comandos real y soporte bilingüe.',
-        tags: ["Vue 3", "Tailwind", "WebGL"],
+          'Este mismo portafolio. Emulador de terminal interactivo con <strong>Vue 3 y TailwindCSS</strong>. Sistema de comandos UNIX (ls, cat, cd, pwd) sobre un sistema de archivos virtual, diseño glassmorphism fluido y soporte bilingüe.',
+        tags: ["Vue 3", "Tailwind", "CLI"],
       },
     ],
   },

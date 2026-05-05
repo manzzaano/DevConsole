@@ -11,9 +11,9 @@
         class="glass-card p-6 flex flex-col items-center text-center group"
       >
         <div
-          class="w-14 h-14 mb-4 flex items-center justify-center rounded-full bg-white/[3%] border border-white/[15%] group-hover:scale-110 group-hover:border-white/40 group-hover:bg-white/[8%] transition-all duration-300"
+          class="w-14 h-14 mb-4 flex items-center justify-center rounded-full bg-[#2AFFB0]/[0.06] border border-[#2AFFB0]/20 group-hover:scale-110 group-hover:border-[#2AFFB0]/50 group-hover:bg-[#2AFFB0]/[0.12] transition-all duration-300"
         >
-          <span v-html="method.svg" class="text-white/70 group-hover:text-white"></span>
+          <span v-html="method.svg" class="text-[#2AFFB0]/70 group-hover:text-[#2AFFB0]"></span>
         </div>
 
         <h4 class="font-bold text-white mb-2 text-lg tracking-wide">
@@ -25,17 +25,17 @@
         >
           <span class="text-white/30 uppercase"
             >{{ t.protocolLabel }}:
-            <span class="text-white/60">{{ method.protocol }}</span></span
+            <span class="accent-teal">{{ method.protocol }}</span></span
           >
           <span class="text-white/60"
-            >STATUS: {{ method.statusText }}</span
+            >STATUS: <span class="accent-teal">{{ method.statusText }}</span></span
           >
         </div>
 
         <a
           :href="method.link"
           target="_blank"
-          class="glass-btn mt-auto w-full text-xs font-mono"
+          class="glass-btn mt-auto w-full text-xs font-mono accent-teal"
         >
           [ {{ method.actionText }} ]
         </a>

@@ -11,10 +11,10 @@
         <div class="flex justify-between items-start mb-4">
           <div>
             <span
-              class="text-[10px] text-white/40 font-mono tracking-widest uppercase"
+              class="text-[10px] accent-teal font-mono tracking-widest uppercase"
               >[ {{ t.deployment }} 00 ]</span
             >
-            <h4 class="text-xl font-bold text-white">
+            <h4 class="text-xl font-bold accent-teal">
               ENTREREDES CONSULTORÍA TECNOLÓGICA
             </h4>
             <p class="text-xs text-white/40">
@@ -26,7 +26,7 @@
 
         <div class="space-y-2 font-mono text-xs text-white/70 mb-4">
           <p v-for="(task, index) in t.tasksEntreredes" :key="index">
-            <span class="text-white/40">[ {{ task.status }} ]</span>
+            <span class="accent-teal font-mono text-[10px]">[ {{ task.status }} ]</span>
             {{ task.desc }}
           </p>
         </div>
@@ -35,7 +35,7 @@
           <span
             v-for="tech in stackEntreredes"
             :key="tech"
-            class="glass-tag text-[10px]"
+            class="glass-tag accent-teal text-[10px]"
           >
             {{ tech }}
           </span>
@@ -48,10 +48,10 @@
         <div class="flex justify-between items-start mb-4">
           <div>
             <span
-              class="text-[10px] text-white/40 font-mono tracking-widest uppercase"
+              class="text-[10px] accent-teal font-mono tracking-widest uppercase"
               >[ {{ t.deployment }} 01 ]</span
             >
-            <h4 class="text-xl font-bold text-white">
+            <h4 class="text-xl font-bold accent-teal">
               Savia by Berger-Levrault
             </h4>
             <p class="text-xs text-white/40">
@@ -63,7 +63,7 @@
 
         <div class="space-y-2 font-mono text-xs text-white/70 mb-4">
           <p v-for="(task, index) in t.tasksSavia" :key="index">
-            <span class="text-white/40">[ {{ task.status }} ]</span>
+            <span class="accent-teal font-mono text-[10px]">[ {{ task.status }} ]</span>
             {{ task.desc }}
           </p>
         </div>
@@ -72,7 +72,7 @@
           <span
             v-for="tech in stackSavia"
             :key="tech"
-            class="glass-tag text-[10px]"
+            class="glass-tag accent-teal text-[10px]"
           >
             {{ tech }}
           </span>
@@ -85,10 +85,10 @@
         <div class="flex justify-between items-start mb-4">
           <div>
             <span
-              class="text-[10px] text-white/40 font-mono tracking-widest uppercase"
+              class="text-[10px] accent-teal font-mono tracking-widest uppercase"
               >[ {{ t.deployment }} 02 ]</span
             >
-            <h4 class="text-xl font-bold text-white">Cojali S.L.</h4>
+            <h4 class="text-xl font-bold accent-teal">Cojali S.L.</h4>
             <p class="text-xs text-white/40">
               {{ t.roleCojali }} | {{ t.dateCojali }}
             </p>
@@ -98,7 +98,7 @@
 
         <div class="space-y-2 font-mono text-xs text-white/70 mb-4">
           <p v-for="(task, index) in t.tasksCojali" :key="index">
-            <span class="text-white/40">[ {{ task.status }} ]</span>
+            <span class="accent-teal font-mono text-[10px]">[ {{ task.status }} ]</span>
             {{ task.desc }}
           </p>
         </div>
@@ -110,10 +110,10 @@
         <div class="flex justify-between items-start mb-4">
           <div>
             <span
-              class="text-[10px] text-white/40 font-mono tracking-widest uppercase"
+              class="text-[10px] accent-teal font-mono tracking-widest uppercase"
               >[ {{ t.coreLabel }} ]</span
             >
-            <h4 class="text-xl font-bold text-white">{{ t.roleKitchen }}</h4>
+            <h4 class="text-xl font-bold accent-teal">{{ t.roleKitchen }}</h4>
             <p class="text-xs text-white/40">
               {{ t.dateKitchen }}
             </p>
@@ -123,7 +123,7 @@
 
         <div class="space-y-2 font-mono text-xs text-white/70 mb-4">
           <p v-for="(task, index) in t.tasksKitchen" :key="index">
-            <span class="text-white/40">[ {{ task.status }} ]</span>
+            <span class="accent-teal font-mono text-[10px]">[ {{ task.status }} ]</span>
             {{ task.desc }}
           </p>
         </div>

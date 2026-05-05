@@ -12,37 +12,37 @@
       <div class="flex-grow space-y-4 font-mono w-full">
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-3 text-sm">
           <p>
-            <span class="text-white/60 font-bold uppercase tracking-tight"
+            <span class="accent-teal font-bold uppercase tracking-tight"
               >> {{ t.userLabel }}:
             </span>
             <span class="text-white">{{ t.userName }}</span>
           </p>
           <p>
-            <span class="text-white/60 font-bold uppercase tracking-tight"
+            <span class="accent-teal font-bold uppercase tracking-tight"
               >> {{ t.levelLabel }}:
             </span>
             <span class="text-white">{{ t.levelValue }}</span>
           </p>
           <p>
-            <span class="text-white/60 font-bold uppercase tracking-tight"
+            <span class="accent-teal font-bold uppercase tracking-tight"
               >> {{ t.locationLabel }}:
             </span>
             <span class="text-white">{{ t.locationValue }}</span>
           </p>
           <p>
-            <span class="text-white/60 font-bold uppercase tracking-tight"
+            <span class="accent-teal font-bold uppercase tracking-tight"
               >> {{ t.coreLabel }}:
             </span>
             <span class="text-white">{{ t.coreValue }}</span>
           </p>
           <p>
-            <span class="text-white/60 font-bold uppercase tracking-tight"
+            <span class="accent-teal font-bold uppercase tracking-tight"
               >> {{ t.statusLabel }}:
             </span>
             <span class="text-white">{{ t.statusValue }}</span>
           </p>
           <p>
-            <span class="text-white/60 font-bold uppercase tracking-tight"
+            <span class="accent-teal font-bold uppercase tracking-tight"
               >> {{ t.ageLabel }}:
             </span>
             <span class="text-white">{{ t.ageValue }}</span>

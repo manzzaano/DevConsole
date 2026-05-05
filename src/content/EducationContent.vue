@@ -11,12 +11,12 @@
         class="relative"
       >
         <div
-          class="absolute -left-[41px] top-1.5 w-4 h-4 rounded-full"
-          :class="
-            edu.active
-              ? 'bg-white shadow-[0_0_12px_rgba(255,255,255,0.5)]'
-              : 'bg-white/20'
-          "
+            class="absolute -left-[41px] top-1.5 w-4 h-4 rounded-full"
+            :class="
+              edu.active
+                ? 'bg-[#2AFFB0] shadow-[0_0_12px_rgba(42,255,176,0.6)]'
+                : 'bg-white/20'
+            "
         ></div>
 
         <div
@@ -29,7 +29,7 @@
           </h4>
           <div class="flex-shrink-0">
             <span
-            class="glass-tag text-[10px] md:text-xs whitespace-nowrap tracking-tight"
+            class="glass-tag accent-teal text-[10px] md:text-xs whitespace-nowrap tracking-tight"
             >
               [ {{ edu.status }} ]
             </span>
@@ -44,7 +44,7 @@
           <span
             v-for="tag in edu.tags"
             :key="tag"
-            class="glass-tag text-[10px]"
+            class="glass-tag accent-teal text-[10px]"
           >
             {{ tag }}
           </span>
@@ -53,9 +53,9 @@
     </div>
 
     <div class="pt-6 border-t border-white/[8%]">
-      <h3
-        class="text-sm font-bold text-white mb-6 flex items-center tracking-widest uppercase font-mono"
-      >
+        <h3
+          class="text-sm font-bold accent-teal mb-6 flex items-center tracking-widest uppercase font-mono"
+        >
         <i data-lucide="shield-check" class="w-4 h-4 mr-2"></i>
         {{ t.licenseHeader }}
       </h3>
@@ -80,7 +80,7 @@
           <a
             :href="cert.link"
             target="_blank"
-            class="glass-btn w-full text-xs font-bold"
+            class="glass-btn w-full text-xs font-bold accent-teal"
           >
             [ {{ t.downloadLabel }} ]
           </a>
