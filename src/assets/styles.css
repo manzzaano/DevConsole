@@ -1,15 +1,19 @@
 :root {
-  --bg: #050505;
-  --surface: rgba(255, 255, 255, 0.03);
+  --bg: #0A0A14;
+  --surface: rgba(255, 255, 255, 0.04);
   --surface-hover: rgba(255, 255, 255, 0.08);
-  --border: rgba(255, 255, 255, 0.15);
-  --border-highlight: rgba(255, 255, 255, 0.4);
+  --border: rgba(255, 255, 255, 0.12);
+  --border-highlight: rgba(255, 255, 255, 0.35);
   --text-primary: #ffffff;
   --text-secondary: rgba(255, 255, 255, 0.6);
   --glow-cool: rgba(160, 185, 210, 0.5);
   --glow-warm: rgba(240, 230, 215, 0.5);
-  --shadow-drop: 0 8px 32px 0 rgba(0, 0, 0, 0.4);
-  --shadow-inner: inset 0 1px 1px rgba(255, 255, 255, 0.1);
+  --shadow-drop: 0 8px 32px 0 rgba(0, 0, 0, 0.5);
+  --shadow-inner: inset 0 1px 1px rgba(255, 255, 255, 0.06);
+
+  --cmd-teal: #2AFFB0;
+  --skill-green: #00FF41;
+  --link-cyan: #00E5FF;
 }
 
 @import "tailwindcss";
@@ -21,16 +25,16 @@
   }
 
   ::selection {
-    background-color: rgba(160, 185, 210, 0.25);
-    color: #fff;
+    background-color: var(--cmd-teal);
+    color: #000;
   }
 }
 
 @layer components {
   .glass-panel {
     background: var(--surface);
-    -webkit-backdrop-filter: blur(8px);
-    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(16px);
+    backdrop-filter: blur(16px);
     border: 1px solid var(--border);
     border-radius: 24px;
     box-shadow: var(--shadow-drop), var(--shadow-inner);
@@ -39,8 +43,8 @@
 
   .glass-card {
     background: var(--surface);
-    -webkit-backdrop-filter: blur(8px);
-    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px);
     border: 1px solid var(--border);
     border-radius: 24px;
     box-shadow: var(--shadow-drop), var(--shadow-inner);
@@ -51,7 +55,7 @@
   .glass-card:hover {
     background: var(--surface-hover);
     border-color: var(--border-highlight);
-    box-shadow: var(--shadow-drop), var(--shadow-inner), 0 0 30px rgba(160, 185, 210, 0.10);
+    box-shadow: var(--shadow-drop), var(--shadow-inner), 0 0 30px rgba(42, 255, 176, 0.08);
   }
 
   .glass-btn {
@@ -73,7 +77,7 @@
   .glass-btn:hover {
     background: linear-gradient(135deg, rgba(255, 255, 255, 0.10) 0%, rgba(255, 255, 255, 0.05) 100%);
     border-color: var(--border-highlight);
-    box-shadow: var(--shadow-drop), var(--shadow-inner), 0 0 20px rgba(160, 185, 210, 0.30);
+    box-shadow: var(--shadow-drop), var(--shadow-inner), 0 0 20px rgba(160, 185, 210, 0.25);
   }
 
   .glass-btn-sm {
@@ -120,7 +124,7 @@
     border-color: var(--border-highlight);
     color: var(--text-primary);
     transform: scale(1.1);
-    box-shadow: var(--shadow-drop), var(--shadow-inner), 0 0 20px rgba(160, 185, 210, 0.40);
+    box-shadow: var(--shadow-drop), var(--shadow-inner), 0 0 20px rgba(42, 255, 176, 0.30);
   }
 
   .glass-tag {
@@ -151,7 +155,23 @@
     text-shadow: 0 0 8px currentColor;
   }
 
-  /* Theme accents — derived from theme.json palette */
+  /* ── Syntax Highlighting Accents ── */
+
+  .accent-teal {
+    color: var(--cmd-teal);
+    text-shadow: 0 0 10px rgba(42, 255, 176, 0.45);
+  }
+
+  .accent-green {
+    color: var(--skill-green);
+    text-shadow: 0 0 10px rgba(0, 255, 65, 0.45);
+  }
+
+  .accent-cyan {
+    color: var(--link-cyan);
+    text-shadow: 0 0 10px rgba(0, 229, 255, 0.40);
+  }
+
   .accent-cool {
     color: rgb(160, 185, 210);
     text-shadow: 0 0 10px rgba(160, 185, 210, 0.4);
@@ -168,7 +188,7 @@
   }
 
   .heading-gradient {
-    background: linear-gradient(120deg, rgb(160, 185, 210) 0%, rgb(255, 255, 255) 45%, rgb(240, 230, 215) 100%);
+    background: linear-gradient(120deg, var(--cmd-teal) 0%, #80FFD4 40%, rgb(255, 255, 255) 70%, var(--link-cyan) 100%);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
@@ -180,7 +200,7 @@
     backdrop-filter: blur(16px);
     border: 1px solid var(--border);
     border-radius: 24px;
-    box-shadow: var(--shadow-drop), var(--shadow-inner), inset 0 0 0 1px rgba(160, 185, 210, 0.06);
+    box-shadow: var(--shadow-drop), var(--shadow-inner), inset 0 0 0 1px rgba(42, 255, 176, 0.04);
     padding: 24px;
     transition: all 0.3s ease;
     position: relative;
@@ -191,13 +211,139 @@
     content: "";
     position: absolute;
     inset: 0;
-    background: radial-gradient(ellipse 80% 60% at 0% 0%, rgba(160, 185, 210, 0.08), transparent 60%);
+    background: radial-gradient(ellipse 80% 60% at 0% 0%, rgba(42, 255, 176, 0.06), transparent 60%);
     pointer-events: none;
   }
 
   .glass-card-accent:hover {
-    border-color: rgba(160, 185, 210, 0.45);
-    box-shadow: var(--shadow-drop), var(--shadow-inner), 0 0 30px rgba(160, 185, 210, 0.18);
+    border-color: rgba(42, 255, 176, 0.40);
+    box-shadow: var(--shadow-drop), var(--shadow-inner), 0 0 30px rgba(42, 255, 176, 0.15);
+  }
+
+  /* ── Block Inversion Hover ── */
+
+  .block-invert {
+    transition: all 0.15s ease;
+  }
+
+  .block-invert:hover {
+    background-color: var(--cmd-teal);
+    color: #000000;
+  }
+
+  .block-invert:hover * {
+    color: #000000 !important;
+    text-shadow: none !important;
+  }
+
+  .block-invert:hover .glass-tag {
+    background-color: rgba(0, 0, 0, 0.10);
+    border-color: rgba(0, 0, 0, 0.25);
+    color: #000000;
+  }
+
+  .block-invert:hover svg {
+    stroke: #000000;
+  }
+
+  /* ── Bash/Zsh Syntax Colored Output ── */
+
+  .dir-name {
+    color: var(--link-cyan);
+    font-weight: bold;
+    text-shadow: 0 0 6px rgba(0, 229, 255, 0.3);
+  }
+
+  .file-exe {
+    color: var(--cmd-teal);
+    text-shadow: 0 0 4px rgba(42, 255, 176, 0.25);
+  }
+
+  .file-bin {
+    color: #FFD700;
+    text-shadow: 0 0 4px rgba(255, 215, 0, 0.2);
+  }
+
+  .file-regular {
+    color: rgba(255, 255, 255, 0.75);
+  }
+
+  /* ── CLI Frame (retro terminal window border, preserved) ── */
+
+  .cli-frame {
+    border: 2px solid rgba(255, 255, 255, 0.35);
+    background: #000000;
+    position: relative;
+    display: inline-block;
+    overflow: hidden;
+  }
+
+  .cli-frame::before {
+    content: "+";
+    position: absolute;
+    top: -1px;
+    left: -1px;
+    color: rgba(255, 255, 255, 0.35);
+    font-family: "Fira Code", monospace;
+    font-size: 11px;
+    line-height: 1;
+    z-index: 2;
+    pointer-events: none;
+  }
+
+  .cli-frame::after {
+    content: "+";
+    position: absolute;
+    top: -1px;
+    right: -1px;
+    color: rgba(255, 255, 255, 0.35);
+    font-family: "Fira Code", monospace;
+    font-size: 11px;
+    line-height: 1;
+    z-index: 2;
+    pointer-events: none;
+  }
+
+  .cli-frame .cli-corner-bl,
+  .cli-frame .cli-corner-br {
+    position: absolute;
+    color: rgba(255, 255, 255, 0.35);
+    font-family: "Fira Code", monospace;
+    font-size: 11px;
+    line-height: 1;
+    z-index: 2;
+    pointer-events: none;
+  }
+
+  .cli-frame .cli-corner-bl {
+    bottom: 0;
+    left: -1px;
+  }
+
+  .cli-frame .cli-corner-br {
+    bottom: 0;
+    right: -1px;
+  }
+
+  .cli-frame .cli-title {
+    position: absolute;
+    top: -0.6em;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #000000;
+    padding: 0 12px;
+    color: rgba(255, 255, 255, 0.5);
+    font-family: "Fira Code", monospace;
+    font-size: 10px;
+    white-space: nowrap;
+    z-index: 2;
+    pointer-events: none;
+  }
+
+  .cli-frame img {
+    display: block;
+    max-width: 100%;
+    height: auto;
   }
 }
 
@@ -241,164 +387,62 @@
   text-shadow: 0 0 8px currentColor;
 }
 
-/* Aurora — animated cool/warm radial gradients on near-black bg */
-.bg-aurora {
+/* ── Fluid Glassmorphism Animated Background ── */
+
+@property --g1-x { syntax: "<percentage>"; inherits: false; initial-value: 15%; }
+@property --g1-y { syntax: "<percentage>"; inherits: false; initial-value: 25%; }
+@property --g2-x { syntax: "<percentage>"; inherits: false; initial-value: 80%; }
+@property --g2-y { syntax: "<percentage>"; inherits: false; initial-value: 20%; }
+@property --g3-x { syntax: "<percentage>"; inherits: false; initial-value: 40%; }
+@property --g3-y { syntax: "<percentage>"; inherits: false; initial-value: 80%; }
+@property --g4-x { syntax: "<percentage>"; inherits: false; initial-value: 75%; }
+@property --g4-y { syntax: "<percentage>"; inherits: false; initial-value: 70%; }
+
+.bg-fluid {
   background-color: var(--bg);
   background-image:
-    radial-gradient(ellipse 55% 45% at var(--a-x, 18%) var(--a-y, 55%), rgba(160, 185, 210, 0.50), transparent 65%),
-    radial-gradient(ellipse 50% 40% at var(--b-x, 82%) var(--b-y, 42%), rgba(160, 185, 210, 0.42), transparent 65%),
-    radial-gradient(ellipse 40% 35% at var(--c-x, 50%) var(--c-y, 88%), rgba(122, 163, 204, 0.34), transparent 70%),
-    radial-gradient(ellipse 45% 35% at var(--d-x, 65%) var(--d-y, 15%), rgba(240, 230, 215, 0.12), transparent 70%),
-    radial-gradient(ellipse 30% 28% at var(--e-x, 30%) var(--e-y, 25%), rgba(180, 160, 220, 0.18), transparent 70%);
-  animation: aurora 28s ease-in-out infinite alternate;
+    radial-gradient(ellipse 60% 50% at var(--g1-x) var(--g1-y), rgba(0, 168, 168, 0.22), transparent 60%),
+    radial-gradient(ellipse 50% 55% at var(--g2-x) var(--g2-y), rgba(42, 255, 176, 0.14), transparent 58%),
+    radial-gradient(ellipse 55% 45% at var(--g3-x) var(--g3-y), rgba(65, 80, 180, 0.18), transparent 62%),
+    radial-gradient(ellipse 45% 50% at var(--g4-x) var(--g4-y), rgba(45, 27, 78, 0.16), transparent 60%);
+  animation: fluid-morph 40s linear infinite;
 }
 
-@property --a-x { syntax: "<percentage>"; inherits: false; initial-value: 18%; }
-@property --a-y { syntax: "<percentage>"; inherits: false; initial-value: 55%; }
-@property --b-x { syntax: "<percentage>"; inherits: false; initial-value: 82%; }
-@property --b-y { syntax: "<percentage>"; inherits: false; initial-value: 42%; }
-@property --c-x { syntax: "<percentage>"; inherits: false; initial-value: 50%; }
-@property --c-y { syntax: "<percentage>"; inherits: false; initial-value: 88%; }
-@property --d-x { syntax: "<percentage>"; inherits: false; initial-value: 65%; }
-@property --d-y { syntax: "<percentage>"; inherits: false; initial-value: 15%; }
-@property --e-x { syntax: "<percentage>"; inherits: false; initial-value: 30%; }
-@property --e-y { syntax: "<percentage>"; inherits: false; initial-value: 25%; }
-
-@keyframes aurora {
+@keyframes fluid-morph {
   0% {
-    --a-x: 12%; --a-y: 60%;
-    --b-x: 85%; --b-y: 38%;
-    --c-x: 45%; --c-y: 90%;
-    --d-x: 70%; --d-y: 12%;
-    --e-x: 25%; --e-y: 22%;
+    --g1-x: 12%; --g1-y: 30%;
+    --g2-x: 82%; --g2-y: 18%;
+    --g3-x: 35%; --g3-y: 85%;
+    --g4-x: 72%; --g4-y: 72%;
   }
-  50% {
-    --a-x: 28%; --a-y: 40%;
-    --b-x: 70%; --b-y: 60%;
-    --c-x: 60%; --c-y: 75%;
-    --d-x: 50%; --d-y: 25%;
-    --e-x: 75%; --e-y: 30%;
+  20% {
+    --g1-x: 28%; --g1-y: 12%;
+    --g2-x: 68%; --g2-y: 38%;
+    --g3-x: 55%; --g3-y: 68%;
+    --g4-x: 82%; --g4-y: 55%;
+  }
+  40% {
+    --g1-x: 38%; --g1-y: 22%;
+    --g2-x: 55%; --g2-y: 48%;
+    --g3-x: 25%; --g3-y: 75%;
+    --g4-x: 88%; --g4-y: 45%;
+  }
+  60% {
+    --g1-x: 20%; --g1-y: 42%;
+    --g2-x: 78%; --g2-y: 28%;
+    --g3-x: 50%; --g3-y: 60%;
+    --g4-x: 15%; --g4-y: 70%;
+  }
+  80% {
+    --g1-x: 8%; --g1-y: 38%;
+    --g2-x: 88%; --g2-y: 14%;
+    --g3-x: 40%; --g3-y: 82%;
+    --g4-x: 60%; --g4-y: 65%;
   }
   100% {
-    --a-x: 20%; --a-y: 70%;
-    --b-x: 88%; --b-y: 30%;
-    --c-x: 35%; --c-y: 85%;
-    --d-x: 80%; --d-y: 20%;
-    --e-x: 40%; --e-y: 18%;
+    --g1-x: 12%; --g1-y: 30%;
+    --g2-x: 82%; --g2-y: 18%;
+    --g3-x: 35%; --g3-y: 85%;
+    --g4-x: 72%; --g4-y: 72%;
   }
-}
-
-/* Conic shimmer — slow rotating multi-color tint, screen-blended */
-.bg-conic {
-  background:
-    conic-gradient(
-      from var(--conic-rot, 0deg) at 50% 50%,
-      rgba(160, 185, 210, 0)    0deg,
-      rgba(160, 185, 210, 0.18) 60deg,
-      rgba(180, 160, 220, 0.10) 140deg,
-      rgba(160, 185, 210, 0)    220deg,
-      rgba(240, 230, 215, 0.08) 290deg,
-      rgba(160, 185, 210, 0)    360deg
-    );
-  filter: blur(60px);
-  animation: conic-spin 80s linear infinite;
-}
-
-@property --conic-rot { syntax: "<angle>"; inherits: false; initial-value: 0deg; }
-
-@keyframes conic-spin {
-  to { --conic-rot: 360deg; }
-}
-
-/* Diagonal light beam sweeping across — screen-blended, very subtle */
-.bg-beam {
-  background: linear-gradient(
-    115deg,
-    transparent 30%,
-    rgba(160, 185, 210, 0.12) 48%,
-    rgba(240, 230, 215, 0.06) 50%,
-    rgba(160, 185, 210, 0.12) 52%,
-    transparent 70%
-  );
-  background-size: 280% 280%;
-  background-position: 0% 0%;
-  filter: blur(2px);
-  animation: beam-sweep 22s ease-in-out infinite;
-  opacity: 0.55;
-}
-
-@keyframes beam-sweep {
-  0%   { background-position: 120% -20%; opacity: 0; }
-  20%  { opacity: 0.55; }
-  50%  { background-position: -20% 120%; opacity: 0.55; }
-  60%  { opacity: 0; }
-  100% { background-position: -20% 120%; opacity: 0; }
-}
-
-/* Star drift — tiny cool/warm pinpoint dots, slow parallax drift */
-.bg-stars {
-  background-image:
-    radial-gradient(1px 1px at 12% 18%, rgba(160, 185, 210, 0.7), transparent 60%),
-    radial-gradient(1px 1px at 28% 72%, rgba(240, 230, 215, 0.5), transparent 60%),
-    radial-gradient(1px 1px at 47% 33%, rgba(160, 185, 210, 0.6), transparent 60%),
-    radial-gradient(1px 1px at 64% 88%, rgba(180, 160, 220, 0.55), transparent 60%),
-    radial-gradient(1px 1px at 78% 22%, rgba(160, 185, 210, 0.65), transparent 60%),
-    radial-gradient(1px 1px at 89% 60%, rgba(240, 230, 215, 0.4), transparent 60%),
-    radial-gradient(1px 1px at 6% 92%, rgba(160, 185, 210, 0.5), transparent 60%),
-    radial-gradient(2px 2px at 38% 14%, rgba(160, 185, 210, 0.85), transparent 55%),
-    radial-gradient(2px 2px at 72% 48%, rgba(240, 230, 215, 0.7), transparent 55%),
-    radial-gradient(2px 2px at 18% 56%, rgba(180, 160, 220, 0.7), transparent 55%);
-  background-size: 100% 100%;
-  background-repeat: no-repeat;
-  animation: stars-drift 60s linear infinite, stars-pulse 5s ease-in-out infinite;
-  opacity: 0.85;
-}
-
-@keyframes stars-drift {
-  0%   { transform: translate3d(0, 0, 0); }
-  100% { transform: translate3d(-30px, -20px, 0); }
-}
-
-@keyframes stars-pulse {
-  0%, 100% { filter: brightness(1); }
-  50%      { filter: brightness(1.35); }
-}
-
-/* Tech grid — ultra-faint dot grid, terminal/circuit vibe */
-.bg-grid {
-  background-image:
-    radial-gradient(circle at center, rgba(160, 185, 210, 0.06) 1px, transparent 1.6px);
-  background-size: 36px 36px;
-  mask-image: radial-gradient(ellipse 80% 60% at 50% 50%, black 30%, transparent 100%);
-  -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 50%, black 30%, transparent 100%);
-  animation: grid-shift 90s linear infinite;
-}
-
-@keyframes grid-shift {
-  0%   { background-position: 0 0; }
-  100% { background-position: 36px 36px; }
-}
-
-/* Scanlines — terminal CRT vibe, ultra subtle */
-.bg-scanlines {
-  background-image: repeating-linear-gradient(
-    to bottom,
-    rgba(255, 255, 255, 0.018) 0px,
-    rgba(255, 255, 255, 0.018) 1px,
-    transparent 1px,
-    transparent 3px
-  );
-  opacity: 0.6;
-}
-
-/* Grain overlay — photographic texture over canvas background */
-.grain-layer {
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  pointer-events: none;
-  opacity: 0.05;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)'/%3E%3C/svg%3E");
-  background-repeat: repeat;
-  background-size: 200px 200px;
 }

@@ -1,6 +1,6 @@
 <template>
   <div
-    class="w-full h-full bg-[#050505] flex justify-center overflow-y-auto custom-scrollbar p-2 md:p-8 relative"
+    class="w-full h-full bg-[#000000] flex justify-center overflow-y-auto custom-scrollbar p-2 md:p-8 relative"
   >
     <div
       v-if="isLoading"
@@ -42,7 +42,7 @@
       <a
         href="./documents/Ismael_Manzano_CV.pdf"
         target="_blank"
-        class="glass-fab group"
+        class="glass-fab group !bg-black/85 !text-white/90 border-white/30 hover:!bg-black hover:!text-white hover:border-white/50 shadow-[0_4px_20px_rgba(0,0,0,0.5)]"
         :title="t.openRaw"
       >
         <i data-lucide="external-link" class="w-5 h-5"></i>
@@ -55,7 +55,7 @@
 
       <button
         @click="forceDownload"
-        class="glass-fab group"
+        class="glass-fab group !bg-black/85 !text-white/90 border-white/30 hover:!bg-black hover:!text-white hover:border-white/50 shadow-[0_4px_20px_rgba(0,0,0,0.5)]"
         :title="t.download"
       >
         <i data-lucide="download" class="w-5 h-5"></i>

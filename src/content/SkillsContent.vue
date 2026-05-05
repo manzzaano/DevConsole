@@ -8,9 +8,9 @@
       <div
         class="glass-card p-4 group"
       >
-        <div class="flex items-center mb-4 text-white">
-          <i data-lucide="code-2" class="w-5 h-5 mr-2"></i>
-          <h4 class="font-bold uppercase tracking-widest text-sm">
+        <div class="flex items-center mb-4">
+          <i data-lucide="code-2" class="w-5 h-5 mr-2 accent-teal"></i>
+          <h4 class="font-bold uppercase tracking-widest text-sm accent-teal">
             {{ t.catLanguages }}
           </h4>
         </div>
@@ -28,9 +28,9 @@
       <div
         class="glass-card p-4 group"
       >
-        <div class="flex items-center mb-4 text-white">
-          <i data-lucide="layers" class="w-5 h-5 mr-2"></i>
-          <h4 class="font-bold uppercase tracking-widest text-sm">
+        <div class="flex items-center mb-4">
+          <i data-lucide="layers" class="w-5 h-5 mr-2 accent-teal"></i>
+          <h4 class="font-bold uppercase tracking-widest text-sm accent-teal">
             {{ t.catFrontend }}
           </h4>
         </div>
@@ -48,9 +48,9 @@
       <div
         class="glass-card p-4 group"
       >
-        <div class="flex items-center mb-4 text-white">
-          <i data-lucide="box" class="w-5 h-5 mr-2"></i>
-          <h4 class="font-bold uppercase tracking-widest text-sm">
+        <div class="flex items-center mb-4">
+          <i data-lucide="box" class="w-5 h-5 mr-2 accent-teal"></i>
+          <h4 class="font-bold uppercase tracking-widest text-sm accent-teal">
             {{ t.catTools }}
           </h4>
         </div>
@@ -68,9 +68,9 @@
       <div
         class="glass-card p-4 group"
       >
-        <div class="flex items-center mb-4 text-white">
-          <i data-lucide="cpu" class="w-5 h-5 mr-2"></i>
-          <h4 class="font-bold uppercase tracking-widest text-sm">
+        <div class="flex items-center mb-4">
+          <i data-lucide="cpu" class="w-5 h-5 mr-2 accent-teal"></i>
+          <h4 class="font-bold uppercase tracking-widest text-sm accent-teal">
             {{ t.catArchitecture }}
           </h4>
         </div>
