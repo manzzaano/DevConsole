@@ -7,11 +7,11 @@
       isFocused ? 'is-focused' : '',
     ]"
   >
-    <span class="accent-teal font-bold">manzzaano@portfolio</span><span class="text-white/70">:</span><span class="accent-warm">{{ promptPath }}</span><span class="text-white/70">$</span>
+    <span class="accent-teal font-bold text-xs sm:text-sm md:text-base whitespace-nowrap">manzzaano@portfolio</span><span class="text-white/70 text-xs sm:text-sm md:text-base">:</span><span class="accent-warm text-xs sm:text-sm md:text-base whitespace-nowrap">{{ promptPath }}</span><span class="text-white/70 text-xs sm:text-sm md:text-base">$</span>
 
     <div class="relative ml-2 flex-grow h-6">
       <div class="absolute inset-0 flex items-center whitespace-pre">
-        <span id="input-text">{{ modelValue }}</span>
+        <span id="input-text" class="text-xs sm:text-sm md:text-base">{{ modelValue }}</span>
         <span class="bg-white w-2 h-5 blink"></span>
         <span class="text-white/20">{{ suggestionRemainder }}</span>
       </div>
@@ -20,7 +20,7 @@
         ref="inputRefLocal"
         id="command-input"
         type="text"
-        class="absolute inset-0 bg-transparent border-none text-transparent w-full outline-none caret-transparent"
+        class="absolute inset-0 bg-transparent border-none text-transparent w-full outline-none caret-transparent text-xs sm:text-sm md:text-base"
         :value="modelValue"
         @input="onInputLocal"
         @keydown="onKeyDownLocal"

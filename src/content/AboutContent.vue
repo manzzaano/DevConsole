@@ -5,7 +5,7 @@
         <img
           src="../assets/foto-perfil.png"
           alt="Ismael Manzano"
-          class="w-40 h-40 aspect-square rounded-full object-cover border-4 border-white/[15%] shadow-[0_0_15px_rgba(255,255,255,0.1)]"
+          class="w-32 h-32 sm:w-36 sm:h-36 md:w-40 md:h-40 aspect-square rounded-full object-cover border-4 border-white/[15%] shadow-[0_0_15px_rgba(255,255,255,0.1)]"
         />
       </div>
 
