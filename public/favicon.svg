@@ -1,25 +1,6 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-  <defs>
-    <linearGradient id="glass" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#1a1a1a"/>
-      <stop offset="100%" stop-color="#050505"/>
-    </linearGradient>
-    <linearGradient id="sheen" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.18"/>
-      <stop offset="60%" stop-color="#ffffff" stop-opacity="0"/>
-    </linearGradient>
-    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
-      <feGaussianBlur stdDeviation="0.8" result="b"/>
-      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
-    </filter>
-  </defs>
-
-  <rect x="2" y="2" width="60" height="60" rx="14" fill="url(#glass)"/>
-  <rect x="2" y="2" width="60" height="60" rx="14" fill="url(#sheen)"/>
-  <rect x="2.5" y="2.5" width="59" height="59" rx="13.5" fill="none" stroke="#ffffff" stroke-opacity="0.4" stroke-width="1"/>
-
-  <g fill="#ffffff" filter="url(#glow)" font-family="'Fira Code', ui-monospace, monospace" font-weight="700">
-    <path d="M16 22 L28 32 L16 42" fill="none" stroke="#ffffff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
-    <rect x="32" y="38" width="16" height="4" rx="1.5"/>
-  </g>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <rect width="32" height="32" fill="#040804" rx="4"/>
+  <text x="16" y="25" text-anchor="middle" fill="#4ade80"
+    font-family="system-ui, -apple-system, sans-serif"
+    font-weight="800" font-size="28">/</text>
 </svg>
