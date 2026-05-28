@@ -94,7 +94,7 @@ export function useTerminal({
         </div>
         <div class="boot-line mt-5 border-l-2 pl-4 py-2" style="border-color:rgba(74,222,128,0.5);animation-delay:1.1s">
           <p class="text-4xl sm:text-5xl font-bold heading-gradient leading-tight">${name}</p>
-          <p class="text-xs mt-1.5 tracking-wide" style="color:rgba(74,222,128,0.65)">▸ ${role}</p>
+          <p class="text-sm mt-2 tracking-wide" style="color:rgba(74,222,128,0.85)">▸ ${role}</p>
         </div>
         <div class="boot-line h-px mt-4 mb-3" style="background:linear-gradient(90deg,rgba(74,222,128,0.3),transparent);animation-delay:1.25s"></div>
         <div class="boot-line" style="animation-delay:1.35s">
