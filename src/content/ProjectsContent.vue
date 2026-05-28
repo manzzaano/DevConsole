@@ -10,7 +10,7 @@
             <span class="text-[10px] sm:text-xs font-mono tracking-widest uppercase text-white/40">
             [ {{ project.id }} ]
           </span>
-          <h4 class="text-lg sm:text-xl font-bold text-white transition-all">
+          <h4 class="text-lg sm:text-xl font-bold text-white transition-all font-sans">
             {{ project.title }}
           </h4>
         </div>
@@ -43,7 +43,7 @@
       </div>
 
       <p
-        class="text-sm text-white/70 mb-4 flex-grow leading-relaxed"
+        class="text-sm text-white/70 mb-4 flex-grow leading-relaxed font-sans"
         v-html="project.description"
       ></p>
 

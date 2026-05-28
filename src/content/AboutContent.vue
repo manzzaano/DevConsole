@@ -55,7 +55,7 @@
       <p class="text-xs text-white/30 font-mono italic">
         // {{ t.logTitle }}
       </p>
-      <div class="text-white/70 space-y-4 leading-relaxed">
+      <div class="text-white/70 space-y-4 leading-relaxed font-sans">
         <p v-html="t.bio1"></p>
         <p v-html="t.bio2"></p>
         <p v-html="t.bio3"></p>
