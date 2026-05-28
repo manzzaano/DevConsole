@@ -22,47 +22,42 @@
         @mousedown="onTitleBarMouseDown"
         @dblclick="onTitleBarDblClick"
       >
-        <!-- Window controls with tooltips -->
+        <!-- Window controls -->
         <div class="flex items-center gap-2">
+          <button
+            @click.stop="handleClose"
+            @mouseenter="hoveredBtn = 'close'"
+            @mouseleave="hoveredBtn = ''"
+            class="w-4 h-4 rounded-full flex items-center justify-center"
+            style="background:#ff5f57;box-shadow:0 0 8px rgba(255,95,87,0.5)"
+          >
+            <span class="text-[8px] font-black leading-none" style="color:rgba(0,0,0,0.5)">✕</span>
+          </button>
+          <button
+            @click.stop="handleMinimize"
+            @mouseenter="hoveredBtn = 'min'"
+            @mouseleave="hoveredBtn = ''"
+            class="w-4 h-4 rounded-full flex items-center justify-center"
+            style="background:#ffbd2e;box-shadow:0 0 8px rgba(255,189,46,0.5)"
+          >
+            <span class="text-[9px] font-black leading-none" style="color:rgba(0,0,0,0.5)">−</span>
+          </button>
+          <button
+            @click.stop="handleMaximize"
+            @mouseenter="hoveredBtn = 'max'"
+            @mouseleave="hoveredBtn = ''"
+            class="w-4 h-4 rounded-full flex items-center justify-center"
+            style="background:#28c940;box-shadow:0 0 8px rgba(40,201,64,0.5)"
+          >
+            <span class="text-[8px] font-black leading-none" style="color:rgba(0,0,0,0.5)">⤢</span>
+          </button>
 
-          <div class="relative group/close">
-            <button
-              @click.stop="handleClose"
-              class="w-4 h-4 rounded-full flex items-center justify-center"
-              style="background:#ff5f57;box-shadow:0 0 8px rgba(255,95,87,0.5)"
-            >
-              <span class="text-[8px] font-black leading-none" style="color:rgba(0,0,0,0.5)">✕</span>
-            </button>
-            <span class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 bg-black/85 text-white/65 text-[9px] font-mono px-2 py-0.5 rounded whitespace-nowrap opacity-0 group-hover/close:opacity-100 transition-opacity duration-150 pointer-events-none z-50">
-              Cerrar
-            </span>
-          </div>
-
-          <div class="relative group/min">
-            <button
-              @click.stop="handleMinimize"
-              class="w-4 h-4 rounded-full flex items-center justify-center"
-              style="background:#ffbd2e;box-shadow:0 0 8px rgba(255,189,46,0.5)"
-            >
-              <span class="text-[9px] font-black leading-none" style="color:rgba(0,0,0,0.5)">−</span>
-            </button>
-            <span class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 bg-black/85 text-white/65 text-[9px] font-mono px-2 py-0.5 rounded whitespace-nowrap opacity-0 group-hover/min:opacity-100 transition-opacity duration-150 pointer-events-none z-50">
-              Minimizar
-            </span>
-          </div>
-
-          <div class="relative group/max">
-            <button
-              @click.stop="handleMaximize"
-              class="w-4 h-4 rounded-full flex items-center justify-center"
-              style="background:#28c940;box-shadow:0 0 8px rgba(40,201,64,0.5)"
-            >
-              <span class="text-[8px] font-black leading-none" style="color:rgba(0,0,0,0.5)">⤢</span>
-            </button>
-            <span class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 bg-black/85 text-white/65 text-[9px] font-mono px-2 py-0.5 rounded whitespace-nowrap opacity-0 group-hover/max:opacity-100 transition-opacity duration-150 pointer-events-none z-50">
-              {{ isMaximized ? 'Restaurar' : 'Maximizar' }}
-            </span>
-          </div>
+          <Transition name="btn-label">
+            <span
+              v-if="hoveredBtn"
+              class="ml-1 text-[11px] font-mono text-white/45 select-none pointer-events-none"
+            >{{ btnLabel }}</span>
+          </Transition>
         </div>
 
         <div class="ml-2 text-xs font-mono hidden sm:block">
@@ -163,6 +158,14 @@ const isMinimized = ref(false);
 const isMaximized = ref(false);
 const dragging    = ref(false);
 const resizing    = ref(false);
+const hoveredBtn  = ref('');
+
+const btnLabel = computed(() => {
+  if (hoveredBtn.value === 'close') return 'cerrar';
+  if (hoveredBtn.value === 'min')   return isMinimized.value ? 'restaurar' : 'minimizar';
+  if (hoveredBtn.value === 'max')   return isMaximized.value ? 'restaurar' : 'maximizar';
+  return '';
+});
 
 const winX = ref(0);
 const winY = ref(0);
@@ -362,4 +365,9 @@ onBeforeUnmount(() => {
   background: rgba(255, 255, 255, 0.12);
   border-radius: 10px;
 }
+
+.btn-label-enter-active,
+.btn-label-leave-active { transition: opacity 0.15s ease; }
+.btn-label-enter-from,
+.btn-label-leave-to { opacity: 0; }
 </style>
