@@ -106,14 +106,14 @@
 
       <!-- 8-direction resize handles (desktop, not maximized, not minimized) -->
       <template v-if="!isMobile && !isMaximized && !isMinimized">
-        <div class="absolute top-0 left-0 w-3 h-3 z-30 cursor-nw-resize"     @mousedown.prevent.stop="onResizeStart($event, 'nw')" />
-        <div class="absolute top-0 right-0 w-3 h-3 z-30 cursor-ne-resize"    @mousedown.prevent.stop="onResizeStart($event, 'ne')" />
-        <div class="absolute bottom-0 left-0 w-3 h-3 z-30 cursor-sw-resize"  @mousedown.prevent.stop="onResizeStart($event, 'sw')" />
-        <div class="absolute bottom-0 right-0 w-3 h-3 z-30 cursor-se-resize" @mousedown.prevent.stop="onResizeStart($event, 'se')" />
-        <div class="absolute top-0 left-3 right-3 h-1.5 z-30 cursor-n-resize"    @mousedown.prevent.stop="onResizeStart($event, 'n')" />
-        <div class="absolute bottom-0 left-3 right-3 h-1.5 z-30 cursor-s-resize" @mousedown.prevent.stop="onResizeStart($event, 's')" />
-        <div class="absolute top-3 bottom-3 left-0 w-1.5 z-30 cursor-w-resize"   @mousedown.prevent.stop="onResizeStart($event, 'w')" />
-        <div class="absolute top-3 bottom-3 right-0 w-1.5 z-30 cursor-e-resize"  @mousedown.prevent.stop="onResizeStart($event, 'e')" />
+        <div class="absolute top-0 left-0 w-3 h-3 z-30 cursor-nw-resize"     @mousedown.prevent="onResizeStart($event, 'nw')" />
+        <div class="absolute top-0 right-0 w-3 h-3 z-30 cursor-ne-resize"    @mousedown.prevent="onResizeStart($event, 'ne')" />
+        <div class="absolute bottom-0 left-0 w-3 h-3 z-30 cursor-sw-resize"  @mousedown.prevent="onResizeStart($event, 'sw')" />
+        <div class="absolute bottom-0 right-0 w-3 h-3 z-30 cursor-se-resize" @mousedown.prevent="onResizeStart($event, 'se')" />
+        <div class="absolute top-0 left-3 right-3 h-1.5 z-30 cursor-n-resize"    @mousedown.prevent="onResizeStart($event, 'n')" />
+        <div class="absolute bottom-0 left-3 right-3 h-1.5 z-30 cursor-s-resize" @mousedown.prevent="onResizeStart($event, 's')" />
+        <div class="absolute top-3 bottom-3 left-0 w-1.5 z-30 cursor-w-resize"   @mousedown.prevent="onResizeStart($event, 'w')" />
+        <div class="absolute top-3 bottom-3 right-0 w-1.5 z-30 cursor-e-resize"  @mousedown.prevent="onResizeStart($event, 'e')" />
       </template>
     </div>
 
@@ -365,7 +365,7 @@ function onWindowResize() {
 
 function onWindowMouseDown() {
   if (isMinimized.value) return;
-  nextTick(focusInput);
+  setTimeout(focusInput, 0);
 }
 
 /* ── Mobile keys ──────────────────────────────────────────── */
