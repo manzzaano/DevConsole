@@ -356,6 +356,30 @@
   }
 }
 
+@keyframes shimmer {
+  0%   { background-position: -100% center; }
+  100% { background-position: 200% center; }
+}
+
+.heading-gradient-animated {
+  background: linear-gradient(
+    90deg,
+    #4ade80 0%,
+    #86efac 20%,
+    #ffffff 42%,
+    #86efac 64%,
+    #4ade80 85%,
+    #86efac 100%
+  );
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  animation: shimmer 4s linear infinite;
+  filter: drop-shadow(0 0 18px rgba(74, 222, 128, 0.5));
+}
+
 @keyframes gradient {
   0% { background-position: 0% 50%; }
   50% { background-position: 100% 50%; }

@@ -75,9 +75,10 @@ export function useTerminal({
   const printWelcomeMessage = () => {
     const welcomeMessage = `
       <div class="mb-4">
-        <p class="text-xl sm:text-2xl font-bold heading-gradient">${getText("welcome_title")}</p>
-        <p class="text-white/70">${getText("welcome_help")}</p>
-        <p class="text-white/70">${getText("welcome_shortcuts")}</p>
+        <p class="text-2xl sm:text-3xl font-bold heading-gradient-animated mb-3">${getText("welcome_title")}</p>
+        <div class="h-px w-full mb-3" style="background: linear-gradient(90deg, rgba(74,222,128,0.35), transparent)"></div>
+        <p class="text-white/60 text-sm">${getText("welcome_help")}</p>
+        <p class="text-white/60 text-sm">${getText("welcome_shortcuts")}</p>
       </div>`;
     appendHtml(welcomeMessage);
   };
