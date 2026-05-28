@@ -9,9 +9,12 @@ import { createNoise3D } from 'simplex-noise'
 const canvasRef = ref(null)
 
 const ACCENT      = '#4ade80'
-const FADE_MIN    = 0.007
-const FADE_MAX    = 0.15
-const FADE_RAMP   = 10800 // frames to reach FADE_MAX (~3 min at 60fps)
+const FADE_MIN     = 0.007
+const FADE_BASE    = 0.025
+const FADE_PEAK    = 0.12
+const FADE_RAMP    = 7200  // 2 min warmup to FADE_BASE
+const CLEAN_EVERY  = 10800 // cleanup every 3 min (post-warmup)
+const CLEAN_WINDOW = 1800  // cleanup window: 30s
 const NOISE_SCALE = 0.002
 const TIME_SCALE  = 0.0001
 
@@ -82,7 +85,15 @@ onMounted(() => {
     const h   = canvas.height / dpr
     if (!ready || w === 0 || h === 0) { animId = requestAnimationFrame(loop); return }
 
-    const fade = FADE_MIN + (FADE_MAX - FADE_MIN) * Math.min(1, time / FADE_RAMP)
+    const base = FADE_MIN + (FADE_BASE - FADE_MIN) * Math.min(1, time / FADE_RAMP)
+    let boost = 0
+    if (time >= FADE_RAMP) {
+      const cleanPhase = (time - FADE_RAMP) % CLEAN_EVERY
+      if (cleanPhase < CLEAN_WINDOW) {
+        boost = (FADE_PEAK - FADE_BASE) * Math.sin((cleanPhase / CLEAN_WINDOW) * Math.PI)
+      }
+    }
+    const fade = base + boost
     ctx.fillStyle = `rgba(0,0,0,${fade})`
     ctx.fillRect(0, 0, w, h)
 
