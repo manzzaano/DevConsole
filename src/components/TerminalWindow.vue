@@ -11,6 +11,7 @@
       class="glass-panel p-0 flex flex-col z-10"
       :class="isMobile ? 'relative w-full max-w-4xl mx-0 sm:mx-2 h-[95dvh] sm:h-[92dvh]' : 'fixed'"
       :style="!isMobile ? windowStyle : {}"
+      @mousedown="onWindowMouseDown"
     >
       <!-- Title bar -->
       <div
@@ -358,6 +359,13 @@ function onWindowResize() {
     winW.value = window.innerWidth;
     winH.value = window.innerHeight;
   }
+}
+
+/* ── Always-on focus ─────────────────────────────────────── */
+
+function onWindowMouseDown() {
+  if (isMinimized.value) return;
+  nextTick(focusInput);
 }
 
 /* ── Mobile keys ──────────────────────────────────────────── */
