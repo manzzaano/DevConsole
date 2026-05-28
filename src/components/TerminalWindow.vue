@@ -285,36 +285,71 @@ function handleClose() {
   window.location.href = 'https://leosoftware.dev';
 }
 
+const TRANSITION_MS = 240; // matches CSS 0.22s + buffer
+
+function restoreFromMaximized() {
+  if (prevState) {
+    winX.value = prevState.x;
+    winY.value = prevState.y;
+    winW.value = prevState.w;
+    winH.value = prevState.h;
+  }
+  isMaximized.value = false;
+}
+
+function doMinimize() {
+  prevMinH = winH.value;
+  isMinimized.value = true;
+  winH.value = 48;
+}
+
+function doMaximize() {
+  prevState = { x: winX.value, y: winY.value, w: winW.value, h: winH.value };
+  winX.value = 0;
+  winY.value = 0;
+  winW.value = window.innerWidth;
+  winH.value = window.innerHeight;
+  isMaximized.value = true;
+}
+
 function handleMinimize() {
   if (isMobile.value) return;
+
   if (isMinimized.value) {
+    // Restore from minimized → normal
     isMinimized.value = false;
     winH.value = prevMinH || 600;
-  } else {
-    prevMinH = winH.value;
-    isMinimized.value = true;
-    winH.value = 48;
+    return;
   }
+
+  if (isMaximized.value) {
+    // Maximized → restore first, then minimize after transition
+    restoreFromMaximized();
+    setTimeout(doMinimize, TRANSITION_MS);
+    return;
+  }
+
+  doMinimize();
 }
 
 function handleMaximize() {
   if (isMobile.value) return;
+
   if (isMaximized.value) {
-    if (prevState) {
-      winX.value = prevState.x;
-      winY.value = prevState.y;
-      winW.value = prevState.w;
-      winH.value = prevState.h;
-    }
-    isMaximized.value = false;
-  } else {
-    prevState = { x: winX.value, y: winY.value, w: winW.value, h: winH.value };
-    winX.value = 0;
-    winY.value = 0;
-    winW.value = window.innerWidth;
-    winH.value = window.innerHeight;
-    isMaximized.value = true;
+    // Restore from maximized → normal
+    restoreFromMaximized();
+    return;
   }
+
+  if (isMinimized.value) {
+    // Minimized → restore first, then maximize after transition
+    isMinimized.value = false;
+    winH.value = prevMinH || 600;
+    setTimeout(doMaximize, TRANSITION_MS);
+    return;
+  }
+
+  doMaximize();
 }
 
 function onWindowResize() {
