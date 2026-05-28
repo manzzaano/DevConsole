@@ -10,8 +10,8 @@ const canvasRef = ref(null)
 
 const ACCENT      = '#4ade80'
 const FADE_MIN    = 0.007
-const FADE_MAX    = 0.018
-const FADE_RAMP   = 7200  // frames to reach FADE_MAX (~2 min at 60fps)
+const FADE_MAX    = 0.15
+const FADE_RAMP   = 10800 // frames to reach FADE_MAX (~3 min at 60fps)
 const NOISE_SCALE = 0.002
 const TIME_SCALE  = 0.0001
 
