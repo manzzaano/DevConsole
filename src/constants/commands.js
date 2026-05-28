@@ -15,6 +15,7 @@ export const terminalCommandsList = [
   "demo",
   "neofetch",
   "exit",
+  "leo/",
 ];
 
 export const allCommands = [...windowCommands, ...terminalCommandsList];

@@ -279,11 +279,12 @@ export function useTerminal({
           <li class="text-white/60"><span class="accent-teal font-bold">clear</span> <span class="text-white/30">—</span> ${getText("help_clear")}</li>
           <li class="text-white/60"><span class="accent-violet font-bold">Ctrl+L</span> <span class="text-white/30">—</span> ${getText("help_clear_shortcut")}</li>
           <li class="text-white/60"><span class="accent-teal font-bold">exit</span> <span class="text-white/30">—</span> ${getText("help_exit")}</li>
+          <li class="text-white/60"><span class="accent-teal font-bold">leo/</span> <span class="text-white/30">—</span> ${getText("help_leo")}</li>
         </ul>`;
       appendHtml(`<div>${helpText}</div>`);
-    } else if (command === "exit") {
+    } else if (command === "exit" || command === "leo/") {
       appendHtml(
-        `<div><p class="text-white/50">Volviendo a leosoftware.dev...</p></div>`,
+        `<div><p class="text-white/50">Navegando a leosoftware.dev...</p></div>`,
       );
       setTimeout(() => {
         window.location.href = "https://leosoftware.dev";
