@@ -11,9 +11,9 @@
         class="glass-card p-6 flex flex-col items-center text-center group"
       >
         <div
-          class="w-14 h-14 mb-4 flex items-center justify-center rounded-full bg-[#2AFFB0]/[0.06] border border-[#2AFFB0]/20 group-hover:scale-110 group-hover:border-[#2AFFB0]/50 group-hover:bg-[#2AFFB0]/[0.12] transition-all duration-300"
+          class="w-14 h-14 mb-4 flex items-center justify-center rounded-full bg-[#4ade80]/[0.06] border border-[#4ade80]/20 group-hover:scale-110 group-hover:border-[#4ade80]/50 group-hover:bg-[#4ade80]/[0.12] transition-all duration-300"
         >
-          <span v-html="method.svg" class="text-[#2AFFB0]/70 group-hover:text-[#2AFFB0]"></span>
+          <span v-html="method.svg" class="text-[#4ade80]/70 group-hover:text-[#4ade80]"></span>
         </div>
 
           <h4 class="font-bold text-white mb-2 text-base sm:text-lg tracking-wide">

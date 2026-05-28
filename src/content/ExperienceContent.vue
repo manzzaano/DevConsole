@@ -158,7 +158,7 @@ const content = {
       { status: "OK", desc: "Software architecture with Laravel ecosystem" },
       { status: "OK", desc: "Background task processing & Job management" },
     ],
-    roleSavia: "Fronted Software Developer",
+    roleSavia: "Frontend Software Developer",
     dateSavia: "March - April 2025",
     tasksSavia: [
       { status: "OK", desc: "Frontend architecture with React & Vite" },
@@ -196,7 +196,7 @@ const content = {
       { status: "OK", desc: "Arquitectura de software con ecosistema Laravel" },
       { status: "OK", desc: "Procesamiento de tareas en segundo plano (Jobs)" },
     ],
-    roleSavia: "Fronted Software Developer",
+    roleSavia: "Frontend Software Developer",
     dateSavia: "Marzo - Abril 2025",
     tasksSavia: [
       { status: "OK", desc: "Arquitectura frontend con React & Vite" },

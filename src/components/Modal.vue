@@ -97,7 +97,7 @@ const applyTiltEffect = () => {
 
       card.style.transform = `perspective(1000px) scale(1.01) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
       card.style.transition = "transform 0.1s ease-out, box-shadow 0.1s ease-out";
-      card.style.boxShadow = "0 10px 30px rgba(160, 185, 210, 0.12)";
+      card.style.boxShadow = "0 10px 30px rgba(74, 222, 128, 0.12)";
       card.style.zIndex = "10";
     };
 

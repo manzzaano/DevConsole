@@ -19,7 +19,7 @@
           <a
             :href="project.github"
             target="_blank"
-            class="text-white/40 hover:text-[#2AFFB0] transition-colors block accent-cyan"
+            class="text-white/40 hover:text-[#4ade80] transition-colors block accent-cyan"
             :aria-label="'View ' + project.title + ' on GitHub'"
           >
             <svg
@@ -88,11 +88,11 @@ const content = {
       },
       {
         id: "Project_03",
-        title: "Terminal Portfolio",
+        title: "DevConsole",
         github: "https://github.com/manzzaano/PortafolioTerminal",
         description:
-          'This very portfolio. Interactive terminal emulator with <strong>Vue 3 and TailwindCSS</strong>. Glassmorphism fluid design with bilingual support and a real command system.',
-        tags: ["Vue 3", "Tailwind", "CLI"],
+          'Web terminal emulation engine. Command dispatcher decoupled from the renderer. <strong>useTerminal</strong> composable as reactive state machine injectable without touching the DOM. Virtual filesystem, ghost text autocomplete with real-time prefix matching, i18n lazy-loaded from external JSON.',
+        tags: ["Vue 3", "Vite", "Typed.js", "Tailwind"],
       },
     ],
   },
@@ -116,11 +116,11 @@ const content = {
       },
       {
         id: "Proyecto_03",
-        title: "PortfolioTerminal",
+        title: "DevConsole",
         github: "https://github.com/manzzaano/PortafolioTerminal",
         description:
-          'Este mismo portafolio. Emulador de terminal interactivo con <strong>Vue 3 y TailwindCSS</strong>. Diseño glassmorphism fluido con soporte bilingüe y sistema de comandos real.',
-        tags: ["Vue 3", "Tailwind", "CLI"],
+          'Motor de emulación de terminal web. Command dispatcher desacoplado del renderer. Composable <strong>useTerminal</strong> como máquina de estado reactiva inyectable sin tocar el DOM. Filesystem virtual, ghost text autocomplete con prefix matching en tiempo real, i18n lazy cargado desde JSON externo.',
+        tags: ["Vue 3", "Vite", "Typed.js", "Tailwind"],
       },
     ],
   },
