@@ -205,13 +205,21 @@ const windowStyle = computed(() => ({
 
 let dragOffX = 0;
 let dragOffY = 0;
+let draggingFromMaximized = false;
 
 function onTitleBarMouseDown(e) {
-  if (isMobile.value || isMaximized.value) return;
+  if (isMobile.value) return;
   if (e.target.closest('button, [class*="group/"]')) return;
   dragging.value = true;
-  dragOffX = e.clientX - winX.value;
-  dragOffY = e.clientY - winY.value;
+  if (isMaximized.value) {
+    draggingFromMaximized = true;
+    dragOffX = e.clientX;
+    dragOffY = e.clientY;
+  } else {
+    draggingFromMaximized = false;
+    dragOffX = e.clientX - winX.value;
+    dragOffY = e.clientY - winY.value;
+  }
 }
 
 function onTitleBarDblClick(e) {
@@ -244,10 +252,20 @@ function onResizeStart(e, dir) {
 
 function onMouseMove(e) {
   if (dragging.value) {
-    const vw = window.innerWidth;
-    const vh = window.innerHeight;
-    winX.value = Math.max(0, Math.min(e.clientX - dragOffX, vw - winW.value));
-    winY.value = Math.max(0, Math.min(e.clientY - dragOffY, vh - 48));
+    if (draggingFromMaximized) {
+      draggingFromMaximized = false;
+      const ratio = e.clientX / window.innerWidth;
+      restoreFromMaximized();
+      dragOffX = Math.round(ratio * winW.value);
+      dragOffY = 20;
+      winX.value = Math.max(0, Math.min(e.clientX - dragOffX, window.innerWidth - winW.value));
+      winY.value = Math.max(0, e.clientY - dragOffY);
+    } else {
+      const vw = window.innerWidth;
+      const vh = window.innerHeight;
+      winX.value = Math.max(0, Math.min(e.clientX - dragOffX, vw - winW.value));
+      winY.value = Math.max(0, Math.min(e.clientY - dragOffY, vh - 48));
+    }
   }
   if (resizing.value) {
     const dx = e.clientX - resStartX;
@@ -278,6 +296,7 @@ function onMouseMove(e) {
 function onMouseUp() {
   dragging.value = false;
   resizing.value = false;
+  draggingFromMaximized = false;
 }
 
 /* ── Window controls ──────────────────────────────────────── */
