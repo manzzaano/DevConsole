@@ -15,7 +15,7 @@
       <!-- Title bar -->
       <div
         class="bg-white/[3%] rounded-t-[24px] p-3 flex items-center gap-2 border-b border-white/[15%] flex-shrink-0 z-10"
-        :class="{ 'cursor-grab select-none': !isMobile && !isMaximized }"
+        :class="{ 'select-none': !isMobile && !isMaximized }"
         @mousedown="onTitleBarMouseDown"
       >
         <!-- macOS window controls -->
