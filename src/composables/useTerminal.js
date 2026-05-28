@@ -401,9 +401,9 @@ export function useTerminal({
       printWelcomeMessage();
       const langDemo =
         currentLang.value === "es"
-          ? '<p class="text-white/50">¿Es tu primera vez aquí? Escribe <span class="text-white glow">demo</span> para un tour rápido.</p>'
-          : '<p class="text-white/50">First time here? Type <span class="text-white glow">demo</span> for a quick tour.</p>';
-      setTimeout(() => appendHtml(`<div>${langDemo}</div>`), 1400);
+          ? '<p class="text-white/55">¿Es tu primera vez aquí? Escribe <span class="accent-teal">demo</span> para un tour rápido.</p>'
+          : '<p class="text-white/55">First time here? Type <span class="accent-teal">demo</span> for a quick tour.</p>';
+      setTimeout(() => appendHtml(`<div class="text-base font-mono">${langDemo}</div>`), 1400);
       nextTick(focusInput);
     } catch (e) {
       appendHtml(
