@@ -1,6 +1,8 @@
 {
   "en": {
     "welcome_title": "Welcome to the Portfolio of Ismael Manzano León",
+    "welcome_prefix": "Welcome to the portfolio of",
+    "welcome_name": "Ismael Manzano León",
     "welcome_help": "Type '<span class=\"accent-cool\">help</span>' to see the list of available commands.",
     "welcome_shortcuts": "Use '<span class=\"accent-cool\">Tab</span>' to autocomplete and <span class=\"accent-cool\">arrow keys</span> to navigate history.",
     "opening_app": "Opening application:",
@@ -36,6 +38,8 @@
   },
   "es": {
     "welcome_title": "Bienvenido al Portafolio de Ismael Manzano León",
+    "welcome_prefix": "Bienvenido al portafolio de",
+    "welcome_name": "Ismael Manzano León",
     "welcome_help": "Escribe '<span class=\"accent-cool\">help</span>' para ver la lista de comandos disponibles.",
     "welcome_shortcuts": "Usa '<span class=\"accent-cool\">Tab</span>' para autocompletar y las <span class=\"accent-cool\">flechas</span> para navegar el historial.",
     "opening_app": "Abriendo aplicación:",
