@@ -20,33 +20,49 @@
           isMinimized ? 'rounded-b-[24px]' : 'border-b border-white/[15%]'
         ]"
         @mousedown="onTitleBarMouseDown"
+        @dblclick="onTitleBarDblClick"
       >
-        <!-- macOS window controls -->
-        <div class="flex items-center gap-2 group/btns">
-          <button
-            @click.stop="handleClose"
-            class="w-4 h-4 rounded-full flex items-center justify-center"
-            style="background: #ff5f57; box-shadow: 0 0 8px rgba(255,95,87,0.5)"
-            title="Cerrar"
-          >
-            <span class="text-[8px] font-black leading-none transition-opacity" style="color: rgba(0,0,0,0.5)">✕</span>
-          </button>
-          <button
-            @click.stop="handleMinimize"
-            class="w-4 h-4 rounded-full flex items-center justify-center"
-            style="background: #ffbd2e; box-shadow: 0 0 8px rgba(255,189,46,0.5)"
-            title="Minimizar"
-          >
-            <span class="text-[9px] font-black leading-none transition-opacity" style="color: rgba(0,0,0,0.5)">−</span>
-          </button>
-          <button
-            @click.stop="handleMaximize"
-            class="w-4 h-4 rounded-full flex items-center justify-center"
-            style="background: #28c940; box-shadow: 0 0 8px rgba(40,201,64,0.5)"
-            title="Maximizar"
-          >
-            <span class="text-[8px] font-black leading-none transition-opacity" style="color: rgba(0,0,0,0.5)">⤢</span>
-          </button>
+        <!-- Window controls with tooltips -->
+        <div class="flex items-center gap-2">
+
+          <div class="relative group/close">
+            <button
+              @click.stop="handleClose"
+              class="w-4 h-4 rounded-full flex items-center justify-center"
+              style="background:#ff5f57;box-shadow:0 0 8px rgba(255,95,87,0.5)"
+            >
+              <span class="text-[8px] font-black leading-none" style="color:rgba(0,0,0,0.5)">✕</span>
+            </button>
+            <span class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 bg-black/85 text-white/65 text-[9px] font-mono px-2 py-0.5 rounded whitespace-nowrap opacity-0 group-hover/close:opacity-100 transition-opacity duration-150 pointer-events-none z-50">
+              Cerrar
+            </span>
+          </div>
+
+          <div class="relative group/min">
+            <button
+              @click.stop="handleMinimize"
+              class="w-4 h-4 rounded-full flex items-center justify-center"
+              style="background:#ffbd2e;box-shadow:0 0 8px rgba(255,189,46,0.5)"
+            >
+              <span class="text-[9px] font-black leading-none" style="color:rgba(0,0,0,0.5)">−</span>
+            </button>
+            <span class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 bg-black/85 text-white/65 text-[9px] font-mono px-2 py-0.5 rounded whitespace-nowrap opacity-0 group-hover/min:opacity-100 transition-opacity duration-150 pointer-events-none z-50">
+              Minimizar
+            </span>
+          </div>
+
+          <div class="relative group/max">
+            <button
+              @click.stop="handleMaximize"
+              class="w-4 h-4 rounded-full flex items-center justify-center"
+              style="background:#28c940;box-shadow:0 0 8px rgba(40,201,64,0.5)"
+            >
+              <span class="text-[8px] font-black leading-none" style="color:rgba(0,0,0,0.5)">⤢</span>
+            </button>
+            <span class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 bg-black/85 text-white/65 text-[9px] font-mono px-2 py-0.5 rounded whitespace-nowrap opacity-0 group-hover/max:opacity-100 transition-opacity duration-150 pointer-events-none z-50">
+              {{ isMaximized ? 'Restaurar' : 'Maximizar' }}
+            </span>
+          </div>
         </div>
 
         <div class="ml-2 text-xs font-mono hidden sm:block">
@@ -73,27 +89,11 @@
         </div>
 
         <div v-if="!isDemoMode" class="mt-2">
-          <div
-            class="md:hidden flex flex-wrap gap-1.5 mb-4 p-2 bg-white/[3%] rounded-[24px] border border-white/[15%] justify-center"
-          >
-            <button @click.stop="handleMobileKey('tab')" class="glass-btn-sm font-bold min-w-[44px] min-h-[44px] flex items-center justify-center text-[11px] px-3">
-              TAB
-            </button>
-            <button @click.stop="handleMobileKey('arrowup')" class="glass-btn-sm font-bold min-w-[44px] min-h-[44px] flex items-center justify-center text-[11px] px-3">
-              ▲
-            </button>
-            <button
-              @click.stop="handleMobileKey('arrowdown')"
-              class="glass-btn-sm font-bold min-w-[44px] min-h-[44px] flex items-center justify-center text-[11px] px-3"
-            >
-              ▼
-            </button>
-            <button
-              @click.stop="handleMobileKey('l', true)"
-              class="glass-btn-sm font-bold min-w-[44px] min-h-[44px] flex items-center justify-center text-[11px] px-3"
-            >
-              CLS
-            </button>
+          <div class="md:hidden flex flex-wrap gap-1.5 mb-4 p-2 bg-white/[3%] rounded-[24px] border border-white/[15%] justify-center">
+            <button @click.stop="handleMobileKey('tab')" class="glass-btn-sm font-bold min-w-[44px] min-h-[44px] flex items-center justify-center text-[11px] px-3">TAB</button>
+            <button @click.stop="handleMobileKey('arrowup')" class="glass-btn-sm font-bold min-w-[44px] min-h-[44px] flex items-center justify-center text-[11px] px-3">▲</button>
+            <button @click.stop="handleMobileKey('arrowdown')" class="glass-btn-sm font-bold min-w-[44px] min-h-[44px] flex items-center justify-center text-[11px] px-3">▼</button>
+            <button @click.stop="handleMobileKey('l', true)" class="glass-btn-sm font-bold min-w-[44px] min-h-[44px] flex items-center justify-center text-[11px] px-3">CLS</button>
           </div>
 
           <TerminalInput
@@ -108,13 +108,17 @@
         </div>
       </div>
 
-      <!-- Resize handle (desktop, not maximized) -->
-      <div
-        v-if="!isMobile && !isMinimized && !isMaximized"
-        class="absolute bottom-0 right-0 w-5 h-5 z-20 cursor-se-resize"
-        style="background: linear-gradient(135deg, transparent 50%, rgba(255,255,255,0.07) 50%); border-radius: 0 0 24px 0"
-        @mousedown.prevent.stop="onResizeStart"
-      />
+      <!-- 8-direction resize handles (desktop, not maximized, not minimized) -->
+      <template v-if="!isMobile && !isMaximized && !isMinimized">
+        <div class="absolute top-0 left-0 w-3 h-3 z-30 cursor-nw-resize"     @mousedown.prevent.stop="onResizeStart($event, 'nw')" />
+        <div class="absolute top-0 right-0 w-3 h-3 z-30 cursor-ne-resize"    @mousedown.prevent.stop="onResizeStart($event, 'ne')" />
+        <div class="absolute bottom-0 left-0 w-3 h-3 z-30 cursor-sw-resize"  @mousedown.prevent.stop="onResizeStart($event, 'sw')" />
+        <div class="absolute bottom-0 right-0 w-3 h-3 z-30 cursor-se-resize" @mousedown.prevent.stop="onResizeStart($event, 'se')" />
+        <div class="absolute top-0 left-3 right-3 h-1.5 z-30 cursor-n-resize"    @mousedown.prevent.stop="onResizeStart($event, 'n')" />
+        <div class="absolute bottom-0 left-3 right-3 h-1.5 z-30 cursor-s-resize" @mousedown.prevent.stop="onResizeStart($event, 's')" />
+        <div class="absolute top-3 bottom-3 left-0 w-1.5 z-30 cursor-w-resize"   @mousedown.prevent.stop="onResizeStart($event, 'w')" />
+        <div class="absolute top-3 bottom-3 right-0 w-1.5 z-30 cursor-e-resize"  @mousedown.prevent.stop="onResizeStart($event, 'e')" />
+      </template>
     </div>
 
     <Modal
@@ -157,6 +161,8 @@ const {
 const isMobile    = ref(false);
 const isMinimized = ref(false);
 const isMaximized = ref(false);
+const dragging    = ref(false);
+const resizing    = ref(false);
 
 const winX = ref(0);
 const winY = ref(0);
@@ -166,7 +172,8 @@ const winH = ref(0);
 const MIN_W = 480;
 const MIN_H = 320;
 
-let prevState = null;
+let prevState   = null;
+let prevMinH    = 0;
 
 function initWindow() {
   isMobile.value = window.innerWidth < 768;
@@ -180,60 +187,93 @@ function initWindow() {
 }
 
 const windowStyle = computed(() => ({
-  left:   `${winX.value}px`,
-  top:    `${winY.value}px`,
-  width:  `${winW.value}px`,
-  height: isMinimized.value ? 'auto' : `${winH.value}px`,
+  left:       `${winX.value}px`,
+  top:        `${winY.value}px`,
+  width:      `${winW.value}px`,
+  height:     `${winH.value}px`,
+  overflow:   'hidden',
+  transition: (dragging.value || resizing.value)
+    ? 'none'
+    : 'left 0.22s ease, top 0.22s ease, width 0.22s ease, height 0.22s ease',
 }));
 
 /* ── Drag ─────────────────────────────────────────────────── */
 
-let dragging = false;
 let dragOffX = 0;
 let dragOffY = 0;
 
 function onTitleBarMouseDown(e) {
   if (isMobile.value || isMaximized.value) return;
-  if (e.target.closest('button')) return;
-  dragging = true;
-  dragOffX  = e.clientX - winX.value;
-  dragOffY  = e.clientY - winY.value;
+  if (e.target.closest('button, [class*="group/"]')) return;
+  dragging.value = true;
+  dragOffX = e.clientX - winX.value;
+  dragOffY = e.clientY - winY.value;
 }
 
-/* ── Resize ───────────────────────────────────────────────── */
+function onTitleBarDblClick(e) {
+  if (isMobile.value || e.target.closest('button')) return;
+  handleMaximize();
+}
 
-let resizing  = false;
-let resStartX = 0;
-let resStartY = 0;
-let resStartW = 0;
-let resStartH = 0;
+/* ── Resize (8 directions) ────────────────────────────────── */
 
-function onResizeStart(e) {
-  resizing  = true;
-  resStartX = e.clientX;
-  resStartY = e.clientY;
-  resStartW = winW.value;
-  resStartH = winH.value;
+let resizeDir  = '';
+let resStartX  = 0;
+let resStartY  = 0;
+let resStartW  = 0;
+let resStartH  = 0;
+let resStartLeft = 0;
+let resStartTop  = 0;
+
+function onResizeStart(e, dir) {
+  resizing.value = true;
+  resizeDir  = dir;
+  resStartX  = e.clientX;
+  resStartY  = e.clientY;
+  resStartW  = winW.value;
+  resStartH  = winH.value;
+  resStartLeft = winX.value;
+  resStartTop  = winY.value;
 }
 
 /* ── Global mouse handlers ────────────────────────────────── */
 
 function onMouseMove(e) {
-  if (dragging) {
+  if (dragging.value) {
     const vw = window.innerWidth;
     const vh = window.innerHeight;
     winX.value = Math.max(0, Math.min(e.clientX - dragOffX, vw - winW.value));
     winY.value = Math.max(0, Math.min(e.clientY - dragOffY, vh - 48));
   }
-  if (resizing) {
-    winW.value = Math.max(MIN_W, resStartW + (e.clientX - resStartX));
-    winH.value = Math.max(MIN_H, resStartH + (e.clientY - resStartY));
+  if (resizing.value) {
+    const dx = e.clientX - resStartX;
+    const dy = e.clientY - resStartY;
+    let nW = resStartW;
+    let nH = resStartH;
+    let nX = resStartLeft;
+    let nY = resStartTop;
+
+    if (resizeDir.includes('e')) nW = Math.max(MIN_W, resStartW + dx);
+    if (resizeDir.includes('s')) nH = Math.max(MIN_H, resStartH + dy);
+    if (resizeDir.includes('w')) {
+      nW = Math.max(MIN_W, resStartW - dx);
+      nX = resStartLeft + (resStartW - nW);
+    }
+    if (resizeDir.includes('n')) {
+      nH = Math.max(MIN_H, resStartH - dy);
+      nY = resStartTop + (resStartH - nH);
+    }
+
+    winW.value = nW;
+    winH.value = nH;
+    winX.value = nX;
+    winY.value = nY;
   }
 }
 
 function onMouseUp() {
-  dragging = false;
-  resizing = false;
+  dragging.value = false;
+  resizing.value = false;
 }
 
 /* ── Window controls ──────────────────────────────────────── */
@@ -244,7 +284,14 @@ function handleClose() {
 
 function handleMinimize() {
   if (isMobile.value) return;
-  isMinimized.value = !isMinimized.value;
+  if (isMinimized.value) {
+    isMinimized.value = false;
+    winH.value = prevMinH || 600;
+  } else {
+    prevMinH = winH.value;
+    isMinimized.value = true;
+    winH.value = 48;
+  }
 }
 
 function handleMaximize() {
