@@ -9,7 +9,7 @@ export const neofetchData = {
   `,
   stats: [
     { label: "OS", value: "ManzanoOS v1.1" },
-    { label: "Role", value: "Fullstack Developer" },
+    { label: "Role", value: "Backend & Systems Developer" },
     {
       label: "Github",
       value: "github.com/manzzaano",

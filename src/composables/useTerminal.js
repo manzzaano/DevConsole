@@ -206,7 +206,7 @@ export function useTerminal({
     }
 
     appendHtml(
-      `<div class="flex"><span class="accent-teal font-bold">manzzaano@portfolio</span><span class="text-white/70">:</span><span class="accent-warm">${escapeHtml(promptPath)}</span><span class="text-white/70">$</span><p class="ml-2 text-white">${escapeHtml(cmd)}</p></div>`,
+      `<div class="flex"><span class="accent-teal font-bold">ismael@leosoftware</span><span class="text-white/70">:</span><span class="accent-warm">${escapeHtml(promptPath)}</span><span class="text-white/70">$</span><p class="ml-2 text-white">${escapeHtml(cmd)}</p></div>`,
     );
 
     if (windowCommands.includes(command)) {
@@ -255,8 +255,16 @@ export function useTerminal({
           <li class="text-white/60"><span class="accent-teal font-bold">neofetch</span> <span class="text-white/30">—</span> ${getText("help_neofetch")}</li>
           <li class="text-white/60"><span class="accent-teal font-bold">clear</span> <span class="text-white/30">—</span> ${getText("help_clear")}</li>
           <li class="text-white/60"><span class="accent-violet font-bold">Ctrl+L</span> <span class="text-white/30">—</span> ${getText("help_clear_shortcut")}</li>
+          <li class="text-white/60"><span class="accent-teal font-bold">exit</span> <span class="text-white/30">—</span> ${getText("help_exit")}</li>
         </ul>`;
       appendHtml(`<div>${helpText}</div>`);
+    } else if (command === "exit") {
+      appendHtml(
+        `<div><p class="text-white/50">Volviendo a leosoftware.dev...</p></div>`,
+      );
+      setTimeout(() => {
+        window.location.href = "https://leosoftware.dev";
+      }, 800);
     } else if (command === "ls" || command === "cat" || command === "cd" || command === "pwd") {
       appendHtml(
         `<div><p class="text-white/50 italic">${getText("unix_removed")}</p></div>`,
@@ -326,7 +334,7 @@ export function useTerminal({
           inputText.value = matches[0];
         } else if (matches.length > 1) {
           appendHtml(
-            `<div class="flex"><span class="accent-teal font-bold">manzzaano@portfolio</span><span class="text-white/70">:</span><span class="accent-warm">${escapeHtml(promptPath)}</span><span class="text-white/70">$</span><p class="ml-2 text-white/70">${escapeHtml(partialCommand)}</p></div>`,
+            `<div class="flex"><span class="accent-teal font-bold">ismael@leosoftware</span><span class="text-white/70">:</span><span class="accent-warm">${escapeHtml(promptPath)}</span><span class="text-white/70">$</span><p class="ml-2 text-white/70">${escapeHtml(partialCommand)}</p></div>`,
           );
           appendHtml(
             `<div class="flex flex-wrap gap-x-4 text-white/60">${matches.join(" ")}</div>`,
