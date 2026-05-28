@@ -80,39 +80,18 @@ export function useTerminal({
 
     if (isFirstWelcome) {
       isFirstWelcome = false;
-      setTimeout(() => {
-        document.querySelectorAll('.boot-line').forEach(el => {
-          el.style.opacity = '1';
-          el.style.animation = 'none';
-        });
-      }, 1800);
-      appendHtml(`
-        <div class="mb-4 text-base font-mono">
-          <div class="boot-line space-y-0.5 mb-3" style="animation-delay:0.05s">
-            <div><span class="text-white/25">[ BOOT  ]</span><span class="text-white/45"> DevConsole v2.0</span></div>
-          </div>
-          <div class="boot-line" style="animation-delay:0.22s">
-            <span style="color:#4ade80">[ OK    ]</span><span class="text-white/40"> Loading kernel...</span>
-          </div>
-          <div class="boot-line" style="animation-delay:0.42s">
-            <span style="color:#4ade80">[ OK    ]</span><span class="text-white/40"> Mounting filesystem...</span>
-          </div>
-          <div class="boot-line" style="animation-delay:0.62s">
-            <span style="color:#4ade80">[ INIT  ]</span><span class="text-white/40"> Loading profile: </span><span class="text-white/70">${name}</span>
-          </div>
-          <div class="boot-line" style="animation-delay:0.82s">
-            <span style="color:#4ade80">[ READY ]</span><span class="text-white/40"> Environment initialized</span>
-          </div>
-          <div class="boot-line mt-5 border-l-2 pl-4 py-2" style="border-color:rgba(74,222,128,0.5);animation-delay:1.1s">
-            <p class="text-4xl sm:text-5xl font-bold heading-gradient leading-tight">${name}</p>
-            <p class="text-sm mt-2 tracking-wide" style="color:rgba(74,222,128,0.85)">▸ ${role}</p>
-          </div>
-          <div class="boot-line h-px mt-4 mb-3" style="background:linear-gradient(90deg,rgba(74,222,128,0.3),transparent);animation-delay:1.25s"></div>
-          <div class="boot-line" style="animation-delay:1.35s">
-            <p class="text-white/55">${getText("welcome_help")}</p>
-            <p class="text-white/55 mt-0.5">${getText("welcome_shortcuts")}</p>
-          </div>
-        </div>`);
+      const mono = 'class="text-base font-mono mb-0.5"';
+      const seq = [
+        [0,    `<div ${mono}><span class="text-white/25">[ BOOT  ]</span><span class="text-white/45"> DevConsole v2.0</span></div>`],
+        [170,  `<div ${mono}><span style="color:#4ade80">[ OK    ]</span><span class="text-white/40"> Loading kernel...</span></div>`],
+        [340,  `<div ${mono}><span style="color:#4ade80">[ OK    ]</span><span class="text-white/40"> Mounting filesystem...</span></div>`],
+        [510,  `<div ${mono}><span style="color:#4ade80">[ INIT  ]</span><span class="text-white/40"> Loading profile: </span><span class="text-white/70">${name}</span></div>`],
+        [680,  `<div ${mono} mb-4"><span style="color:#4ade80">[ READY ]</span><span class="text-white/40"> Environment initialized</span></div>`],
+        [950,  `<div class="border-l-2 pl-4 py-2 mb-3" style="border-color:rgba(74,222,128,0.5)"><p class="text-4xl sm:text-5xl font-bold heading-gradient leading-tight">${name}</p><p class="text-sm mt-2 tracking-wide" style="color:rgba(74,222,128,0.85)">▸ ${role}</p></div>`],
+        [1100, `<div class="h-px mb-3" style="background:linear-gradient(90deg,rgba(74,222,128,0.3),transparent)"></div>`],
+        [1200, `<div class="text-base font-mono"><p class="text-white/55">${getText("welcome_help")}</p><p class="text-white/55 mt-0.5">${getText("welcome_shortcuts")}</p></div>`],
+      ];
+      seq.forEach(([delay, html]) => setTimeout(() => appendHtml(html), delay));
     } else {
       appendHtml(`
         <div class="mb-4 text-base font-mono">
@@ -424,7 +403,7 @@ export function useTerminal({
         currentLang.value === "es"
           ? '<p class="text-white/50">¿Es tu primera vez aquí? Escribe <span class="text-white glow">demo</span> para un tour rápido.</p>'
           : '<p class="text-white/50">First time here? Type <span class="text-white glow">demo</span> for a quick tour.</p>';
-      appendHtml(`<div class="boot-line" style="animation-delay:1.55s">${langDemo}</div>`);
+      setTimeout(() => appendHtml(`<div>${langDemo}</div>`), 1400);
       nextTick(focusInput);
     } catch (e) {
       appendHtml(
