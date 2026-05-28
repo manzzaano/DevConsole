@@ -80,6 +80,12 @@ export function useTerminal({
 
     if (isFirstWelcome) {
       isFirstWelcome = false;
+      setTimeout(() => {
+        document.querySelectorAll('.boot-line').forEach(el => {
+          el.style.opacity = '1';
+          el.style.animation = 'none';
+        });
+      }, 1800);
       appendHtml(`
         <div class="mb-4 text-base font-mono">
           <div class="boot-line space-y-0.5 mb-3" style="animation-delay:0.05s">
