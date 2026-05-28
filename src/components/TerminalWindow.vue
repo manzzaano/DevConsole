@@ -320,6 +320,7 @@ function handleMinimize() {
     // Restore from minimized → normal
     isMinimized.value = false;
     winH.value = prevMinH || 600;
+    setTimeout(focusInput, 0);
     return;
   }
 
