@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.2.2",
+    "simplex-noise": "^4.0.3",
     "typed.js": "^2.1.0",
     "vue": "^3.5.22",
     "vue-pdf-embed": "^2.1.4"

@@ -2,7 +2,7 @@
   <div
     class="relative text-white flex items-center justify-center min-h-screen p-2 md:p-4 overflow-hidden"
   >
-    <div class="bg-fluid fixed inset-0 z-0 pointer-events-none"></div>
+    <FlowField />
 
     <div
       id="window"
@@ -93,6 +93,7 @@ import { ref, onMounted, onBeforeUnmount, nextTick } from "vue";
 import TerminalOutput from "./TerminalOutput.vue";
 import TerminalInput from "./TerminalInput.vue";
 import Modal from "./Modal.vue";
+import FlowField from "./FlowField.vue";
 import { useTerminal } from "../composables/useTerminal";
 
 const outputComponent = ref(null);
