@@ -401,7 +401,7 @@ export function useTerminal({
         currentLang.value === "es"
           ? '<p class="text-white/50">¿Es tu primera vez aquí? Escribe <span class="text-white glow">demo</span> para un tour rápido.</p>'
           : '<p class="text-white/50">First time here? Type <span class="text-white glow">demo</span> for a quick tour.</p>';
-      appendHtml(`<div>${langDemo}</div>`);
+      appendHtml(`<div class="boot-line" style="animation-delay:1.55s">${langDemo}</div>`);
       nextTick(focusInput);
     } catch (e) {
       appendHtml(
