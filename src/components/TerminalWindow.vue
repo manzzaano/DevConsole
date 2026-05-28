@@ -14,35 +14,38 @@
     >
       <!-- Title bar -->
       <div
-        class="bg-white/[3%] rounded-t-[24px] p-3 flex items-center gap-2 border-b border-white/[15%] flex-shrink-0 z-10"
-        :class="{ 'select-none': !isMobile && !isMaximized }"
+        class="bg-white/[3%] rounded-t-[24px] p-3 flex items-center gap-2 flex-shrink-0 z-10"
+        :class="[
+          { 'select-none': !isMobile && !isMaximized },
+          isMinimized ? 'rounded-b-[24px]' : 'border-b border-white/[15%]'
+        ]"
         @mousedown="onTitleBarMouseDown"
       >
         <!-- macOS window controls -->
-        <div class="flex items-center gap-1.5 group/btns">
+        <div class="flex items-center gap-2 group/btns">
           <button
             @click.stop="handleClose"
-            class="w-3 h-3 rounded-full flex items-center justify-center"
-            style="background: #ff5f57; box-shadow: 0 0 6px rgba(255,95,87,0.45)"
+            class="w-4 h-4 rounded-full flex items-center justify-center"
+            style="background: #ff5f57; box-shadow: 0 0 8px rgba(255,95,87,0.5)"
             title="Cerrar"
           >
-            <span class="opacity-0 group-hover/btns:opacity-100 text-[7px] font-black leading-none transition-opacity" style="color: rgba(0,0,0,0.5)">✕</span>
+            <span class="opacity-0 group-hover/btns:opacity-100 text-[8px] font-black leading-none transition-opacity" style="color: rgba(0,0,0,0.5)">✕</span>
           </button>
           <button
             @click.stop="handleMinimize"
-            class="w-3 h-3 rounded-full flex items-center justify-center"
-            style="background: #ffbd2e; box-shadow: 0 0 6px rgba(255,189,46,0.45)"
+            class="w-4 h-4 rounded-full flex items-center justify-center"
+            style="background: #ffbd2e; box-shadow: 0 0 8px rgba(255,189,46,0.5)"
             title="Minimizar"
           >
-            <span class="opacity-0 group-hover/btns:opacity-100 text-[8px] font-black leading-none transition-opacity" style="color: rgba(0,0,0,0.5)">−</span>
+            <span class="opacity-0 group-hover/btns:opacity-100 text-[9px] font-black leading-none transition-opacity" style="color: rgba(0,0,0,0.5)">−</span>
           </button>
           <button
             @click.stop="handleMaximize"
-            class="w-3 h-3 rounded-full flex items-center justify-center"
-            style="background: #28c940; box-shadow: 0 0 6px rgba(40,201,64,0.45)"
+            class="w-4 h-4 rounded-full flex items-center justify-center"
+            style="background: #28c940; box-shadow: 0 0 8px rgba(40,201,64,0.5)"
             title="Maximizar"
           >
-            <span class="opacity-0 group-hover/btns:opacity-100 text-[7px] font-black leading-none transition-opacity" style="color: rgba(0,0,0,0.5)">⤢</span>
+            <span class="opacity-0 group-hover/btns:opacity-100 text-[8px] font-black leading-none transition-opacity" style="color: rgba(0,0,0,0.5)">⤢</span>
           </button>
         </div>
 
