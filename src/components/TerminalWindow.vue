@@ -29,7 +29,7 @@
             style="background: #ff5f57; box-shadow: 0 0 8px rgba(255,95,87,0.5)"
             title="Cerrar"
           >
-            <span class="opacity-0 group-hover/btns:opacity-100 text-[8px] font-black leading-none transition-opacity" style="color: rgba(0,0,0,0.5)">✕</span>
+            <span class="text-[8px] font-black leading-none transition-opacity" style="color: rgba(0,0,0,0.5)">✕</span>
           </button>
           <button
             @click.stop="handleMinimize"
@@ -37,7 +37,7 @@
             style="background: #ffbd2e; box-shadow: 0 0 8px rgba(255,189,46,0.5)"
             title="Minimizar"
           >
-            <span class="opacity-0 group-hover/btns:opacity-100 text-[9px] font-black leading-none transition-opacity" style="color: rgba(0,0,0,0.5)">−</span>
+            <span class="text-[9px] font-black leading-none transition-opacity" style="color: rgba(0,0,0,0.5)">−</span>
           </button>
           <button
             @click.stop="handleMaximize"
@@ -45,7 +45,7 @@
             style="background: #28c940; box-shadow: 0 0 8px rgba(40,201,64,0.5)"
             title="Maximizar"
           >
-            <span class="opacity-0 group-hover/btns:opacity-100 text-[8px] font-black leading-none transition-opacity" style="color: rgba(0,0,0,0.5)">⤢</span>
+            <span class="text-[8px] font-black leading-none transition-opacity" style="color: rgba(0,0,0,0.5)">⤢</span>
           </button>
         </div>
 
