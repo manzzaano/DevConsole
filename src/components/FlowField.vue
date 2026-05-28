@@ -8,10 +8,12 @@ import { createNoise3D } from 'simplex-noise'
 
 const canvasRef = ref(null)
 
-const ACCENT       = '#4ade80'
-const FADE_ALPHA   = 0.007
-const NOISE_SCALE  = 0.002
-const TIME_SCALE   = 0.0001
+const ACCENT      = '#4ade80'
+const FADE_MIN    = 0.007
+const FADE_MAX    = 0.018
+const FADE_RAMP   = 7200  // frames to reach FADE_MAX (~2 min at 60fps)
+const NOISE_SCALE = 0.002
+const TIME_SCALE  = 0.0001
 
 function scaleFactor() {
   const w = window.innerWidth
@@ -80,7 +82,8 @@ onMounted(() => {
     const h   = canvas.height / dpr
     if (!ready || w === 0 || h === 0) { animId = requestAnimationFrame(loop); return }
 
-    ctx.fillStyle = `rgba(0,0,0,${FADE_ALPHA})`
+    const fade = FADE_MIN + (FADE_MAX - FADE_MIN) * Math.min(1, time / FADE_RAMP)
+    ctx.fillStyle = `rgba(0,0,0,${fade})`
     ctx.fillRect(0, 0, w, h)
 
     for (let i = 0; i < particles.length; i++) {
