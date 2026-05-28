@@ -21,12 +21,12 @@
 
 @layer base {
   body {
-    font-family: "Fira Code", monospace;
+    font-family: "JetBrains Mono", monospace;
     background-color: var(--bg);
   }
 
   .font-mono {
-    font-family: "Fira Code", monospace;
+    font-family: "JetBrains Mono", monospace;
   }
 
   .font-sans {
@@ -77,7 +77,7 @@
     box-shadow: var(--shadow-drop), var(--shadow-inner);
     color: var(--text-primary);
     padding: 12px 32px;
-    font-family: "Fira Code", monospace;
+    font-family: "JetBrains Mono", monospace;
     transition: all 0.3s ease;
     cursor: pointer;
     text-align: center;
@@ -100,7 +100,7 @@
     color: var(--text-primary);
     padding: 8px 20px;
     font-size: 0.75rem;
-    font-family: "Fira Code", monospace;
+    font-family: "JetBrains Mono", monospace;
     transition: all 0.3s ease;
     cursor: pointer;
     text-align: center;
@@ -144,7 +144,7 @@
     color: var(--text-secondary);
     padding: 6px 16px;
     font-size: 0.75rem;
-    font-family: "Fira Code", monospace;
+    font-family: "JetBrains Mono", monospace;
     transition: all 0.3s ease;
     cursor: default;
   }
@@ -293,7 +293,7 @@
     top: -1px;
     left: -1px;
     color: rgba(255, 255, 255, 0.35);
-    font-family: "Fira Code", monospace;
+    font-family: "JetBrains Mono", monospace;
     font-size: 11px;
     line-height: 1;
     z-index: 2;
@@ -306,7 +306,7 @@
     top: -1px;
     right: -1px;
     color: rgba(255, 255, 255, 0.35);
-    font-family: "Fira Code", monospace;
+    font-family: "JetBrains Mono", monospace;
     font-size: 11px;
     line-height: 1;
     z-index: 2;
@@ -317,7 +317,7 @@
   .cli-frame .cli-corner-br {
     position: absolute;
     color: rgba(255, 255, 255, 0.35);
-    font-family: "Fira Code", monospace;
+    font-family: "JetBrains Mono", monospace;
     font-size: 11px;
     line-height: 1;
     z-index: 2;
@@ -342,7 +342,7 @@
     background: #000000;
     padding: 0 12px;
     color: rgba(255, 255, 255, 0.5);
-    font-family: "Fira Code", monospace;
+    font-family: "JetBrains Mono", monospace;
     font-size: 10px;
     white-space: nowrap;
     z-index: 2;
