@@ -5,6 +5,15 @@
   >
     <FlowField />
 
+    <!-- Snap-to-top preview -->
+    <Transition name="snap">
+      <div
+        v-if="snapReady && !isMobile"
+        class="fixed inset-0 pointer-events-none z-[5]"
+        style="background:rgba(74,222,128,0.05);border:2px solid rgba(74,222,128,0.25);border-radius:4px"
+      />
+    </Transition>
+
     <div
       id="window"
       ref="windowEl"
@@ -159,6 +168,7 @@ const isMinimized = ref(false);
 const isMaximized = ref(false);
 const dragging    = ref(false);
 const resizing    = ref(false);
+const snapReady   = ref(false);
 const hoveredBtn  = ref('');
 
 const btnLabel = computed(() => {
@@ -265,6 +275,7 @@ function onMouseMove(e) {
       const vh = window.innerHeight;
       winX.value = Math.max(0, Math.min(e.clientX - dragOffX, vw - winW.value));
       winY.value = Math.max(0, Math.min(e.clientY - dragOffY, vh - 48));
+      snapReady.value = winY.value <= 4;
     }
   }
   if (resizing.value) {
@@ -294,6 +305,15 @@ function onMouseMove(e) {
 }
 
 function onMouseUp() {
+  if (dragging.value && snapReady.value) {
+    snapReady.value = false;
+    dragging.value = false;
+    draggingFromMaximized = false;
+    resizing.value = false;
+    doMaximize();
+    return;
+  }
+  snapReady.value = false;
   dragging.value = false;
   resizing.value = false;
   draggingFromMaximized = false;
@@ -433,4 +453,9 @@ onBeforeUnmount(() => {
 .btn-label-leave-active { transition: opacity 0.15s ease; }
 .btn-label-enter-from,
 .btn-label-leave-to { opacity: 0; }
+
+.snap-enter-active,
+.snap-leave-active { transition: opacity 0.15s ease; }
+.snap-enter-from,
+.snap-leave-to { opacity: 0; }
 </style>
