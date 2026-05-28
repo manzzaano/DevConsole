@@ -14,7 +14,7 @@
               class="text-[10px] sm:text-xs accent-teal font-mono tracking-widest uppercase"
               >[ {{ t.deployment }} 00 ]</span
             >
-            <h4 class="text-lg sm:text-xl font-bold accent-teal">
+            <h4 class="text-lg sm:text-xl font-bold accent-teal font-sans">
               ENTREREDES CONSULTORÍA TECNOLÓGICA
             </h4>
             <p class="text-xs text-white/40">
@@ -51,7 +51,7 @@
               class="text-[10px] sm:text-xs accent-teal font-mono tracking-widest uppercase"
               >[ {{ t.deployment }} 01 ]</span
             >
-            <h4 class="text-lg sm:text-xl font-bold accent-teal">
+            <h4 class="text-lg sm:text-xl font-bold accent-teal font-sans">
               Savia by Berger-Levrault
             </h4>
             <p class="text-xs text-white/40">
@@ -88,7 +88,7 @@
               class="text-[10px] sm:text-xs accent-teal font-mono tracking-widest uppercase"
               >[ {{ t.deployment }} 02 ]</span
             >
-            <h4 class="text-lg sm:text-xl font-bold accent-teal">Cojali S.L.</h4>
+            <h4 class="text-lg sm:text-xl font-bold accent-teal font-sans">Cojali S.L.</h4>
             <p class="text-xs text-white/40">
               {{ t.roleCojali }} | {{ t.dateCojali }}
             </p>
@@ -113,7 +113,7 @@
               class="text-[10px] sm:text-xs accent-teal font-mono tracking-widest uppercase"
               >[ {{ t.coreLabel }} ]</span
             >
-            <h4 class="text-lg sm:text-xl font-bold accent-teal">{{ t.roleKitchen }}</h4>
+            <h4 class="text-lg sm:text-xl font-bold accent-teal font-sans">{{ t.roleKitchen }}</h4>
             <p class="text-xs text-white/40">
               {{ t.dateKitchen }}
             </p>

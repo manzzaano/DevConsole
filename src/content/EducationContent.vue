@@ -14,7 +14,7 @@
             class="absolute -left-[41px] top-1.5 w-4 h-4 rounded-full"
             :class="
               edu.active
-                ? 'bg-[#2AFFB0] shadow-[0_0_12px_rgba(42,255,176,0.6)]'
+                ? 'bg-[#4ade80] shadow-[0_0_12px_rgba(74,222,128,0.6)]'
                 : 'bg-white/20'
             "
         ></div>
@@ -23,7 +23,7 @@
           class="flex flex-col md:flex-row md:items-start justify-between gap-x-6 gap-y-3 mb-2"
         >
           <h4
-            class="text-base sm:text-lg font-bold text-white leading-tight flex-grow max-w-full md:max-w-[75%]"
+            class="text-base sm:text-lg font-bold text-white leading-tight flex-grow max-w-full md:max-w-[75%] font-sans"
           >
             {{ edu.title }}
           </h4>
@@ -72,7 +72,7 @@
             >
             <i data-lucide="award" class="w-4 h-4 text-white/40"></i>
           </div>
-          <h5 class="text-md font-bold text-white mb-1">{{ cert.name }}</h5>
+          <h5 class="text-md font-bold text-white mb-1 font-sans">{{ cert.name }}</h5>
           <p class="text-[10px] text-white/40 mb-4">
             {{ cert.platform }} | {{ cert.date }}
           </p>
