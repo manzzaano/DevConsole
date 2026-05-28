@@ -73,13 +73,34 @@ export function useTerminal({
   };
 
   const printWelcomeMessage = () => {
+    const name = getText("welcome_name");
+    const role = getText("neofetch_role");
     const welcomeMessage = `
-      <div class="mb-4">
-        <p class="text-xs tracking-[0.25em] uppercase text-white/35 mb-1">${getText("welcome_prefix")}</p>
-        <p class="text-4xl sm:text-5xl font-bold heading-gradient-animated leading-tight mb-4">${getText("welcome_name")}</p>
-        <div class="h-px w-full mb-4" style="background: linear-gradient(90deg, rgba(74,222,128,0.45), transparent)"></div>
-        <p class="text-white/60 text-sm">${getText("welcome_help")}</p>
-        <p class="text-white/60 text-sm">${getText("welcome_shortcuts")}</p>
+      <div class="mb-4 text-sm font-mono">
+        <div class="boot-line space-y-0.5 mb-3" style="animation-delay:0.05s">
+          <div><span class="text-white/25">[ BOOT  ]</span><span class="text-white/45"> DevConsole v2.0</span></div>
+        </div>
+        <div class="boot-line" style="animation-delay:0.22s">
+          <span style="color:#4ade80">[ OK    ]</span><span class="text-white/40"> Loading kernel...</span>
+        </div>
+        <div class="boot-line" style="animation-delay:0.42s">
+          <span style="color:#4ade80">[ OK    ]</span><span class="text-white/40"> Mounting filesystem...</span>
+        </div>
+        <div class="boot-line" style="animation-delay:0.62s">
+          <span style="color:#4ade80">[ INIT  ]</span><span class="text-white/40"> Loading profile: </span><span class="text-white/70">${name}</span>
+        </div>
+        <div class="boot-line" style="animation-delay:0.82s">
+          <span style="color:#4ade80">[ READY ]</span><span class="text-white/40"> Environment initialized</span>
+        </div>
+        <div class="boot-line mt-5 border-l-2 pl-4 py-2" style="border-color:rgba(74,222,128,0.5);animation-delay:1.1s">
+          <p class="text-3xl sm:text-4xl font-bold heading-gradient leading-tight">${name}</p>
+          <p class="text-xs mt-1.5 tracking-wide" style="color:rgba(74,222,128,0.65)">▸ ${role}</p>
+        </div>
+        <div class="boot-line h-px mt-4 mb-3" style="background:linear-gradient(90deg,rgba(74,222,128,0.3),transparent);animation-delay:1.25s"></div>
+        <div class="boot-line" style="animation-delay:1.35s">
+          <p class="text-white/55">${getText("welcome_help")}</p>
+          <p class="text-white/55 mt-0.5">${getText("welcome_shortcuts")}</p>
+        </div>
       </div>`;
     appendHtml(welcomeMessage);
   };
