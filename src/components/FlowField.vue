@@ -139,7 +139,13 @@ onMounted(() => {
   const obs = new IntersectionObserver(([entry]) => { paused = !entry.isIntersecting }, { threshold: 0 })
   obs.observe(canvas)
 
-  window.addEventListener('resize',    resize)
+  let resizeTimeout = null
+  const throttledResize = () => {
+    if (resizeTimeout) return
+    resize()
+    resizeTimeout = setTimeout(() => { resizeTimeout = null }, 200)
+  }
+  window.addEventListener('resize',    throttledResize)
   window.addEventListener('mousemove', onPointer)
   window.addEventListener('touchmove', onPointer, { passive: true })
   window.addEventListener('touchend',  onPointerEnd)
@@ -148,7 +154,7 @@ onMounted(() => {
     cancelAnimationFrame(animId)
     clearTimeout(tid)
     obs.disconnect()
-    window.removeEventListener('resize',    resize)
+    window.removeEventListener('resize',    throttledResize)
     window.removeEventListener('mousemove', onPointer)
     window.removeEventListener('touchmove', onPointer)
     window.removeEventListener('touchend',  onPointerEnd)
