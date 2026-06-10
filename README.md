@@ -2,7 +2,7 @@
 
 > An interactive terminal emulator with a modern glassmorphism design, UNIX command system, and virtual filesystem — built with Vue 3 + TailwindCSS.
 
-![Portfolio Terminal Demo](https://raw.githubusercontent.com/manzzaano/PortafolioTerminal/main/public/DemoPortafolio.gif)
+![Portfolio Terminal Demo](https://raw.githubusercontent.com/manzzaano/DevConsole/main/public/DemoPortafolio.gif)
 
 ---
 
