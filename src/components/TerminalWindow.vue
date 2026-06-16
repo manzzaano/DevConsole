@@ -1,9 +1,17 @@
 <template>
   <div
-    class="relative text-white overflow-hidden"
+    class="relative text-white overflow-hidden bg-black"
     :class="isMobile ? 'flex items-center justify-center min-h-screen p-2' : 'min-h-screen'"
   >
-    <FlowField />
+    <RibbonBackground />
+
+    <!-- Viñeta perimetral — ancla la terminal en el espacio -->
+    <div class="fixed inset-0 pointer-events-none z-[1]"
+      style="background: radial-gradient(ellipse 72% 72% at 50% 50%, transparent 28%, rgba(0,0,0,0.72) 100%)" />
+
+    <!-- Film grain editorial -->
+    <div class="fixed inset-0 pointer-events-none z-[5]"
+      style="background-image:url(&quot;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.80' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E&quot;);background-size:180px 180px;opacity:0.035;mix-blend-mode:overlay" />
 
     <!-- Snap-to-top preview -->
     <Transition name="snap">
@@ -27,7 +35,7 @@
         class="bg-white/[3%] rounded-t-[24px] p-3 flex items-center gap-2 flex-shrink-0 z-10"
         :class="[
           { 'select-none': !isMobile && !isMaximized },
-          isMinimized ? 'rounded-b-[24px]' : 'border-b border-white/[15%]'
+          isMinimized ? 'rounded-b-[20px]' : 'border-b border-[rgba(74,222,128,0.12)]'
         ]"
         @mousedown="onTitleBarMouseDown"
         @dblclick="onTitleBarDblClick"
@@ -141,7 +149,7 @@ import { ref, computed, onMounted, onBeforeUnmount, nextTick } from "vue";
 import TerminalOutput from "./TerminalOutput.vue";
 import TerminalInput from "./TerminalInput.vue";
 import Modal from "./Modal.vue";
-import FlowField from "./FlowField.vue";
+import RibbonBackground from "./RibbonBackground.vue";
 import { useTerminal } from "../composables/useTerminal";
 
 const outputComponent = ref(null);
