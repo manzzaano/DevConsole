@@ -107,8 +107,8 @@ const content = {
         title: "HND in Multiplatform App Development (2nd Year)",
         institution: "IES Maestre de Calatrava",
         period: "2025 - 2026",
-        status: "ACTIVE_NODE",
-        active: true,
+        status: "STATUS_OK",
+        active: false,
         tags: ["Mobile_Dev", "BI", "Process_Mgmt"],
       },
       {
@@ -140,8 +140,8 @@ const content = {
           "Grado Superior en Desarrollo de Aplicaciones Multiplataforma (2º DAM)",
         institution: "IES Maestre de Calatrava",
         period: "2025 - 2026",
-        status: "NODO_ACTIVO",
-        active: true,
+        status: "STATUS_OK",
+        active: false,
         tags: ["Móviles", "BI", "Gestión_Procesos"],
       },
       {
