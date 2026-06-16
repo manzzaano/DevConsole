@@ -1,8 +1,5 @@
 <template>
-  <div
-    class="relative text-white overflow-hidden bg-black"
-    :class="isMobile ? 'flex items-center justify-center min-h-screen p-2' : 'min-h-screen'"
-  >
+  <div class="relative text-white overflow-hidden bg-black min-h-screen">
     <RibbonBackground />
 
     <!-- Viñeta perimetral — ancla la terminal en el espacio -->
@@ -12,6 +9,14 @@
     <!-- Film grain editorial -->
     <div class="fixed inset-0 pointer-events-none z-[5]"
       style="background-image:url(&quot;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.80' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E&quot;);background-size:180px 180px;opacity:0.035;mix-blend-mode:overlay" />
+
+    <!-- Mobile: card view -->
+    <MobileView
+      v-if="isMobile"
+      :currentLang="currentLang"
+      :openWindow="openWindow"
+      @setLang="setLang"
+    />
 
     <!-- Snap-to-top preview -->
     <Transition name="snap">
@@ -23,11 +28,11 @@
     </Transition>
 
     <div
+      v-if="!isMobile"
       id="window"
       ref="windowEl"
-      class="glass-panel p-0 flex flex-col z-10"
-      :class="isMobile ? 'relative w-full max-w-4xl mx-0 sm:mx-2 h-[95dvh] sm:h-[92dvh]' : 'fixed'"
-      :style="!isMobile ? windowStyle : {}"
+      class="glass-panel p-0 flex flex-col z-10 fixed"
+      :style="windowStyle"
       @mousedown="onWindowMouseDown"
     >
       <!-- Title bar -->
@@ -89,6 +94,7 @@
         id="terminal"
         ref="terminalElement"
         class="p-3 sm:p-4 md:p-6 flex-grow flex flex-col overflow-y-auto z-10 scroll-smooth custom-scrollbar"
+        @click.capture="onTerminalClick"
         @click="focusInput"
       >
         <TerminalOutput ref="outputComponent" />
@@ -102,13 +108,6 @@
         </div>
 
         <div v-if="!isDemoMode" class="mt-2">
-          <div class="md:hidden flex flex-wrap gap-1.5 mb-4 p-2 bg-white/[3%] rounded-[24px] border border-white/[15%] justify-center">
-            <button @click.stop="handleMobileKey('tab')" class="glass-btn-sm font-bold min-w-[44px] min-h-[44px] flex items-center justify-center text-[11px] px-3">TAB</button>
-            <button @click.stop="handleMobileKey('arrowup')" class="glass-btn-sm font-bold min-w-[44px] min-h-[44px] flex items-center justify-center text-[11px] px-3">▲</button>
-            <button @click.stop="handleMobileKey('arrowdown')" class="glass-btn-sm font-bold min-w-[44px] min-h-[44px] flex items-center justify-center text-[11px] px-3">▼</button>
-            <button @click.stop="handleMobileKey('l', true)" class="glass-btn-sm font-bold min-w-[44px] min-h-[44px] flex items-center justify-center text-[11px] px-3">CLS</button>
-          </div>
-
           <TerminalInput
             ref="inputComponent"
             v-model="inputText"
@@ -150,6 +149,7 @@ import TerminalOutput from "./TerminalOutput.vue";
 import TerminalInput from "./TerminalInput.vue";
 import Modal from "./Modal.vue";
 import RibbonBackground from "./RibbonBackground.vue";
+import MobileView from "./MobileView.vue";
 import { useTerminal } from "../composables/useTerminal";
 
 const outputComponent = ref(null);
@@ -162,6 +162,7 @@ const {
   inputText, isFocused, isDemoMode, suggestionRemainder, promptPath,
   modalHidden, modalTitle, modalComponent, currentLang,
   onKeyDown, loadContentAndInit, onDocumentKeyDown, focusInput, closeWindow,
+  openWindow, executeCommand, setLang,
 } = useTerminal({
   outputRef:    outputComponent,
   inputRef:     inputComponent,
@@ -406,6 +407,16 @@ function onWindowResize() {
   if (isMaximized.value) {
     winW.value = window.innerWidth;
     winH.value = window.innerHeight;
+  }
+}
+
+/* ── Terminal click delegation (data-cmd chips) ───────────── */
+
+function onTerminalClick(e) {
+  const btn = e.target.closest('[data-cmd]');
+  if (btn) {
+    e.stopPropagation();
+    executeCommand(btn.dataset.cmd);
   }
 }
 
