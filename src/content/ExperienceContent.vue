@@ -5,33 +5,6 @@
     </p>
 
     <div class="grid grid-cols-1 gap-6">
-      <!-- leo/ -->
-      <div class="glass-card p-5 flex flex-col group">
-        <div class="flex justify-between items-start mb-4">
-          <div>
-            <span class="text-[10px] sm:text-xs accent-teal font-mono tracking-widest uppercase"
-              >[ {{ t.deployment }} 00 ]</span
-            >
-            <h4 class="text-lg sm:text-xl font-bold accent-teal font-sans">leo/ · Ismael Manzano</h4>
-            <p class="text-xs text-white/40">{{ t.roleLeo }} | {{ t.dateLeo }}</p>
-          </div>
-          <i data-lucide="terminal" class="w-5 h-5 text-white/40"></i>
-        </div>
-
-        <div class="space-y-2 font-mono text-[11px] sm:text-xs text-white/70 mb-4">
-          <p v-for="(task, index) in t.tasksLeo" :key="index">
-            <span class="accent-teal font-mono text-[10px]">[ {{ task.status }} ]</span>
-            {{ task.desc }}
-          </p>
-        </div>
-
-        <div class="flex flex-wrap gap-2 pt-3 border-t border-white/[8%]">
-          <span v-for="tech in stackLeo" :key="tech" class="glass-tag accent-teal text-[10px] sm:text-xs">
-            {{ tech }}
-          </span>
-        </div>
-      </div>
-
       <!-- Entreredes -->
       <div
         class="glass-card p-5 flex flex-col group"
@@ -40,7 +13,7 @@
           <div>
             <span
               class="text-[10px] sm:text-xs accent-teal font-mono tracking-widest uppercase"
-              >[ {{ t.deployment }} 01 ]</span
+              >[ {{ t.deployment }} 00 ]</span
             >
             <h4 class="text-lg sm:text-xl font-bold accent-teal font-sans">
               ENTREREDES CONSULTORÍA TECNOLÓGICA
@@ -78,7 +51,7 @@
           <div>
             <span
               class="text-[10px] sm:text-xs accent-teal font-mono tracking-widest uppercase"
-              >[ {{ t.deployment }} 02 ]</span
+              >[ {{ t.deployment }} 01 ]</span
             >
             <h4 class="text-lg sm:text-xl font-bold accent-teal font-sans">
               Savia by Berger-Levrault
@@ -115,7 +88,7 @@
           <div>
             <span
               class="text-[10px] sm:text-xs accent-teal font-mono tracking-widest uppercase"
-              >[ {{ t.deployment }} 03 ]</span
+              >[ {{ t.deployment }} 02 ]</span
             >
             <h4 class="text-lg sm:text-xl font-bold accent-teal font-sans">Cojali S.L.</h4>
             <p class="text-xs text-white/40">
@@ -168,7 +141,6 @@ const props = defineProps({
   lang: { type: String, default: "en" },
 });
 
-const stackLeo        = ["Next.js", "TypeScript", "Laravel", "FastAPI", "Python", "Docker"];
 const stackEntreredes = ["Laravel", "Filament PHP", "PHP", "Gemini AI", "PHPUnit", "Docker", "Jobs"];
 const stackSavia      = ["React", "Vite", "Azure", "JavaScript", "Git"];
 
