@@ -407,38 +407,11 @@ export function useTerminal({
       translations.value = await loadContentJson();
       printWelcomeMessage();
 
-      const cmds = ["about", "projects", "skills", "experience", "education", "contact"];
-      const chipStyle = [
-        "display:inline-block",
-        "padding:3px 10px",
-        "margin:2px 2px",
-        "border-radius:5px",
-        "font-family:monospace",
-        "font-size:11px",
-        "background:rgba(74,222,128,0.08)",
-        "border:1px solid rgba(74,222,128,0.22)",
-        "color:rgba(74,222,128,0.9)",
-        "cursor:pointer",
-      ].join(";");
-      const chips = cmds.map((c) => `<button data-cmd="${c}" style="${chipStyle}">${c}</button>`).join("");
-
-      const hint =
+      const langDemo =
         currentLang.value === "es"
-          ? "Pulsa un comando o escríbelo:"
-          : "Click a command or type it:";
-      const shortcuts =
-        currentLang.value === "es"
-          ? `↑↓ historial · TAB completar · <button data-cmd="demo" style="${chipStyle}">demo</button> para el tour`
-          : `↑↓ history · TAB complete · <button data-cmd="demo" style="${chipStyle}">demo</button> for a tour`;
-
-      const onboarding = `
-        <div style="font-family:monospace;margin-top:6px">
-          <p style="color:rgba(255,255,255,0.38);font-size:11px;margin-bottom:6px">── commands ───────────────────</p>
-          <p style="color:rgba(255,255,255,0.45);font-size:12px;margin-bottom:5px">${hint}</p>
-          <div style="margin-bottom:8px">${chips}</div>
-          <p style="color:rgba(255,255,255,0.3);font-size:11px">${shortcuts}</p>
-        </div>`;
-      setTimeout(() => appendHtml(`<div>${onboarding}</div>`), 1400);
+          ? '<p class="text-white/55">¿Es tu primera vez aquí? Escribe <span class="accent-teal">demo</span> para un tour rápido.</p>'
+          : '<p class="text-white/55">First time here? Type <span class="accent-teal">demo</span> for a quick tour.</p>';
+      setTimeout(() => appendHtml(`<div class="text-base font-mono">${langDemo}</div>`), 1400);
       nextTick(focusInput);
     } catch (e) {
       appendHtml(
@@ -462,7 +435,6 @@ export function useTerminal({
     loadContentAndInit,
     focusInput,
     clearTerminal,
-    executeCommand,
     closeWindow,
     openWindow,
     setLang,

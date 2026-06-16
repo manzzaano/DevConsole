@@ -94,7 +94,6 @@
         id="terminal"
         ref="terminalElement"
         class="p-3 sm:p-4 md:p-6 flex-grow flex flex-col overflow-y-auto z-10 scroll-smooth custom-scrollbar"
-        @click.capture="onTerminalClick"
         @click="focusInput"
       >
         <TerminalOutput ref="outputComponent" />
@@ -162,7 +161,7 @@ const {
   inputText, isFocused, isDemoMode, suggestionRemainder, promptPath,
   modalHidden, modalTitle, modalComponent, currentLang,
   onKeyDown, loadContentAndInit, onDocumentKeyDown, focusInput, closeWindow,
-  openWindow, executeCommand, setLang,
+  openWindow, setLang,
 } = useTerminal({
   outputRef:    outputComponent,
   inputRef:     inputComponent,
@@ -407,16 +406,6 @@ function onWindowResize() {
   if (isMaximized.value) {
     winW.value = window.innerWidth;
     winH.value = window.innerHeight;
-  }
-}
-
-/* ── Terminal click delegation (data-cmd chips) ───────────── */
-
-function onTerminalClick(e) {
-  const btn = e.target.closest('[data-cmd]');
-  if (btn) {
-    e.stopPropagation();
-    executeCommand(btn.dataset.cmd);
   }
 }
 
