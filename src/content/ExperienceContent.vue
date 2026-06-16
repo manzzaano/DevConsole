@@ -5,6 +5,34 @@
     </p>
 
     <div class="grid grid-cols-1 gap-6">
+      <!-- leo/ -->
+      <div class="glass-card p-5 flex flex-col group">
+        <div class="flex justify-between items-start mb-4">
+          <div>
+            <span class="text-[10px] sm:text-xs accent-teal font-mono tracking-widest uppercase"
+              >[ {{ t.deployment }} 00 ]</span
+            >
+            <h4 class="text-lg sm:text-xl font-bold accent-teal font-sans">leo/ · Ismael Manzano</h4>
+            <p class="text-xs text-white/40">{{ t.roleLeo }} | {{ t.dateLeo }}</p>
+          </div>
+          <i data-lucide="terminal" class="w-5 h-5 text-white/40"></i>
+        </div>
+
+        <div class="space-y-2 font-mono text-[11px] sm:text-xs text-white/70 mb-4">
+          <p v-for="(task, index) in t.tasksLeo" :key="index">
+            <span class="accent-teal font-mono text-[10px]">[ {{ task.status }} ]</span>
+            {{ task.desc }}
+          </p>
+        </div>
+
+        <div class="flex flex-wrap gap-2 pt-3 border-t border-white/[8%]">
+          <span v-for="tech in stackLeo" :key="tech" class="glass-tag accent-teal text-[10px] sm:text-xs">
+            {{ tech }}
+          </span>
+        </div>
+      </div>
+
+      <!-- Entreredes -->
       <div
         class="glass-card p-5 flex flex-col group"
       >
@@ -12,7 +40,7 @@
           <div>
             <span
               class="text-[10px] sm:text-xs accent-teal font-mono tracking-widest uppercase"
-              >[ {{ t.deployment }} 00 ]</span
+              >[ {{ t.deployment }} 01 ]</span
             >
             <h4 class="text-lg sm:text-xl font-bold accent-teal font-sans">
               ENTREREDES CONSULTORÍA TECNOLÓGICA
@@ -42,6 +70,7 @@
         </div>
       </div>
 
+      <!-- Savia -->
       <div
         class="glass-card p-5 flex flex-col group"
       >
@@ -49,7 +78,7 @@
           <div>
             <span
               class="text-[10px] sm:text-xs accent-teal font-mono tracking-widest uppercase"
-              >[ {{ t.deployment }} 01 ]</span
+              >[ {{ t.deployment }} 02 ]</span
             >
             <h4 class="text-lg sm:text-xl font-bold accent-teal font-sans">
               Savia by Berger-Levrault
@@ -86,7 +115,7 @@
           <div>
             <span
               class="text-[10px] sm:text-xs accent-teal font-mono tracking-widest uppercase"
-              >[ {{ t.deployment }} 02 ]</span
+              >[ {{ t.deployment }} 03 ]</span
             >
             <h4 class="text-lg sm:text-xl font-bold accent-teal font-sans">Cojali S.L.</h4>
             <p class="text-xs text-white/40">
@@ -139,39 +168,42 @@ const props = defineProps({
   lang: { type: String, default: "en" },
 });
 
-const stackEntreredes = ["Laravel", "PHP", "IA Models", "APIs", "Jobs"];
-const stackSavia = ["React", "Vite", "Azure", "JavaScript", "Git"];
+const stackLeo        = ["Next.js", "TypeScript", "Laravel", "FastAPI", "Python", "Docker"];
+const stackEntreredes = ["Laravel", "Filament PHP", "PHP", "Gemini AI", "PHPUnit", "Docker", "Jobs"];
+const stackSavia      = ["React", "Vite", "Azure", "JavaScript", "Git"];
 
 const content = {
   en: {
     initMessage: "Initializing workload execution trace...",
     deployment: "DEPLOYMENT",
     coreLabel: "OPERATIONAL_CORE",
-    roleEntreredes: "Full Stack Developer",
+    roleLeo: "Founder & Full Stack Developer",
+    dateLeo: "May 2026 - Present",
+    tasksLeo: [
+      { status: "RUNNING", desc: "Design and development of Full Stack web systems end-to-end" },
+      { status: "OK", desc: "Software architecture with production focus and technical criteria" },
+      { status: "OK", desc: "SaaS products and client solutions under the leo/ brand" },
+    ],
+    roleEntreredes: "Full Stack Developer | Laravel",
     dateEntreredes: "February 2026 - May 2026",
     tasksEntreredes: [
-      {
-        status: "DONE",
-        desc: "Integral development of scalable web solutions",
-      },
-      { status: "OK", desc: "Third-party API & AI Model integration" },
-      { status: "OK", desc: "Software architecture with Laravel ecosystem" },
-      { status: "OK", desc: "Background task processing & Job management" },
+      { status: "DONE", desc: "Autonomous full stack development of a landing page SaaS (Laravel + Filament PHP), deployed to production with Docker" },
+      { status: "DONE", desc: "Gemini AI integration via async Jobs & Queues — non-blocking model request processing" },
+      { status: "DONE", desc: "Advanced PHPUnit testing: load, security & fuzzing before deployment" },
     ],
     roleSavia: "Frontend Software Developer",
     dateSavia: "March - April 2025",
     tasksSavia: [
-      { status: "OK", desc: "Frontend architecture with React & Vite" },
-      { status: "OK", desc: "Cloud implementation on Azure" },
-      { status: "OK", desc: "Version control via Git/GitHub" },
-      { status: "DONE", desc: "UI/UX interface optimization" },
+      { status: "OK", desc: "Reusable frontend components with React & Vite" },
+      { status: "OK", desc: "Test environment deployment on Microsoft Azure" },
+      { status: "DONE", desc: "Version control via Git/GitHub" },
     ],
     roleCojali: "Software QA Analyst",
     dateCojali: "February 2025",
     tasksCojali: [
-      { status: "OK", desc: "Software testing & Bug tracking" },
-      { status: "OK", desc: "Logics application & Analysis" },
-      { status: "DONE", desc: "Corporate tools integration" },
+      { status: "OK", desc: "Clean Code standards & QA process application" },
+      { status: "OK", desc: "Complex algorithmics & software testing" },
+      { status: "DONE", desc: "Corporate tools & workflows integration" },
     ],
     roleKitchen: "Kitchen Assistant",
     dateKitchen: "March 2025 - Present",
@@ -185,33 +217,35 @@ const content = {
     initMessage: "Iniciando trazado de ejecución de carga de trabajo...",
     deployment: "DESPLIEGUE",
     coreLabel: "NÚCLEO_OPERATIVO",
-    roleEntreredes: "Full Stack Developer",
+    roleLeo: "Founder & Full Stack Developer",
+    dateLeo: "Mayo 2026 - Actualidad",
+    tasksLeo: [
+      { status: "EJECUTANDO", desc: "Diseño y desarrollo de sistemas web Full Stack de principio a fin" },
+      { status: "OK", desc: "Arquitectura de software con criterio técnico y foco en producción" },
+      { status: "OK", desc: "Productos SaaS y soluciones para clientes bajo la marca leo/" },
+    ],
+    roleEntreredes: "Full Stack Developer | Laravel",
     dateEntreredes: "Febrero 2026 - Mayo 2026",
     tasksEntreredes: [
-      {
-        status: "DONE",
-        desc: "Desarrollo integral de soluciones web escalables",
-      },
-      { status: "OK", desc: "Integración de APIs de terceros y modelos de IA" },
-      { status: "OK", desc: "Arquitectura de software con ecosistema Laravel" },
-      { status: "OK", desc: "Procesamiento de tareas en segundo plano (Jobs)" },
+      { status: "DONE", desc: "Desarrollo full stack autónomo de un SaaS generador de landing pages (Laravel + Filament PHP), llevado a producción con Docker" },
+      { status: "DONE", desc: "Integración de Gemini AI mediante Jobs y Queues asíncronos — procesamiento de peticiones al modelo sin bloquear la aplicación" },
+      { status: "DONE", desc: "Testing avanzado con PHPUnit: pruebas de carga, seguridad y fuzzing antes del despliegue" },
     ],
     roleSavia: "Frontend Software Developer",
     dateSavia: "Marzo - Abril 2025",
     tasksSavia: [
-      { status: "OK", desc: "Arquitectura frontend con React & Vite" },
-      { status: "OK", desc: "Implementación cloud en Azure" },
-      { status: "OK", desc: "Control de versiones Git/GitHub" },
-      { status: "DONE", desc: "Optimización de interfaces UI/UX" },
+      { status: "OK", desc: "Componentes frontend reutilizables con React & Vite" },
+      { status: "OK", desc: "Despliegue de entornos de prueba en Microsoft Azure" },
+      { status: "DONE", desc: "Control de versiones Git/GitHub" },
     ],
     roleCojali: "Software QA Analyst",
     dateCojali: "Febrero 2025",
     tasksCojali: [
-      { status: "OK", desc: "Testing de software & seguimiento de bugs" },
-      { status: "OK", desc: "Aplicación de lógica & Análisis" },
-      { status: "DONE", desc: "Integración en herramientas corporativas" },
+      { status: "OK", desc: "Aplicación de estándares Clean Code y procesos de QA" },
+      { status: "OK", desc: "Algoritmia compleja y testing de software" },
+      { status: "DONE", desc: "Integración en herramientas y flujos corporativos" },
     ],
-    roleKitchen: "Ayudante de Cocina (Compaginando con estudios)",
+    roleKitchen: "Ayudante de Cocina",
     dateKitchen: "Marzo 2025 - Actualidad",
     tasksKitchen: [
       { status: "ALTA", desc: "Tolerancia a la presión & gestión del estrés" },
