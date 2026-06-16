@@ -148,10 +148,10 @@ const content = {
     deployment: "DEPLOYMENT",
     coreLabel: "OPERATIONAL_CORE",
     roleEntreredes: "Full Stack Developer",
-    dateEntreredes: "February 2026 - Present",
+    dateEntreredes: "February 2026 - May 2026",
     tasksEntreredes: [
       {
-        status: "RUNNING",
+        status: "DONE",
         desc: "Integral development of scalable web solutions",
       },
       { status: "OK", desc: "Third-party API & AI Model integration" },
@@ -186,10 +186,10 @@ const content = {
     deployment: "DESPLIEGUE",
     coreLabel: "NÚCLEO_OPERATIVO",
     roleEntreredes: "Full Stack Developer",
-    dateEntreredes: "Febrero 2026 - Actualidad",
+    dateEntreredes: "Febrero 2026 - Mayo 2026",
     tasksEntreredes: [
       {
-        status: "EJECUTANDO",
+        status: "DONE",
         desc: "Desarrollo integral de soluciones web escalables",
       },
       { status: "OK", desc: "Integración de APIs de terceros y modelos de IA" },
