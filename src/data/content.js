@@ -20,7 +20,7 @@ export const neofetchData = {
       value: "in/ismael-manzano-leon",
       url: "https://www.linkedin.com/in/ismael-manzano-leon/",
     },
-    { label: "Kernel", value: "Vue 3.4.x" },
+    { label: "Kernel", value: "Vue 3.5.x" },
     { label: "Uptime", value: "Always Learning" },
     { label: "Packages", value: "Tailwind, Vite, Lucide" },
     { label: "Location", value: "Remote / Spain" },
