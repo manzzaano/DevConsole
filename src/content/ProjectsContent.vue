@@ -94,7 +94,7 @@ const content = {
         title: "DevConsole",
         github: "https://github.com/manzzaano/DevConsole",
         description:
-          'Web terminal emulation engine. Command dispatcher decoupled from the renderer. <strong>useTerminal</strong> composable as reactive state machine injectable without touching the DOM. Virtual filesystem, ghost text autocomplete with real-time prefix matching, i18n lazy-loaded.',
+          'Web terminal emulation engine. Command dispatcher decoupled from the renderer. <strong>useTerminal</strong> composable as reactive state machine injectable without touching the DOM. Ghost text autocomplete with real-time prefix matching, i18n lazy-loaded.',
         tags: ["Vue 3", "Vite", "Typed.js", "Tailwind"],
       },
       {
@@ -138,7 +138,7 @@ const content = {
         title: "DevConsole",
         github: "https://github.com/manzzaano/DevConsole",
         description:
-          'Motor de emulación de terminal web. Command dispatcher desacoplado del renderer. Composable <strong>useTerminal</strong> como máquina de estado reactiva inyectable. Filesystem virtual, ghost text autocomplete con prefix matching en tiempo real, i18n lazy cargado.',
+          'Motor de emulación de terminal web. Command dispatcher desacoplado del renderer. Composable <strong>useTerminal</strong> como máquina de estado reactiva inyectable. Ghost text autocomplete con prefix matching en tiempo real, i18n lazy cargado.',
         tags: ["Vue 3", "Vite", "Typed.js", "Tailwind"],
       },
       {
