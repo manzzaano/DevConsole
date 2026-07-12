@@ -12,6 +12,11 @@ dist
 dist-ssr
 *.local
 
+# Secrets & local caches
+.env
+.env.*
+cache/
+
 # Tooling artifacts
 .playwright-mcp
 .claude
