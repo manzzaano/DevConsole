@@ -3,7 +3,7 @@
     <div class="flex flex-col md:flex-row items-center gap-10">
       <div class="relative flex-shrink-0">
         <img
-          src="../assets/foto-perfil.png"
+          src="../assets/foto-perfil.jpg"
           alt="Ismael Manzano"
           class="w-32 h-32 sm:w-36 sm:h-36 md:w-40 md:h-40 aspect-square rounded-full object-cover border-4 border-white/[15%] shadow-[0_0_15px_rgba(255,255,255,0.1)]"
         />
