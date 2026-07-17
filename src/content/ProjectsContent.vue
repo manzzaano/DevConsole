@@ -94,7 +94,7 @@ const content = {
         title: "DevConsole",
         github: "https://github.com/manzzaano/DevConsole",
         description:
-          'Web terminal emulation engine. Command dispatcher decoupled from the renderer. <strong>useTerminal</strong> composable as reactive state machine injectable without touching the DOM. Ghost text autocomplete with real-time prefix matching, i18n lazy-loaded from external JSON, demo mode with async orchestration via Typed.js.',
+          'Web terminal emulator built with Vue 3, the one you are looking at right now. The command dispatcher is decoupled from the renderer, and the <strong>useTerminal</strong> composable holds all the state as a reactive machine that can be injected without touching the DOM. It includes ghost-text autocomplete based on prefix matching, translations loaded from an external JSON file, and a demo mode driven by Typed.js.',
         tags: ["Vue 3", "Vite", "Typed.js", "Tailwind"],
       },
       {
@@ -102,7 +102,7 @@ const content = {
         title: "leo/",
         github: "https://leosoftware.dev",
         description:
-          'Personal portfolio and development journal. Built with <strong>Next.js 15</strong> and TypeScript. 100/100 Lighthouse scores. Strict type safety, Server Components, zero technical debt.',
+          'Personal portfolio and development journal built with <strong>Next.js 15</strong> and TypeScript. It uses Server Components and strict typing throughout, and scores 100/100 across all four Lighthouse categories.',
         tags: ["Next.js 15", "TypeScript", "Tailwind v4"],
       },
       {
@@ -110,7 +110,7 @@ const content = {
         title: "PokeCore",
         github: "https://manzzaano.github.io/PokeCore",
         description:
-          'Interactive Pokédex with <strong>React 19 and Vite</strong>. 1025 Pokémon with instant search, type filtering, persistent favorites, animated stats modal, shiny sprite toggle. 100% Spanish, mobile-first.',
+          'Interactive Pokédex built with <strong>React 19 and Vite</strong> on top of the PokéAPI. It covers all 1025 Pokémon with instant search, filtering by type, persistent favorites, a stats modal and a shiny sprite toggle. The interface is fully in Spanish and designed mobile-first.',
         tags: ["React 19", "Vite", "TanStack Query"],
       },
       {
@@ -118,7 +118,7 @@ const content = {
         title: "Kairos",
         github: "https://github.com/manzzaano/Kairos",
         description:
-          '<strong>Flutter</strong> app + FastAPI backend + Google Gemini. Converts task abandonment into quantifiable debt. AI-generated stoic reflections, real-time geofencing, tunnel vision with automatic time-blocking.',
+          'Task management app built with <strong>Flutter</strong> and a FastAPI backend, integrated with Google Gemini. It tracks abandoned tasks as an accumulated debt metric and uses that history to generate written feedback with the model. It also includes geofencing and automatic time-blocking for focus sessions.',
         tags: ["Flutter", "FastAPI", "Google Gemini"],
       },
       {
@@ -126,7 +126,7 @@ const content = {
         title: "Regicide",
         github: "https://github.com/manzzaano/Regicide",
         description:
-          'Pure strategy card game. Perfect information, no unfair RNG. Clear state machine with four phases. Every decision has predictable consequences. Wins based on thinking, not luck.',
+          'Strategy card game implemented as a state machine with four phases. All information is visible to the player and randomness plays no part in the outcome, so each game is decided by the choices made. The focus of the project is rule design and state management.',
         tags: ["Game Design", "State Machine", "Strategy"],
       },
     ],
@@ -138,7 +138,7 @@ const content = {
         title: "DevConsole",
         github: "https://github.com/manzzaano/DevConsole",
         description:
-          'Motor de emulación de terminal web. Command dispatcher desacoplado del renderer. Composable <strong>useTerminal</strong> como máquina de estado reactiva inyectable sin tocar el DOM. Ghost text autocomplete con prefix matching en tiempo real, i18n lazy cargado desde JSON externo, demo mode con orquestación async via Typed.js.',
+          'Emulador de terminal web construido con Vue 3, el mismo que estás viendo ahora. El despachador de comandos está desacoplado del renderizado, y el composable <strong>useTerminal</strong> concentra todo el estado como una máquina reactiva que se puede inyectar sin tocar el DOM. Incluye autocompletado con ghost text por prefix matching, traducciones cargadas desde un JSON externo y un modo demo orquestado con Typed.js.',
         tags: ["Vue 3", "Vite", "Typed.js", "Tailwind"],
       },
       {
@@ -146,7 +146,7 @@ const content = {
         title: "leo/",
         github: "https://leosoftware.dev",
         description:
-          'Portafolio personal y diario de desarrollo. Construido con <strong>Next.js 15</strong> y TypeScript. 100/100 en Lighthouse. Tipado estricto, Server Components, cero deuda técnica.',
+          'Portafolio personal y diario de desarrollo construido con <strong>Next.js 15</strong> y TypeScript. Usa Server Components y tipado estricto en todo el proyecto, y obtiene 100/100 en las cuatro categorías de Lighthouse.',
         tags: ["Next.js 15", "TypeScript", "Tailwind v4"],
       },
       {
@@ -154,7 +154,7 @@ const content = {
         title: "PokeCore",
         github: "https://manzzaano.github.io/PokeCore",
         description:
-          'Pokédex interactiva con <strong>React 19 y Vite</strong>. 1025 Pokémon con búsqueda instantánea, filtro por tipo, favoritos persistentes, modal con stats animadas, toggle de sprites shiny. 100% en español, mobile-first.',
+          'Pokédex interactiva construida con <strong>React 19 y Vite</strong> sobre la PokéAPI. Cubre los 1025 Pokémon con búsqueda instantánea, filtrado por tipo, favoritos persistentes, modal de estadísticas y selector de sprites shiny. La interfaz está íntegramente en español y con diseño mobile-first.',
         tags: ["React 19", "Vite", "TanStack Query"],
       },
       {
@@ -162,7 +162,7 @@ const content = {
         title: "Kairos",
         github: "https://github.com/manzzaano/Kairos",
         description:
-          'App <strong>Flutter</strong> + backend FastAPI + Google Gemini. Convierte el abandono de tareas en deuda cuantificable. Reflexiones estoicas generadas por IA, geofencing en tiempo real, túnel de visión con time-blocking automático.',
+          'App de gestión de tareas construida con <strong>Flutter</strong> y un backend en FastAPI, integrada con Google Gemini. Registra las tareas abandonadas como una métrica de deuda acumulada y usa ese historial para generar feedback escrito con el modelo. Incorpora además geofencing y time-blocking automático para las sesiones de concentración.',
         tags: ["Flutter", "FastAPI", "Google Gemini"],
       },
       {
@@ -170,7 +170,7 @@ const content = {
         title: "Regicide",
         github: "https://github.com/manzzaano/Regicide",
         description:
-          'Juego de cartas de estrategia pura. Información perfecta, sin RNG injusto. Máquina de estado clara con cuatro fases. Cada decisión tiene consecuencias predecibles. Gana quien piensa mejor.',
+          'Juego de cartas de estrategia implementado como una máquina de estados con cuatro fases. Toda la información es visible para el jugador y el azar no interviene en el resultado, así que cada partida se decide por las jugadas realizadas. El foco del proyecto está en el diseño de reglas y la gestión de estado.',
         tags: ["Game Design", "State Machine", "Strategy"],
       },
     ],
