@@ -4,7 +4,7 @@
     <!-- Profile -->
     <div class="glass-panel w-full max-w-xs p-6 flex flex-col items-center text-center">
       <img
-        src="../assets/foto-perfil.png"
+        src="../assets/foto-perfil.jpg"
         alt="Ismael Manzano"
         class="w-20 h-20 rounded-full object-cover border-2 mb-3"
         style="border-color: rgba(74,222,128,0.35); box-shadow: 0 0 20px rgba(74,222,128,0.15)"
