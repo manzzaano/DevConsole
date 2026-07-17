@@ -21,7 +21,7 @@ export const neofetchData = {
       url: "https://www.linkedin.com/in/ismael-manzano-leon/",
     },
     { label: "Kernel", value: "Vue 3.5.x" },
-    { label: "Uptime", value: "Always Learning" },
+    { label: "Uptime", value: "Since 2024" },
     { label: "Packages", value: "Tailwind, Vite, Lucide" },
     { label: "Location", value: "Remote / Spain" },
   ],
