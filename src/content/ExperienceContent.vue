@@ -106,30 +106,6 @@
         </div>
       </div>
 
-      <div
-        class="glass-card p-5 flex flex-col group"
-      >
-        <div class="flex justify-between items-start mb-4">
-          <div>
-            <span
-              class="text-[10px] sm:text-xs accent-teal font-mono tracking-widest uppercase"
-              >[ {{ t.coreLabel }} ]</span
-            >
-            <h4 class="text-lg sm:text-xl font-bold accent-teal font-sans">{{ t.roleKitchen }}</h4>
-            <p class="text-xs text-white/40">
-              {{ t.dateKitchen }}
-            </p>
-          </div>
-          <i data-lucide="zap" class="w-5 h-5 text-white/40"></i>
-        </div>
-
-        <div class="space-y-2 font-mono text-[11px] sm:text-xs text-white/70 mb-4">
-          <p v-for="(task, index) in t.tasksKitchen" :key="index">
-            <span class="accent-teal font-mono text-[10px]">[ {{ task.status }} ]</span>
-            {{ task.desc }}
-          </p>
-        </div>
-      </div>
     </div>
   </div>
 </template>
@@ -148,7 +124,6 @@ const content = {
   en: {
     initMessage: "Initializing workload execution trace...",
     deployment: "DEPLOYMENT",
-    coreLabel: "OPERATIONAL_CORE",
     roleLeo: "Founder & Full Stack Developer",
     dateLeo: "May 2026 - Present",
     tasksLeo: [
@@ -177,18 +152,10 @@ const content = {
       { status: "OK", desc: "Complex algorithmics & software testing" },
       { status: "DONE", desc: "Corporate tools & workflows integration" },
     ],
-    roleKitchen: "Kitchen Assistant",
-    dateKitchen: "March 2025 - Present",
-    tasksKitchen: [
-      { status: "HIGH", desc: "Pressure tolerance & Stress management" },
-      { status: "OK", desc: "Resource & Time optimization" },
-      { status: "DONE", desc: "Team sync & Workflow consistency" },
-    ],
   },
   es: {
     initMessage: "Iniciando trazado de ejecución de carga de trabajo...",
     deployment: "DESPLIEGUE",
-    coreLabel: "NÚCLEO_OPERATIVO",
     roleLeo: "Founder & Full Stack Developer",
     dateLeo: "Mayo 2026 - Actualidad",
     tasksLeo: [
@@ -216,13 +183,6 @@ const content = {
       { status: "OK", desc: "Aplicación de estándares Clean Code y procesos de QA" },
       { status: "OK", desc: "Algoritmia compleja y testing de software" },
       { status: "DONE", desc: "Integración en herramientas y flujos corporativos" },
-    ],
-    roleKitchen: "Ayudante de Cocina",
-    dateKitchen: "Marzo 2025 - Actualidad",
-    tasksKitchen: [
-      { status: "ALTA", desc: "Tolerancia a la presión & gestión del estrés" },
-      { status: "OK", desc: "Optimización de recursos & tiempos" },
-      { status: "DONE", desc: "Sincronización de equipo & consistencia" },
     ],
   },
 };

@@ -25,8 +25,8 @@ export const virtualFS = {
         modal: "experience",
         description: "Historial profesional",
         summary: {
-          en: "Entreredes (2026–Present), Savia BL (2025), Cojali S.L. (2025), Kitchen ops. Use 'experience' for full timeline.",
-          es: "Entreredes (2026–Actualidad), Savia BL (2025), Cojali S.L. (2025), Cocina. Usa 'experience' para historial completo.",
+          en: "Entreredes (2026–Present), Savia BL (2025), Cojali S.L. (2025). Use 'experience' for full timeline.",
+          es: "Entreredes (2026–Actualidad), Savia BL (2025), Cojali S.L. (2025). Usa 'experience' para historial completo.",
         },
       },
       "educacion.txt": {
