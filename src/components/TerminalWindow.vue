@@ -1,14 +1,7 @@
 <template>
-  <div class="relative text-white overflow-hidden bg-black min-h-screen">
-    <RibbonBackground />
-
-    <!-- Viñeta perimetral — ancla la terminal en el espacio -->
-    <div class="fixed inset-0 pointer-events-none z-[1]"
-      style="background: radial-gradient(ellipse 72% 72% at 50% 50%, transparent 28%, rgba(0,0,0,0.72) 100%)" />
-
-    <!-- Film grain editorial -->
-    <div class="fixed inset-0 pointer-events-none z-[5]"
-      style="background-image:url(&quot;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.80' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E&quot;);background-size:180px 180px;opacity:0.035;mix-blend-mode:overlay" />
+  <div class="relative text-white overflow-hidden min-h-screen">
+    <div class="slash-pattern" aria-hidden="true" />
+    <div class="slash-glow" :class="{ on: glowOn }" aria-hidden="true" />
 
     <!-- Mobile: card view -->
     <MobileView
@@ -37,10 +30,10 @@
     >
       <!-- Title bar -->
       <div
-        class="bg-white/[3%] rounded-t-[24px] p-3 flex items-center gap-2 flex-shrink-0 z-10"
+        class="bg-white/[3%] rounded-t-[16px] p-3 flex items-center gap-2 flex-shrink-0 z-10"
         :class="[
           { 'select-none': !isMobile && !isMaximized },
-          isMinimized ? 'rounded-b-[20px]' : 'border-b border-[rgba(74,222,128,0.12)]'
+          isMinimized ? 'rounded-b-[16px]' : 'border-b border-[rgba(74,222,128,0.12)]'
         ]"
         @mousedown="onTitleBarMouseDown"
         @dblclick="onTitleBarDblClick"
@@ -52,7 +45,7 @@
             @mouseenter="hoveredBtn = 'close'"
             @mouseleave="hoveredBtn = ''"
             class="w-4 h-4 rounded-full flex items-center justify-center"
-            style="background:#ff5f57;box-shadow:0 0 8px rgba(255,95,87,0.5)"
+            style="background:#ff5f57"
           >
             <span class="text-[8px] font-black leading-none" style="color:rgba(0,0,0,0.5)">✕</span>
           </button>
@@ -61,7 +54,7 @@
             @mouseenter="hoveredBtn = 'min'"
             @mouseleave="hoveredBtn = ''"
             class="w-4 h-4 rounded-full flex items-center justify-center"
-            style="background:#ffbd2e;box-shadow:0 0 8px rgba(255,189,46,0.5)"
+            style="background:#ffbd2e"
           >
             <span class="text-[9px] font-black leading-none" style="color:rgba(0,0,0,0.5)">−</span>
           </button>
@@ -70,7 +63,7 @@
             @mouseenter="hoveredBtn = 'max'"
             @mouseleave="hoveredBtn = ''"
             class="w-4 h-4 rounded-full flex items-center justify-center"
-            style="background:#28c940;box-shadow:0 0 8px rgba(40,201,64,0.5)"
+            style="background:#28c940"
           >
             <span class="text-[8px] font-black leading-none" style="color:rgba(0,0,0,0.5)">⤢</span>
           </button>
@@ -147,7 +140,6 @@ import { ref, computed, onMounted, onBeforeUnmount, nextTick } from "vue";
 import TerminalOutput from "./TerminalOutput.vue";
 import TerminalInput from "./TerminalInput.vue";
 import Modal from "./Modal.vue";
-import RibbonBackground from "./RibbonBackground.vue";
 import MobileView from "./MobileView.vue";
 import { useTerminal } from "../composables/useTerminal";
 
@@ -178,6 +170,7 @@ const dragging    = ref(false);
 const resizing    = ref(false);
 const snapReady   = ref(false);
 const hoveredBtn  = ref('');
+const glowOn      = ref(false);
 
 const btnLabel = computed(() => {
   if (hoveredBtn.value === 'close') return 'cerrar';
@@ -269,6 +262,10 @@ function onResizeStart(e, dir) {
 /* ── Global mouse handlers ────────────────────────────────── */
 
 function onMouseMove(e) {
+  // cursor position for the background glow (CSS vars, no re-render)
+  document.documentElement.style.setProperty('--mx', `${e.clientX}px`);
+  document.documentElement.style.setProperty('--my', `${e.clientY}px`);
+  glowOn.value = true;
   if (dragging.value) {
     if (draggingFromMaximized) {
       draggingFromMaximized = false;
@@ -310,6 +307,11 @@ function onMouseMove(e) {
     winX.value = nX;
     winY.value = nY;
   }
+}
+
+// mouseout with no relatedTarget = pointer left the browser window
+function onMouseOut(e) {
+  if (!e.relatedTarget) glowOn.value = false;
 }
 
 function onMouseUp() {
@@ -430,6 +432,7 @@ onMounted(() => {
   document.addEventListener('keydown',   onDocumentKeyDown);
   document.addEventListener('mousemove', onMouseMove);
   document.addEventListener('mouseup',   onMouseUp);
+  document.addEventListener('mouseout',  onMouseOut);
   window.addEventListener('resize',      onWindowResize);
   nextTick(() => {
     if (inputComponent.value) {
@@ -444,6 +447,7 @@ onBeforeUnmount(() => {
   document.removeEventListener('keydown',   onDocumentKeyDown);
   document.removeEventListener('mousemove', onMouseMove);
   document.removeEventListener('mouseup',   onMouseUp);
+  document.removeEventListener('mouseout',  onMouseOut);
   window.removeEventListener('resize',      onWindowResize);
 });
 </script>

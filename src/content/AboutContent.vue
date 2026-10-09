@@ -5,7 +5,11 @@
         <img
           src="../assets/foto-perfil.jpg"
           alt="Ismael Manzano"
-          class="w-32 h-32 sm:w-36 sm:h-36 md:w-40 md:h-40 aspect-square rounded-full object-cover border-4 border-white/[15%] shadow-[0_0_15px_rgba(255,255,255,0.1)]"
+          width="1080"
+          height="810"
+          draggable="false"
+          class="block w-60 md:w-64 h-auto rounded-2xl select-none"
+          @contextmenu.prevent
         />
       </div>
 
