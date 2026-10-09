@@ -1,7 +1,7 @@
 {
   "en": {
-    "welcome_title": "Welcome to the Portfolio of Ismael Manzano León",
-    "welcome_prefix": "Welcome to the portfolio of",
+    "welcome_title": "Hi, I'm Ismael Manzano León",
+    "welcome_prefix": "Hi, I'm",
     "welcome_name": "Ismael Manzano León",
     "welcome_help": "Type '<span class=\"accent-teal\">help</span>' to see the list of available commands.",
     "welcome_shortcuts": "Use '<span class=\"accent-teal\">Tab</span>' to autocomplete and <span class=\"accent-teal\">arrow keys</span> to navigate history.",
@@ -22,7 +22,7 @@
     "help_clear": "Clears the terminal screen.",
     "help_clear_shortcut": "Shortcut to clear the terminal.",
     "help_neofetch": "Display system and author information",
-    "help_demo": "Launches a guided tour of the portfolio",
+    "help_demo": "Takes you on a guided tour of the console",
     "help_exit": "Return to leosoftware.dev",
     "help_leo": "Navigate to leosoftware.dev",
     "unix_removed": "Unix-style navigation commands have been retired. Use the direct application commands listed above.",
@@ -38,8 +38,8 @@
     "cv_title": "<i data-lucide=\"file-text\" class=\"w-6 h-6 mr-2\"></i>Curriculum Vitae"
   },
   "es": {
-    "welcome_title": "Bienvenido al Portafolio de Ismael Manzano León",
-    "welcome_prefix": "Bienvenido al portafolio de",
+    "welcome_title": "Hola, soy Ismael Manzano León",
+    "welcome_prefix": "Hola, soy",
     "welcome_name": "Ismael Manzano León",
     "welcome_help": "Escribe '<span class=\"accent-teal\">help</span>' para ver la lista de comandos disponibles.",
     "welcome_shortcuts": "Usa '<span class=\"accent-teal\">Tab</span>' para autocompletar y las <span class=\"accent-teal\">flechas</span> para navegar el historial.",
@@ -60,7 +60,7 @@
     "help_clear": "Limpia la pantalla de la terminal.",
     "help_clear_shortcut": "Atajo para limpiar la terminal.",
     "help_neofetch": "Muestra información del sistema y el autor",
-    "help_demo": "Inicia un tour guiado del portafolio",
+    "help_demo": "Hace un recorrido guiado por la consola",
     "help_exit": "Volver a leosoftware.dev",
     "help_leo": "Navegar a leosoftware.dev",
     "unix_removed": "Los comandos de navegación estilo Unix han sido retirados. Usa los comandos directos de aplicación listados arriba.",

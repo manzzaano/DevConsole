@@ -76,7 +76,7 @@ const content = {
         protocol: "WSS // B2B_SYNC",
         statusText: "NETWORK_READY",
         actionText: "CONNECT",
-        link: "https://www.linkedin.com/in/ismael-manzano-león-84b266238/",
+        link: "https://www.linkedin.com/in/ismael-manzano-leon/",
       },
       {
         name: "GitHub",
@@ -106,7 +106,7 @@ const content = {
         protocol: "WSS // B2B_SYNC",
         statusText: "RED_DISPONIBLE",
         actionText: "CONECTAR",
-        link: "https://www.linkedin.com/in/ismael-manzano-león-84b266238/",
+        link: "https://www.linkedin.com/in/ismael-manzano-leon/",
       },
       {
         name: "GitHub",

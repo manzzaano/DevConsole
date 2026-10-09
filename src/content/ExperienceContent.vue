@@ -117,72 +117,57 @@ const props = defineProps({
   lang: { type: String, default: "en" },
 });
 
-const stackEntreredes = ["Laravel", "Filament PHP", "PHP", "Gemini AI", "PHPUnit", "Docker", "Jobs"];
-const stackSavia      = ["React", "Vite", "Azure", "JavaScript", "Git"];
+const stackEntreredes = ["Laravel", "Filament PHP", "PHP", "Gemini AI", "PHPUnit", "Docker"];
+const stackSavia      = ["React 19", "Vite", "JavaScript", "TypeScript", "Git"];
 
+// Same facts and voice as the Experience section of leosoftware.dev
 const content = {
   en: {
-    initMessage: "Initializing workload execution trace...",
+    initMessage: "Loading work history...",
     deployment: "DEPLOYMENT",
-    roleLeo: "Founder & Full Stack Developer",
-    dateLeo: "May 2026 - Present",
-    tasksLeo: [
-      { status: "RUNNING", desc: "Design and development of Full Stack web systems end-to-end" },
-      { status: "OK", desc: "Software architecture with production focus and technical criteria" },
-      { status: "OK", desc: "SaaS products and client solutions under the leo/ brand" },
-    ],
-    roleEntreredes: "Full Stack Developer | Laravel",
-    dateEntreredes: "February 2026 - May 2026",
+    roleEntreredes: "Full Stack Developer",
+    dateEntreredes: "Feb 2026 - May 2026 · 4 months",
     tasksEntreredes: [
-      { status: "DONE", desc: "Autonomous full stack development of a landing page SaaS (Laravel + Filament PHP), deployed to production with Docker" },
-      { status: "DONE", desc: "Gemini AI integration via async Jobs & Queues — non-blocking model request processing" },
-      { status: "DONE", desc: "Advanced PHPUnit testing: load, security & fuzzing before deployment" },
+      { status: "DONE", desc: "I built a landing-page generator SaaS on my own, with Laravel and Filament PHP" },
+      { status: "DONE", desc: "I took it to production with Docker and integrated Gemini through async Jobs, so heavy tasks ran in the background" },
+      { status: "DONE", desc: "Tests with PHPUnit before every deployment" },
     ],
     roleSavia: "Frontend Software Developer",
-    dateSavia: "March - April 2025",
+    dateSavia: "Mar 2025 - Apr 2025 · 2 months",
     tasksSavia: [
-      { status: "OK", desc: "Reusable frontend components with React & Vite" },
-      { status: "OK", desc: "Test environment deployment on Microsoft Azure" },
-      { status: "DONE", desc: "Version control via Git/GitHub" },
+      { status: "DONE", desc: "Frontend app with React 19 and Vite that handled 1000+ records" },
+      { status: "DONE", desc: "Instant search, multiple filters and local persistence" },
+      { status: "DONE", desc: "Reusable components, versioned with Git" },
     ],
     roleCojali: "Software QA Analyst",
-    dateCojali: "February 2025",
+    dateCojali: "Feb 2025 · 1 month",
     tasksCojali: [
-      { status: "OK", desc: "Clean Code standards & QA process application" },
-      { status: "OK", desc: "Complex algorithmics & software testing" },
-      { status: "DONE", desc: "Corporate tools & workflows integration" },
+      { status: "DONE", desc: "An internal technical survey system to evaluate staff" },
+      { status: "DONE", desc: "Functional testing and quality assurance in the development cycle" },
     ],
   },
   es: {
-    initMessage: "Iniciando trazado de ejecución de carga de trabajo...",
+    initMessage: "Cargando historial de trabajo...",
     deployment: "DESPLIEGUE",
-    roleLeo: "Founder & Full Stack Developer",
-    dateLeo: "Mayo 2026 - Actualidad",
-    tasksLeo: [
-      { status: "EJECUTANDO", desc: "Diseño y desarrollo de sistemas web Full Stack de principio a fin" },
-      { status: "OK", desc: "Arquitectura de software con criterio técnico y foco en producción" },
-      { status: "OK", desc: "Productos SaaS y soluciones para clientes bajo la marca leo/" },
-    ],
-    roleEntreredes: "Full Stack Developer | Laravel",
-    dateEntreredes: "Febrero 2026 - Mayo 2026",
+    roleEntreredes: "Full Stack Developer",
+    dateEntreredes: "Feb 2026 - May 2026 · 4 meses",
     tasksEntreredes: [
-      { status: "DONE", desc: "Desarrollo full stack autónomo de un SaaS generador de landing pages (Laravel + Filament PHP), llevado a producción con Docker" },
-      { status: "DONE", desc: "Integración de Gemini AI mediante Jobs y Queues asíncronos — procesamiento de peticiones al modelo sin bloquear la aplicación" },
-      { status: "DONE", desc: "Testing avanzado con PHPUnit: pruebas de carga, seguridad y fuzzing antes del despliegue" },
+      { status: "DONE", desc: "Desarrollé yo solo un SaaS que genera landing pages, con Laravel y Filament PHP" },
+      { status: "DONE", desc: "Lo dejé en producción con Docker e integré Gemini mediante Jobs asíncronos, para que las tareas pesadas fueran en segundo plano" },
+      { status: "DONE", desc: "Tests con PHPUnit antes de cada despliegue" },
     ],
     roleSavia: "Frontend Software Developer",
-    dateSavia: "Marzo - Abril 2025",
+    dateSavia: "Mar 2025 - Abr 2025 · 2 meses",
     tasksSavia: [
-      { status: "OK", desc: "Componentes frontend reutilizables con React & Vite" },
-      { status: "OK", desc: "Despliegue de entornos de prueba en Microsoft Azure" },
-      { status: "DONE", desc: "Control de versiones Git/GitHub" },
+      { status: "DONE", desc: "Aplicación frontend con React 19 y Vite que movía más de 1000 registros" },
+      { status: "DONE", desc: "Búsqueda instantánea, filtrado múltiple y persistencia local" },
+      { status: "DONE", desc: "Componentes reutilizables, con control de versiones en Git" },
     ],
     roleCojali: "Software QA Analyst",
-    dateCojali: "Febrero 2025",
+    dateCojali: "Feb 2025 · 1 mes",
     tasksCojali: [
-      { status: "OK", desc: "Aplicación de estándares Clean Code y procesos de QA" },
-      { status: "OK", desc: "Algoritmia compleja y testing de software" },
-      { status: "DONE", desc: "Integración en herramientas y flujos corporativos" },
+      { status: "DONE", desc: "Un sistema interno de encuestas técnicas para evaluar al personal" },
+      { status: "DONE", desc: "Testing funcional y aseguramiento de calidad en el ciclo de desarrollo" },
     ],
   },
 };

@@ -14,7 +14,7 @@
       />
       <h1 class="text-2xl font-bold text-white leading-tight">Ismael Manzano</h1>
       <p class="font-mono text-sm mt-1" style="color: rgba(74,222,128,0.9)">▸ Full Stack Developer</p>
-      <p class="font-mono text-xs text-white/35 mt-0.5">Remote / Spain</p>
+      <p class="font-mono text-xs text-white/35 mt-0.5">{{ currentLang === 'es' ? 'España · remoto o presencial' : 'Spain · remote or on-site' }}</p>
     </div>
 
     <!-- Command grid -->
