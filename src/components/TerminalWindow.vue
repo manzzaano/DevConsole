@@ -133,6 +133,8 @@
       :currentLang="currentLang"
       @close="closeWindow"
     />
+
+    <CookieBanner :lang="currentLang" />
   </div>
 </template>
 
@@ -143,6 +145,7 @@ import TerminalInput from "./TerminalInput.vue";
 import Modal from "./Modal.vue";
 import MobileView from "./MobileView.vue";
 import ParticleSlash from "./ParticleSlash.vue";
+import CookieBanner from "./CookieBanner.vue";
 import { useTerminal } from "../composables/useTerminal";
 
 const outputComponent = ref(null);
