@@ -23,6 +23,6 @@ export const neofetchData = {
     { label: "Kernel", value: "Vue 3.5.x" },
     { label: "Uptime", value: "Since 2024" },
     { label: "Packages", value: "Tailwind, Vite, Lucide" },
-    { label: "Location", value: "Remote / Spain" },
+    { label: "Location", value: "Spain · remote or on-site" },
   ],
 };

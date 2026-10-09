@@ -86,6 +86,7 @@ const props = defineProps({
   lang: { type: String, default: "en" },
 });
 
+// Same descriptions as the project cards of leosoftware.dev
 const content = {
   en: {
     projectList: [
@@ -94,40 +95,40 @@ const content = {
         title: "DevConsole",
         github: "https://github.com/manzzaano/DevConsole",
         description:
-          'Web terminal emulator built with Vue 3, the one you are looking at right now. The command dispatcher is decoupled from the renderer, and the <strong>useTerminal</strong> composable holds all the state as a reactive machine that can be injected without touching the DOM. It includes ghost-text autocomplete based on prefix matching, translations loaded from an external JSON file, and a demo mode driven by Typed.js.',
-        tags: ["Vue 3", "Vite", "Typed.js", "Tailwind"],
+          'My portfolio as a terminal, the one you are looking at right now, built with <strong>Vue 3</strong>: command logic kept apart from the screen, autocomplete as you type, history and a demo mode, in English and Spanish.',
+        tags: ["Vue 3", "Vite", "Typed.js", "Tailwind v4"],
       },
       {
         id: "Project_02",
-        title: "leo/",
-        github: "https://leosoftware.dev",
+        title: "Kairos",
+        github: "https://github.com/manzzaano/Kairos",
         description:
-          'Personal portfolio and development journal built with <strong>Next.js 15</strong> and TypeScript. It uses Server Components and strict typing throughout, and scores 100/100 across all four Lighthouse categories.',
-        tags: ["Next.js 15", "TypeScript", "Tailwind v4"],
+          'A productivity app in <strong>Flutter</strong>. The first version ran on FastAPI; I rebuilt it with Bloc, tasks stored on the phone that sync to Supabase, and Gemini to prioritise them. In development.',
+        tags: ["Flutter", "Bloc", "Supabase", "Gemini"],
       },
       {
         id: "Project_03",
         title: "PokeCore",
         github: "https://manzzaano.github.io/PokeCore",
         description:
-          'Interactive Pokédex built with <strong>React 19 and Vite</strong> on top of the PokéAPI. It covers all 1025 Pokémon with instant search, filtering by type, persistent favorites, a stats modal and a shiny sprite toggle. The interface is fully in Spanish and designed mobile-first.',
-        tags: ["React 19", "Vite", "TanStack Query"],
+          'All 1,025 Pokémon with instant search, type filters, favourites saved in the browser, stats, weaknesses and evolutions. Built with <strong>React 19, Vite and TanStack Query</strong>.',
+        tags: ["React 19", "Vite", "TanStack Query", "Zustand"],
       },
       {
         id: "Project_04",
-        title: "Kairos",
-        github: "https://github.com/manzzaano/Kairos",
-        description:
-          'Task management app built with <strong>Flutter</strong> and a FastAPI backend, integrated with Google Gemini. It tracks abandoned tasks as an accumulated debt metric and uses that history to generate written feedback with the model. It also includes geofencing and automatic time-blocking for focus sessions.',
-        tags: ["Flutter", "FastAPI", "Google Gemini"],
-      },
-      {
-        id: "Project_05",
         title: "Regicide",
         github: "https://github.com/manzzaano/Regicide",
         description:
-          'Strategy card game implemented as a state machine with four phases. All information is visible to the player and randomness plays no part in the outcome, so each game is decided by the choices made. The focus of the project is rule design and state management.',
-        tags: ["Game Design", "State Machine", "Strategy"],
+          'It started as a JavaFX game and I brought it to the web: <strong>Spring Boot</strong> runs the game on the server, Angular shows it and moves travel over WebSocket. With accounts, JWT and a PostgreSQL leaderboard. In development.',
+        tags: ["Spring Boot", "Angular", "PostgreSQL", "WebSockets"],
+      },
+      {
+        id: "Project_05",
+        title: "leo/",
+        github: "https://leosoftware.dev",
+        description:
+          'My personal site, with the projects told in depth and what I keep learning. Built with <strong>Next.js 15</strong>, TypeScript and Tailwind v4, in Spanish and English.',
+        tags: ["Next.js 15", "TypeScript", "Tailwind v4"],
       },
     ],
   },
@@ -138,40 +139,40 @@ const content = {
         title: "DevConsole",
         github: "https://github.com/manzzaano/DevConsole",
         description:
-          'Emulador de terminal web construido con Vue 3, el mismo que estás viendo ahora. El despachador de comandos está desacoplado del renderizado, y el composable <strong>useTerminal</strong> concentra todo el estado como una máquina reactiva que se puede inyectar sin tocar el DOM. Incluye autocompletado con ghost text por prefix matching, traducciones cargadas desde un JSON externo y un modo demo orquestado con Typed.js.',
-        tags: ["Vue 3", "Vite", "Typed.js", "Tailwind"],
+          'Mi portfolio hecho terminal, el que estás viendo ahora, en <strong>Vue 3</strong>: la lógica de los comandos va separada de la pantalla, con autocompletado mientras escribes, historial y un modo demo, en inglés y en español.',
+        tags: ["Vue 3", "Vite", "Typed.js", "Tailwind v4"],
       },
       {
         id: "Proyecto_02",
-        title: "leo/",
-        github: "https://leosoftware.dev",
+        title: "Kairos",
+        github: "https://github.com/manzzaano/Kairos",
         description:
-          'Portafolio personal y diario de desarrollo construido con <strong>Next.js 15</strong> y TypeScript. Usa Server Components y tipado estricto en todo el proyecto, y obtiene 100/100 en las cuatro categorías de Lighthouse.',
-        tags: ["Next.js 15", "TypeScript", "Tailwind v4"],
+          'App de productividad en <strong>Flutter</strong>. La primera versión iba con FastAPI; la rehíce con Bloc, tareas guardadas en el móvil que se sincronizan con Supabase y Gemini para ordenarlas. En desarrollo.',
+        tags: ["Flutter", "Bloc", "Supabase", "Gemini"],
       },
       {
         id: "Proyecto_03",
         title: "PokeCore",
         github: "https://manzzaano.github.io/PokeCore",
         description:
-          'Pokédex interactiva construida con <strong>React 19 y Vite</strong> sobre la PokéAPI. Cubre los 1025 Pokémon con búsqueda instantánea, filtrado por tipo, favoritos persistentes, modal de estadísticas y selector de sprites shiny. La interfaz está íntegramente en español y con diseño mobile-first.',
-        tags: ["React 19", "Vite", "TanStack Query"],
+          'Los 1025 Pokémon con búsqueda al momento, filtro por tipos, favoritos guardados en el navegador, estadísticas, debilidades y evoluciones. Hecha con <strong>React 19, Vite y TanStack Query</strong>.',
+        tags: ["React 19", "Vite", "TanStack Query", "Zustand"],
       },
       {
         id: "Proyecto_04",
-        title: "Kairos",
-        github: "https://github.com/manzzaano/Kairos",
-        description:
-          'App de gestión de tareas construida con <strong>Flutter</strong> y un backend en FastAPI, integrada con Google Gemini. Registra las tareas abandonadas como una métrica de deuda acumulada y usa ese historial para generar feedback escrito con el modelo. Incorpora además geofencing y time-blocking automático para las sesiones de concentración.',
-        tags: ["Flutter", "FastAPI", "Google Gemini"],
-      },
-      {
-        id: "Proyecto_05",
         title: "Regicide",
         github: "https://github.com/manzzaano/Regicide",
         description:
-          'Juego de cartas de estrategia implementado como una máquina de estados con cuatro fases. Toda la información es visible para el jugador y el azar no interviene en el resultado, así que cada partida se decide por las jugadas realizadas. El foco del proyecto está en el diseño de reglas y la gestión de estado.',
-        tags: ["Game Design", "State Machine", "Strategy"],
+          'Empezó como un juego en JavaFX y lo pasé a la web: <strong>Spring Boot</strong> resuelve la partida en el servidor, Angular la enseña y las jugadas van por WebSocket. Con cuentas, JWT y clasificación en PostgreSQL. En desarrollo.',
+        tags: ["Spring Boot", "Angular", "PostgreSQL", "WebSockets"],
+      },
+      {
+        id: "Proyecto_05",
+        title: "leo/",
+        github: "https://leosoftware.dev",
+        description:
+          'Mi web personal, con los proyectos contados a fondo y lo que voy aprendiendo. Hecha con <strong>Next.js 15</strong>, TypeScript y Tailwind v4, en español y en inglés.',
+        tags: ["Next.js 15", "TypeScript", "Tailwind v4"],
       },
     ],
   },

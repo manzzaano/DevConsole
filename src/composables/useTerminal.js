@@ -84,7 +84,7 @@ export function useTerminal({
       const seq = [
         [0,    `<div ${mono}><span class="text-white/25">[ BOOT  ]</span><span class="text-white/45"> DevConsole v2.0</span></div>`],
         [170,  `<div ${mono}><span style="color:#4ade80">[ OK    ]</span><span class="text-white/40"> Loading kernel...</span></div>`],
-        [340,  `<div ${mono}><span style="color:#4ade80">[ OK    ]</span><span class="text-white/40"> Mounting filesystem...</span></div>`],
+        [340,  `<div ${mono}><span style="color:#4ade80">[ OK    ]</span><span class="text-white/40"> Loading commands...</span></div>`],
         [510,  `<div ${mono}><span style="color:#4ade80">[ INIT  ]</span><span class="text-white/40"> Loading profile: </span><span class="text-white/70">${name}</span></div>`],
         [680,  `<div ${mono} mb-4"><span style="color:#4ade80">[ READY ]</span><span class="text-white/40"> Environment initialized</span></div>`],
         [950,  `<div class="border-l-2 pl-4 py-2 mb-3" style="border-color:rgba(74,222,128,0.5)"><p class="text-4xl sm:text-5xl font-bold leading-tight" style="color:#4ade80">${name}</p><p class="text-sm mt-2 tracking-wide" style="color:rgba(74,222,128,0.85)">▸ ${role}</p></div>`],

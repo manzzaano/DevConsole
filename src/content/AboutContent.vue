@@ -60,9 +60,7 @@
         // {{ t.logTitle }}
       </p>
       <div class="text-white/70 space-y-4 leading-relaxed font-sans">
-        <p v-html="t.bio1"></p>
-        <p v-html="t.bio2"></p>
-        <p v-html="t.bio3"></p>
+        <p v-for="(para, i) in t.bio" :key="i" v-html="para"></p>
       </div>
     </div>
   </div>
@@ -85,46 +83,56 @@ function calcAge() {
   return age;
 }
 
+// Same copy and voice as the "Sobre mí" section of leosoftware.dev
 const content = {
   en: {
     userLabel: "USER",
-    userName: "Ismael Manzano",
-    levelLabel: "LEVEL",
+    userName: "Ismael Manzano León",
+    levelLabel: "ROLE",
     levelValue: "Full Stack Developer",
     locationLabel: "LOCATION",
-    locationValue: "Remote / Spain",
-    coreLabel: "CORE",
-    coreValue: "Full Stack · Software Architecture",
-    statusLabel: "STATUS",
-    statusValue: "Open to work",
+    locationValue: "Spain · remote or on-site",
+    coreLabel: "STACK",
+    coreValue: "Laravel · React · Vue · Flutter",
+    statusLabel: "TRAINING",
+    statusValue: "HND in DAM (2024–2026)",
     ageLabel: "AGE",
-    logTitle: "Identity_Logs_v1.1.2",
-    bio1: "I'm 21 and I hold a Higher National Diploma in Multiplatform App Development (2024–2026), although a good part of what I know comes from learning on my own: reading documentation, building side projects and debugging until I understand why something fails. I care more about understanding why a pattern exists than applying it from memory.",
-    bio2: "I usually work across the whole cycle of a project, from the initial architecture to the production deployment. That means making decisions I can justify later: strict typing where the language allows it, tests before shipping, and keeping the codebase in a state someone else could pick up without much context.",
-    bio3: "<strong>leo/</strong> is the name I develop my personal projects and client work under. I'm currently open to remote, hybrid or on-site positions in Spain.",
+    logTitle: "Hi, I'm Ismael.",
+    lead: (age) => `I'm ${age}, I'm a full stack developer and I trained in multiplatform app development (DAM). I work remotely or on-site from Spain.`,
+    bio: [
+      "During my internship at Entreredes I ended up running one of their projects on my own: <strong class='text-white'>a SaaS that generates landing pages, built with Laravel and Filament</strong>, which I took to production with Docker and Gemini integrated through queues. Before that I was at Savia, doing frontend with React, and at Cojali, in QA.",
+      "My supervisor there summed it up by saying I wasn't <strong class='text-white'>\"the typical intern profile\"</strong>: I could take on work on my own without anyone having to keep an eye on me.",
+      "While I was studying I worked the olive harvest in winter and then as a kitchen assistant in a bar, and even so, whenever I had a moment, I was coding. Almost everything I know I learned on my own, trying things and breaking them until I understood why they failed. It's slower, but <strong class='text-white'>what you learn that way stays with you</strong>.",
+      "My experience is measured in months, not years, and I'm not going to pretend otherwise. I do my best work in teams where I can <strong class='text-white'>take on responsibility from the start</strong>, like I did at Entreredes.",
+    ],
   },
   es: {
     userLabel: "USUARIO",
-    userName: "Ismael Manzano",
-    levelLabel: "NIVEL",
+    userName: "Ismael Manzano León",
+    levelLabel: "ROL",
     levelValue: "Full Stack Developer",
     locationLabel: "UBICACIÓN",
-    locationValue: "Remoto / España",
-    coreLabel: "CORE",
-    coreValue: "Full Stack · Arquitectura de Software",
-    statusLabel: "ESTADO",
-    statusValue: "En búsqueda activa",
+    locationValue: "España · remoto o presencial",
+    coreLabel: "STACK",
+    coreValue: "Laravel · React · Vue · Flutter",
+    statusLabel: "FORMACIÓN",
+    statusValue: "Grado Superior DAM (2024–2026)",
     ageLabel: "EDAD",
-    logTitle: "Registros_de_Identidad_v1.1.2",
-    bio1: "Tengo 21 años y he terminado el Grado Superior de Desarrollo de Aplicaciones Multiplataforma (2024–2026), aunque buena parte de lo que sé viene de aprender por mi cuenta: leer documentación, montar proyectos propios y depurar errores hasta entender por qué ocurren. Me interesa más entender por qué existe un patrón que aplicarlo de memoria.",
-    bio2: "Suelo trabajar en todo el ciclo de un proyecto, desde la arquitectura inicial hasta el despliegue en producción. Eso implica tomar decisiones que pueda justificar después: tipado estricto donde el lenguaje lo permite, tests antes de desplegar y mantener el código en un estado que otra persona pueda retomar sin demasiado contexto.",
-    bio3: "<strong>leo/</strong> es el nombre bajo el que desarrollo mis proyectos personales y trabajos para clientes. Actualmente estoy abierto a puestos en remoto, híbridos o presenciales en España.",
+    logTitle: "Hola, soy Ismael.",
+    lead: (age) => `Tengo ${age} años, soy desarrollador full stack y me formé en el grado superior de DAM. Trabajo en remoto o presencial desde España.`,
+    bio: [
+      "En mis prácticas en Entreredes acabé llevando yo solo uno de sus desarrollos: <strong class='text-white'>un SaaS que genera landing pages, hecho con Laravel y Filament</strong>, que dejé en producción con Docker y con Gemini integrado mediante colas. Antes pasé por Savia, haciendo frontend con React, y por Cojali, en QA.",
+      "Mi supervisor allí lo resumió diciendo que no era <strong class='text-white'>\"el perfil típico de prácticas\"</strong>: podía llevar trabajo por mi cuenta sin que nadie tuviera que estar encima.",
+      "Mientras estudiaba trabajé los inviernos en la campaña de la aceituna y luego de ayudante de cocina en un bar, y aun así, en cuanto tenía un rato, estaba con el código. Casi todo lo que sé lo he aprendido por mi cuenta, probando cosas y rompiéndolas hasta entender por qué fallaban. Es más lento, pero <strong class='text-white'>lo que aprendes así no se te olvida</strong>.",
+      "Mi experiencia se mide en meses, no en años, y no voy a fingir otra cosa. Donde mejor rindo es en equipos en los que puedo <strong class='text-white'>asumir responsabilidad desde el principio</strong>, como hice en Entreredes.",
+    ],
   },
 };
 
 const t = computed(() => {
   const c = content[props.lang] || content.en;
-  const suffix = props.lang === "es" ? `${calcAge()} a\u00f1os` : `${calcAge()} years`;
-  return { ...c, ageValue: suffix };
+  const age = calcAge();
+  const suffix = props.lang === "es" ? `${age} años` : `${age} years`;
+  return { ...c, ageValue: suffix, bio: [c.lead(age), ...c.bio] };
 });
 </script>
