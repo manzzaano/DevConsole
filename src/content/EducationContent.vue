@@ -37,7 +37,7 @@
         </div>
 
         <p class="text-white/40 text-xs mb-3">
-          {{ edu.institution ? `${edu.institution} | ` : '' }}{{ edu.period }}
+          {{ edu.institution }} | {{ edu.period }}
         </p>
 
         <div class="flex flex-wrap gap-2">
@@ -104,8 +104,8 @@ const content = {
     downloadLabel: "DOWNLOAD_CREDENTIAL",
     academicHistory: [
       {
-        title: "HND in Web Application Development (DAW) · complementary, open to work",
-        institution: "",
+        title: "HND in Web Application Development (DAW)",
+        institution: "IES Leonardo Da Vinci",
         period: "2026 - 2027",
         status: "IN_PROGRESS",
         active: true,
@@ -144,8 +144,8 @@ const content = {
     downloadLabel: "DESCARGAR_CREDENCIAL",
     academicHistory: [
       {
-        title: "Grado Superior en Desarrollo de Aplicaciones Web (DAW) · complementario, disponible para trabajar",
-        institution: "",
+        title: "Grado Superior en Desarrollo de Aplicaciones Web (DAW)",
+        institution: "IES Leonardo Da Vinci",
         period: "2026 - 2027",
         status: "EN_CURSO",
         active: true,
