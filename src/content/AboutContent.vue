@@ -103,7 +103,7 @@ const content = {
       "During my internship at Entreredes I ended up running one of their projects on my own: <strong class='text-white'>a SaaS that generates landing pages, built with Laravel and Filament</strong>, which I took to production with Docker and Gemini integrated through queues. Before that I was at Savia, doing frontend with React, and at Cojali, in QA.",
       "My supervisor there summed it up by saying I wasn't <strong class='text-white'>\"the typical intern profile\"</strong>: I could take on work on my own without anyone having to keep an eye on me.",
       "While I was studying I worked the olive harvest in winter and then as a kitchen assistant in a bar, and even so, whenever I had a moment, I was coding. Almost everything I know I learned on my own, trying things and breaking them until I understood why they failed. It's slower, but <strong class='text-white'>what you learn that way stays with you</strong>.",
-      "My experience is measured in months, not years, and I'm not going to pretend otherwise. I do my best work in teams where I can <strong class='text-white'>take on responsibility from the start</strong>, like I did at Entreredes.",
+      "My experience is measured in months, not years, and I'm not going to pretend otherwise. What I do bring is the habit of owning things: at Entreredes I was given a project and took it all the way to production. I do my best work in teams where I can <strong class='text-white'>take on responsibility from the start</strong>.",
     ],
   },
   es: {
@@ -124,7 +124,7 @@ const content = {
       "En mis prácticas en Entreredes acabé llevando yo solo uno de sus desarrollos: <strong class='text-white'>un SaaS que genera landing pages, hecho con Laravel y Filament</strong>, que dejé en producción con Docker y con Gemini integrado mediante colas. Antes pasé por Savia, haciendo frontend con React, y por Cojali, en QA.",
       "Mi supervisor allí lo resumió diciendo que no era <strong class='text-white'>\"el perfil típico de prácticas\"</strong>: podía llevar trabajo por mi cuenta sin que nadie tuviera que estar encima.",
       "Mientras estudiaba trabajé los inviernos en la campaña de la aceituna y luego de ayudante de cocina en un bar, y aun así, en cuanto tenía un rato, estaba con el código. Casi todo lo que sé lo he aprendido por mi cuenta, probando cosas y rompiéndolas hasta entender por qué fallaban. Es más lento, pero <strong class='text-white'>lo que aprendes así no se te olvida</strong>.",
-      "Mi experiencia se mide en meses, no en años, y no voy a fingir otra cosa. Donde mejor rindo es en equipos en los que puedo <strong class='text-white'>asumir responsabilidad desde el principio</strong>, como hice en Entreredes.",
+      "Mi experiencia se mide en meses, no en años, y no voy a fingir otra cosa. Lo que sí traigo es la costumbre de hacerme cargo: en Entreredes me dieron un proyecto y lo llevé hasta producción. Donde mejor rindo es en equipos en los que puedo <strong class='text-white'>asumir responsabilidad desde el principio</strong>.",
     ],
   },
 };
