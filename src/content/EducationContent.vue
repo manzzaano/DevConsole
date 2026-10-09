@@ -37,7 +37,7 @@
         </div>
 
         <p class="text-white/40 text-xs mb-3">
-          {{ edu.institution }} | {{ edu.period }}
+          {{ edu.institution ? `${edu.institution} | ` : '' }}{{ edu.period }}
         </p>
 
         <div class="flex flex-wrap gap-2">
@@ -104,6 +104,14 @@ const content = {
     downloadLabel: "DOWNLOAD_CREDENTIAL",
     academicHistory: [
       {
+        title: "HND in Web Application Development (DAW)",
+        institution: "",
+        period: "2026 - Present",
+        status: "IN_PROGRESS",
+        active: true,
+        tags: ["Web_Dev", "Client_Side", "Server_Side", "Deployment"],
+      },
+      {
         title: "HND in Multiplatform App Development (2nd Year)",
         institution: "IES Maestre de Calatrava",
         period: "2025 - 2026",
@@ -135,6 +143,14 @@ const content = {
     licenseHeader: "Licencias Verificadas",
     downloadLabel: "DESCARGAR_CREDENCIAL",
     academicHistory: [
+      {
+        title: "Grado Superior en Desarrollo de Aplicaciones Web (DAW)",
+        institution: "",
+        period: "2026 - Actualidad",
+        status: "EN_CURSO",
+        active: true,
+        tags: ["Desarrollo_Web", "Cliente", "Servidor", "Despliegue"],
+      },
       {
         title:
           "Grado Superior en Desarrollo de Aplicaciones Multiplataforma (2º DAM)",
