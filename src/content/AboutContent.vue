@@ -98,7 +98,7 @@ const content = {
     statusValue: "DAM (2024-2026) · DAW, complementary",
     ageLabel: "AGE",
     logTitle: "Hi, I'm Ismael.",
-    lead: (age) => `I'm ${age}, I'm a full stack developer and I trained in multiplatform app development (DAM). I'm now studying web development (DAW) as complementary training, to add depth on the web side to what I already do in apps and backend. It doesn't take away from my availability: I'm open to job offers and can start right away, remotely or on-site from Spain.`,
+    lead: (age) => `I'm ${age}, I'm a full stack developer and I trained in multiplatform app development (DAM). I'm now studying Web Application Development (DAW) as complementary training, to add depth on the web side to what I already do in apps and backend. It doesn't take away from my availability: I'm open to job offers and can start right away, remotely or on-site from Spain.`,
     bio: [
       "During my internship at Entreredes I ended up running one of their projects on my own: <strong class='text-white'>a SaaS that generates landing pages, built with Laravel and Filament</strong>, which I took to production with Docker and Gemini integrated through queues. Before that I was at Savia, doing frontend with React, and at Cojali, in QA.",
       "My supervisor there summed it up by saying I wasn't <strong class='text-white'>\"the typical intern profile\"</strong>: I could take on work on my own without anyone having to keep an eye on me.",
@@ -119,7 +119,7 @@ const content = {
     statusValue: "DAM (2024-2026) · DAW, complementario",
     ageLabel: "EDAD",
     logTitle: "Hola, soy Ismael.",
-    lead: (age) => `Tengo ${age} años, soy desarrollador full stack y me formé en el grado superior de DAM. Ahora curso DAW como formación complementaria, para sumar profundidad en web a lo que ya hago en aplicaciones y backend. No me resta disponibilidad: estoy abierto a ofertas de trabajo y puedo incorporarme ya, en remoto o presencial desde España.`,
+    lead: (age) => `Tengo ${age} años, soy desarrollador full stack y me formé en el grado superior de DAM. Ahora curso Desarrollo de Aplicaciones Web (DAW) como formación complementaria, para sumar profundidad en web a lo que ya hago en aplicaciones y backend. No me resta disponibilidad: estoy abierto a ofertas de trabajo y puedo incorporarme ya, en remoto o presencial desde España.`,
     bio: [
       "En mis prácticas en Entreredes acabé llevando yo solo uno de sus desarrollos: <strong class='text-white'>un SaaS que genera landing pages, hecho con Laravel y Filament</strong>, que dejé en producción con Docker y con Gemini integrado mediante colas. Antes pasé por Savia, haciendo frontend con React, y por Cojali, en QA.",
       "Mi supervisor allí lo resumió diciendo que no era <strong class='text-white'>\"el perfil típico de prácticas\"</strong>: podía llevar trabajo por mi cuenta sin que nadie tuviera que estar encima.",
