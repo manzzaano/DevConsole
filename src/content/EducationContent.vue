@@ -104,7 +104,7 @@ const content = {
     downloadLabel: "DOWNLOAD_CREDENTIAL",
     academicHistory: [
       {
-        title: "HND in Web Application Development (DAW)",
+        title: "HND in Web Application Development (DAW) · complementary, open to work",
         institution: "",
         period: "2026 - 2027",
         status: "IN_PROGRESS",
@@ -144,7 +144,7 @@ const content = {
     downloadLabel: "DESCARGAR_CREDENCIAL",
     academicHistory: [
       {
-        title: "Grado Superior en Desarrollo de Aplicaciones Web (DAW)",
+        title: "Grado Superior en Desarrollo de Aplicaciones Web (DAW) · complementario, disponible para trabajar",
         institution: "",
         period: "2026 - 2027",
         status: "EN_CURSO",
