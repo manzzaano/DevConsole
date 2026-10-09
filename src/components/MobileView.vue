@@ -6,8 +6,11 @@
       <img
         src="../assets/foto-perfil.jpg"
         alt="Ismael Manzano"
-        class="w-20 h-20 rounded-full object-cover border-2 mb-3"
-        style="border-color: rgba(74,222,128,0.35); box-shadow: 0 0 20px rgba(74,222,128,0.15)"
+        width="1080"
+        height="810"
+        draggable="false"
+        class="block w-full h-auto rounded-xl mb-4 select-none"
+        @contextmenu.prevent
       />
       <h1 class="text-2xl font-bold text-white leading-tight">Ismael Manzano</h1>
       <p class="font-mono text-sm mt-1" style="color: rgba(74,222,128,0.9)">▸ Full Stack Developer</p>

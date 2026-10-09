@@ -7,11 +7,11 @@
   >
     <div
       id="modal-container"
-      class="glass-panel p-0 text-white flex flex-col w-full max-w-3xl max-h-[90vh] sm:max-h-[85vh] mx-2 sm:mx-4 rounded-[24px] transition-all duration-300"
+      class="glass-panel p-0 text-white flex flex-col w-full max-w-3xl max-h-[90vh] sm:max-h-[85vh] mx-2 sm:mx-4 rounded-[16px] transition-all duration-300"
       :class="modalHidden ? 'scale-95' : 'scale-100'"
     >
       <div
-        class="bg-white/[3%] rounded-t-[24px] p-4 flex justify-between items-center border-b border-white/[15%] shrink-0 z-20"
+        class="bg-white/[3%] rounded-t-[16px] p-4 flex justify-between items-center border-b border-white/[15%] shrink-0 z-20"
       >
         <h2
           id="modal-title"
@@ -97,7 +97,7 @@ const applyTiltEffect = () => {
 
       card.style.transform = `perspective(1000px) scale(1.01) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
       card.style.transition = "transform 0.1s ease-out, box-shadow 0.1s ease-out";
-      card.style.boxShadow = "0 10px 30px rgba(74, 222, 128, 0.12)";
+      card.style.boxShadow = "0 10px 30px rgba(74,222,128, 0.12)";
       card.style.zIndex = "10";
     };
 
