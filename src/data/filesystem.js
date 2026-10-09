@@ -7,8 +7,8 @@ export const virtualFS = {
         modal: "about",
         description: "Información personal y bio",
         summary: {
-          en: "Ismael Manzano — Software Engineer. Backend specialist working at Entreredes. Use 'about' for full profile.",
-          es: "Ismael Manzano — Software Engineer. Especialista backend en Entreredes. Usa 'about' para perfil completo.",
+          en: "Ismael Manzano - Software Engineer. Backend specialist working at Entreredes. Use 'about' for full profile.",
+          es: "Ismael Manzano - Software Engineer. Especialista backend en Entreredes. Usa 'about' para perfil completo.",
         },
       },
       "habilidades.txt": {
@@ -25,8 +25,8 @@ export const virtualFS = {
         modal: "experience",
         description: "Historial profesional",
         summary: {
-          en: "Entreredes (2026–Present), Savia BL (2025), Cojali S.L. (2025). Use 'experience' for full timeline.",
-          es: "Entreredes (2026–Actualidad), Savia BL (2025), Cojali S.L. (2025). Usa 'experience' para historial completo.",
+          en: "Entreredes (2026-Present), Savia BL (2025), Cojali S.L. (2025). Use 'experience' for full timeline.",
+          es: "Entreredes (2026-Actualidad), Savia BL (2025), Cojali S.L. (2025). Usa 'experience' para historial completo.",
         },
       },
       "educacion.txt": {
@@ -34,8 +34,8 @@ export const virtualFS = {
         modal: "education",
         description: "Formación académica",
         summary: {
-          en: "HND Multiplatform App Dev (2024–2026). IES Maestre de Calatrava & IES Gregorio Prieto. Use 'education' for details.",
-          es: "Grado Superior DAM (2024–2026). IES Maestre de Calatrava & IES Gregorio Prieto. Usa 'education' para detalles.",
+          en: "HND Multiplatform App Dev (2024-2026). IES Maestre de Calatrava & IES Gregorio Prieto. Use 'education' for details.",
+          es: "Grado Superior DAM (2024-2026). IES Maestre de Calatrava & IES Gregorio Prieto. Usa 'education' para detalles.",
         },
       },
       "contacto.sh": {

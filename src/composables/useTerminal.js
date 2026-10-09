@@ -273,14 +273,14 @@ export function useTerminal({
       const helpText = `
         <p class="mb-2 accent-warm">${getText("help_header")}</p>
         <ul class="list-disc list-inside space-y-0.5 marker:text-white/30">
-          ${windowCommands.map((c) => `<li class="text-white/60"><span class="accent-teal font-bold">${c}</span> <span class="text-white/30">—</span> ${getText("help_" + c)}</li>`).join("")}
-          <li class="text-white/60"><span class="accent-teal font-bold">lang</span> <span class="text-white/30">—</span> ${getText("help_lang")}</li>
-          <li class="text-white/60"><span class="accent-teal font-bold">demo</span> <span class="text-white/30">—</span> ${getText("help_demo")}</li>
-          <li class="text-white/60"><span class="accent-teal font-bold">neofetch</span> <span class="text-white/30">—</span> ${getText("help_neofetch")}</li>
-          <li class="text-white/60"><span class="accent-teal font-bold">clear</span> <span class="text-white/30">—</span> ${getText("help_clear")}</li>
-          <li class="text-white/60"><span class="accent-violet font-bold">Ctrl+L</span> <span class="text-white/30">—</span> ${getText("help_clear_shortcut")}</li>
-          <li class="text-white/60"><span class="accent-teal font-bold">exit</span> <span class="text-white/30">—</span> ${getText("help_exit")}</li>
-          <li class="text-white/60"><span class="accent-teal font-bold">leo/</span> <span class="text-white/30">—</span> ${getText("help_leo")}</li>
+          ${windowCommands.map((c) => `<li class="text-white/60"><span class="accent-teal font-bold">${c}</span> <span class="text-white/30">-</span> ${getText("help_" + c)}</li>`).join("")}
+          <li class="text-white/60"><span class="accent-teal font-bold">lang</span> <span class="text-white/30">-</span> ${getText("help_lang")}</li>
+          <li class="text-white/60"><span class="accent-teal font-bold">demo</span> <span class="text-white/30">-</span> ${getText("help_demo")}</li>
+          <li class="text-white/60"><span class="accent-teal font-bold">neofetch</span> <span class="text-white/30">-</span> ${getText("help_neofetch")}</li>
+          <li class="text-white/60"><span class="accent-teal font-bold">clear</span> <span class="text-white/30">-</span> ${getText("help_clear")}</li>
+          <li class="text-white/60"><span class="accent-violet font-bold">Ctrl+L</span> <span class="text-white/30">-</span> ${getText("help_clear_shortcut")}</li>
+          <li class="text-white/60"><span class="accent-teal font-bold">exit</span> <span class="text-white/30">-</span> ${getText("help_exit")}</li>
+          <li class="text-white/60"><span class="accent-teal font-bold">leo/</span> <span class="text-white/30">-</span> ${getText("help_leo")}</li>
         </ul>`;
       appendHtml(`<div>${helpText}</div>`);
     } else if (command === "exit" || command === "leo/") {
