@@ -92,6 +92,14 @@ const content = {
     projectList: [
       {
         id: "Project_01",
+        title: "leo-mcp",
+        github: "https://github.com/manzzaano/leo-code",
+        description:
+          'An MCP server that gives Claude Code, Cursor or opencode the real call graph of a repo: where each thing is, who calls it and what breaks if you change it, with file and line. No LLM, no API key. Checked on every change against the Python AST and the TypeScript compiler. In development (beta).',
+        tags: ["Python", "MCP", "tree-sitter", "AST"],
+      },
+      {
+        id: "Project_02",
         title: "DevConsole",
         github: "https://github.com/manzzaano/DevConsole",
         description:
@@ -99,7 +107,7 @@ const content = {
         tags: ["Vue 3", "Vite", "Typed.js", "Tailwind v4"],
       },
       {
-        id: "Project_02",
+        id: "Project_03",
         title: "Kairos",
         github: "https://github.com/manzzaano/Kairos",
         description:
@@ -107,7 +115,7 @@ const content = {
         tags: ["Flutter", "Bloc", "Supabase", "Gemini"],
       },
       {
-        id: "Project_03",
+        id: "Project_04",
         title: "PokeCore",
         github: "https://manzzaano.github.io/PokeCore",
         description:
@@ -115,7 +123,7 @@ const content = {
         tags: ["React 19", "Vite", "TanStack Query", "Zustand"],
       },
       {
-        id: "Project_04",
+        id: "Project_05",
         title: "Regicide",
         github: "https://github.com/manzzaano/Regicide",
         description:
@@ -123,7 +131,7 @@ const content = {
         tags: ["Spring Boot", "Angular", "PostgreSQL", "WebSockets"],
       },
       {
-        id: "Project_05",
+        id: "Project_06",
         title: "leo/",
         github: "https://leosoftware.dev",
         description:
@@ -136,6 +144,14 @@ const content = {
     projectList: [
       {
         id: "Proyecto_01",
+        title: "leo-mcp",
+        github: "https://github.com/manzzaano/leo-code",
+        description:
+          'Un servidor MCP que da a Claude Code, Cursor u opencode el grafo de llamadas real de un repo: dónde está cada cosa, quién la llama y qué se rompe si la cambias, con archivo y línea. Sin LLM ni clave de API. Comprobado en cada cambio contra el AST de Python y el compilador de TypeScript. En desarrollo (beta).',
+        tags: ["Python", "MCP", "tree-sitter", "AST"],
+      },
+      {
+        id: "Proyecto_02",
         title: "DevConsole",
         github: "https://github.com/manzzaano/DevConsole",
         description:
@@ -143,7 +159,7 @@ const content = {
         tags: ["Vue 3", "Vite", "Typed.js", "Tailwind v4"],
       },
       {
-        id: "Proyecto_02",
+        id: "Proyecto_03",
         title: "Kairos",
         github: "https://github.com/manzzaano/Kairos",
         description:
@@ -151,7 +167,7 @@ const content = {
         tags: ["Flutter", "Bloc", "Supabase", "Gemini"],
       },
       {
-        id: "Proyecto_03",
+        id: "Proyecto_04",
         title: "PokeCore",
         github: "https://manzzaano.github.io/PokeCore",
         description:
@@ -159,7 +175,7 @@ const content = {
         tags: ["React 19", "Vite", "TanStack Query", "Zustand"],
       },
       {
-        id: "Proyecto_04",
+        id: "Proyecto_05",
         title: "Regicide",
         github: "https://github.com/manzzaano/Regicide",
         description:
@@ -167,7 +183,7 @@ const content = {
         tags: ["Spring Boot", "Angular", "PostgreSQL", "WebSockets"],
       },
       {
-        id: "Proyecto_05",
+        id: "Proyecto_06",
         title: "leo/",
         github: "https://leosoftware.dev",
         description:
