@@ -130,7 +130,7 @@ const content = {
     tasksEntreredes: [
       { status: "DONE", desc: "I built a landing-page generator SaaS on my own, with Laravel and Filament PHP" },
       { status: "DONE", desc: "I took it to production with Docker and integrated Gemini through async Jobs, so heavy tasks ran in the background" },
-      { status: "DONE", desc: "Tests with PHPUnit before every deployment" },
+      { status: "DONE", desc: "Tests with PHPUnit before every deployment, including load, security and fuzzing tests" },
     ],
     roleSavia: "Frontend Software Developer",
     dateSavia: "Mar 2025 - Apr 2025 · 2 months",
@@ -154,7 +154,7 @@ const content = {
     tasksEntreredes: [
       { status: "DONE", desc: "Desarrollé yo solo un SaaS que genera landing pages, con Laravel y Filament PHP" },
       { status: "DONE", desc: "Lo dejé en producción con Docker e integré Gemini mediante Jobs asíncronos, para que las tareas pesadas fueran en segundo plano" },
-      { status: "DONE", desc: "Tests con PHPUnit antes de cada despliegue" },
+      { status: "DONE", desc: "Tests con PHPUnit antes de cada despliegue, incluidas pruebas de carga, seguridad y fuzzing" },
     ],
     roleSavia: "Frontend Software Developer",
     dateSavia: "Mar 2025 - Abr 2025 · 2 meses",

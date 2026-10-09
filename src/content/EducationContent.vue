@@ -106,7 +106,7 @@ const content = {
       {
         title: "HND in Web Application Development (DAW)",
         institution: "",
-        period: "2026 - Present",
+        period: "2026 - 2027",
         status: "IN_PROGRESS",
         active: true,
         tags: ["Web_Dev", "Client_Side", "Server_Side", "Deployment"],
@@ -146,7 +146,7 @@ const content = {
       {
         title: "Grado Superior en Desarrollo de Aplicaciones Web (DAW)",
         institution: "",
-        period: "2026 - Actualidad",
+        period: "2026 - 2027",
         status: "EN_CURSO",
         active: true,
         tags: ["Desarrollo_Web", "Cliente", "Servidor", "Despliegue"],
