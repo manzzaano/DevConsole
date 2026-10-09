@@ -2,6 +2,7 @@
   <div class="relative text-white overflow-hidden min-h-screen">
     <div class="slash-pattern" aria-hidden="true" />
     <div class="slash-glow" :class="{ on: glowOn }" aria-hidden="true" />
+    <ParticleSlash />
 
     <!-- Mobile: card view -->
     <MobileView
@@ -141,6 +142,7 @@ import TerminalOutput from "./TerminalOutput.vue";
 import TerminalInput from "./TerminalInput.vue";
 import Modal from "./Modal.vue";
 import MobileView from "./MobileView.vue";
+import ParticleSlash from "./ParticleSlash.vue";
 import { useTerminal } from "../composables/useTerminal";
 
 const outputComponent = ref(null);
