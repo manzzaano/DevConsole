@@ -1,7 +1,7 @@
 <template>
   <div
     id="modal-window"
-    class="fixed inset-0 bg-black/60 flex items-center justify-center z-50 transition-opacity duration-300 p-4"
+    class="fixed inset-0 bg-black/30 flex items-center justify-center z-50 transition-opacity duration-300 p-4"
     :class="modalHidden ? 'opacity-0 pointer-events-none' : 'opacity-100'"
     @click.self="close"
   >
