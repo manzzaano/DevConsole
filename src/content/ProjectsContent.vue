@@ -95,7 +95,7 @@ const content = {
         title: "leo-mcp",
         github: "https://github.com/manzzaano/leo-code",
         description:
-          'An MCP server that gives Claude Code, Cursor or opencode the real call graph of a repo: where each thing is, who calls it and what breaks if you change it, with file and line. No LLM, no API key. Checked on every change against the Python AST and the TypeScript compiler. In development (beta).',
+          'An MCP server that tells Claude Code or Cursor where each function is, who calls it and what breaks if you change it. Verified against the Python AST and the TypeScript compiler; with real agents, 30% fewer tokens. In beta.',
         tags: ["Python", "MCP", "tree-sitter", "AST"],
       },
       {
@@ -103,7 +103,7 @@ const content = {
         title: "DevConsole",
         github: "https://github.com/manzzaano/DevConsole",
         description:
-          'My portfolio as a terminal, the one you are looking at right now, built with <strong>Vue 3</strong>: command logic kept apart from the screen, autocomplete as you type, history and a demo mode, in English and Spanish.',
+          'My portfolio as a terminal, the one you are looking at right now, built with <strong>Vue 3</strong>: each command opens a section, the logic is kept apart from the interface, it autocompletes as you type and works in two languages. In production.',
         tags: ["Vue 3", "Vite", "Typed.js", "Tailwind v4"],
       },
       {
@@ -111,7 +111,7 @@ const content = {
         title: "Kairos",
         github: "https://github.com/manzzaano/Kairos",
         description:
-          'A productivity app in <strong>Flutter</strong>. The first version ran on FastAPI; I rebuilt it with Bloc, tasks stored on the phone that sync to Supabase, and Gemini to prioritise them. In development.',
+          'A productivity app in <strong>Flutter</strong> rebuilt to work offline: from depending on a FastAPI server to storing tasks on the phone and syncing them with Supabase. Gemini prioritises them server-side, with no keys on the phone. In development.',
         tags: ["Flutter", "Bloc", "Supabase", "Gemini"],
       },
       {
@@ -119,7 +119,7 @@ const content = {
         title: "PokeCore",
         github: "https://manzzaano.github.io/PokeCore",
         description:
-          'All 1,025 Pokémon with instant search, type filters, favourites saved in the browser, stats, weaknesses and evolutions. Built with <strong>React 19, Vite and TanStack Query</strong>.',
+          'A Pokédex of all 1,025 Pokémon that responds instantly: search without waiting for the network, details prefetched on hover and images loaded in stages. <strong>React 19 and TanStack Query</strong>. In production.',
         tags: ["React 19", "Vite", "TanStack Query", "Zustand"],
       },
       {
@@ -127,7 +127,7 @@ const content = {
         title: "Regicide",
         github: "https://github.com/manzzaano/Regicide",
         description:
-          'It started as a JavaFX game and I brought it to the web: <strong>Spring Boot</strong> runs the game on the server, Angular shows it and moves travel over WebSocket. With accounts, JWT and a PostgreSQL leaderboard. In development.',
+          'An online card game, from JavaFX to the web: <strong>Spring Boot</strong> validates every move on the server and WebSocket syncs it instantly. Accounts with JWT and a PostgreSQL leaderboard. In development.',
         tags: ["Spring Boot", "Angular", "PostgreSQL", "WebSockets"],
       },
       {
@@ -147,7 +147,7 @@ const content = {
         title: "leo-mcp",
         github: "https://github.com/manzzaano/leo-code",
         description:
-          'Un servidor MCP que da a Claude Code, Cursor u opencode el grafo de llamadas real de un repo: dónde está cada cosa, quién la llama y qué se rompe si la cambias, con archivo y línea. Sin LLM ni clave de API. Comprobado en cada cambio contra el AST de Python y el compilador de TypeScript. En desarrollo (beta).',
+          'Servidor MCP que dice a Claude Code o Cursor dónde está cada función, quién la llama y qué se rompe al cambiarla. Verificado contra el AST de Python y el compilador de TypeScript; con agentes reales, un 30% menos de tokens. En beta.',
         tags: ["Python", "MCP", "tree-sitter", "AST"],
       },
       {
@@ -155,7 +155,7 @@ const content = {
         title: "DevConsole",
         github: "https://github.com/manzzaano/DevConsole",
         description:
-          'Mi portfolio hecho terminal, el que estás viendo ahora, en <strong>Vue 3</strong>: la lógica de los comandos va separada de la pantalla, con autocompletado mientras escribes, historial y un modo demo, en inglés y en español.',
+          'Mi portfolio como terminal, el que estás viendo ahora, en <strong>Vue 3</strong>: cada comando abre una sección, la lógica va separada de la interfaz, autocompleta mientras escribes y funciona en dos idiomas. En producción.',
         tags: ["Vue 3", "Vite", "Typed.js", "Tailwind v4"],
       },
       {
@@ -163,7 +163,7 @@ const content = {
         title: "Kairos",
         github: "https://github.com/manzzaano/Kairos",
         description:
-          'App de productividad en <strong>Flutter</strong>. La primera versión iba con FastAPI; la rehíce con Bloc, tareas guardadas en el móvil que se sincronizan con Supabase y Gemini para ordenarlas. En desarrollo.',
+          'App de productividad en <strong>Flutter</strong> rehecha para funcionar sin conexión: de depender de un servidor FastAPI a guardar las tareas en el móvil y sincronizarlas con Supabase. Gemini las prioriza desde el servidor, sin claves en el móvil. En desarrollo.',
         tags: ["Flutter", "Bloc", "Supabase", "Gemini"],
       },
       {
@@ -171,7 +171,7 @@ const content = {
         title: "PokeCore",
         github: "https://manzzaano.github.io/PokeCore",
         description:
-          'Los 1025 Pokémon con búsqueda al momento, filtro por tipos, favoritos guardados en el navegador, estadísticas, debilidades y evoluciones. Hecha con <strong>React 19, Vite y TanStack Query</strong>.',
+          'Pokédex de los 1025 Pokémon que responde al instante: búsqueda sin esperar a la red, ficha precargada al pasar el ratón e imágenes por fases. <strong>React 19 y TanStack Query</strong>. En producción.',
         tags: ["React 19", "Vite", "TanStack Query", "Zustand"],
       },
       {
@@ -179,7 +179,7 @@ const content = {
         title: "Regicide",
         github: "https://github.com/manzzaano/Regicide",
         description:
-          'Empezó como un juego en JavaFX y lo pasé a la web: <strong>Spring Boot</strong> resuelve la partida en el servidor, Angular la enseña y las jugadas van por WebSocket. Con cuentas, JWT y clasificación en PostgreSQL. En desarrollo.',
+          'Juego de cartas online, de JavaFX a la web: <strong>Spring Boot</strong> valida cada jugada en el servidor y WebSocket la sincroniza al momento. Cuentas con JWT y clasificación en PostgreSQL. En desarrollo.',
         tags: ["Spring Boot", "Angular", "PostgreSQL", "WebSockets"],
       },
       {
