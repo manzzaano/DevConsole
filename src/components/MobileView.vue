@@ -6,7 +6,7 @@
       <img
         src="../assets/foto-perfil.jpg"
         alt="Ismael Manzano"
-        width="1600"
+        width="1200"
         height="900"
         draggable="false"
         class="block w-full h-auto rounded-xl mb-4 select-none"
