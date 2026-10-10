@@ -103,7 +103,7 @@ const content = {
       "During my internship at Entreredes I ran one of their projects on my own: <strong class='text-white'>a SaaS that generates landing pages, built with Laravel and Filament</strong>, which I took to production with Docker and Gemini integrated through queues. Before that I did frontend with React at Savia and QA at Cojali.",
       "My supervisor put it this way: I wasn't <strong class='text-white'>\"the typical intern profile\"</strong>; I could take on work on my own without anyone watching over me.",
       "While studying I worked the olive harvest and as a kitchen assistant, and spent my free time coding. Most of what I know I learned on my own, breaking things until I understood why they failed. It's slower, but <strong class='text-white'>what you learn that way sticks</strong>.",
-      "My experience is measured in months, not years, and I don't hide it. What I bring is the habit of owning things: at Entreredes I was given a project and took it to production. I do my best work where I can <strong class='text-white'>take on responsibility from the start</strong>.",
+      "My experience is measured in months, not years, and I don't hide it. What I bring is the habit of owning what I build, until it works in production. I do my best work where I can <strong class='text-white'>take on responsibility from the start</strong>.",
     ],
   },
   es: {
@@ -124,7 +124,7 @@ const content = {
       "En mis prácticas en Entreredes llevé yo solo uno de sus desarrollos: <strong class='text-white'>un SaaS que genera landing pages, con Laravel y Filament</strong>, que dejé en producción con Docker y con Gemini integrado mediante colas. Antes hice frontend con React en Savia y QA en Cojali.",
       "Mi supervisor lo resumió así: no era <strong class='text-white'>\"el perfil típico de prácticas\"</strong>; podía llevar trabajo por mi cuenta sin que nadie estuviera encima.",
       "Mientras estudiaba trabajé en la campaña de la aceituna y de ayudante de cocina, y el tiempo libre se lo dedicaba al código. Casi todo lo he aprendido por mi cuenta, rompiendo cosas hasta entender por qué fallaban. Es más lento, pero <strong class='text-white'>lo que aprendes así no se olvida</strong>.",
-      "Mi experiencia se mide en meses, no en años, y no lo escondo. Lo que traigo es la costumbre de hacerme cargo: en Entreredes me dieron un proyecto y lo llevé a producción. Rindo mejor donde puedo <strong class='text-white'>asumir responsabilidad desde el principio</strong>.",
+      "Mi experiencia se mide en meses, no en años, y no lo escondo. Lo que traigo es la costumbre de hacerme cargo de lo que construyo, hasta que funciona en producción. Rindo mejor donde puedo <strong class='text-white'>asumir responsabilidad desde el principio</strong>.",
     ],
   },
 };
