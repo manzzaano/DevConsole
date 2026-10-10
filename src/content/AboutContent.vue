@@ -5,8 +5,8 @@
         <img
           src="../assets/foto-perfil.jpg"
           alt="Ismael Manzano"
-          width="1080"
-          height="810"
+          width="1600"
+          height="900"
           draggable="false"
           class="block w-60 md:w-64 h-auto rounded-2xl select-none"
           @contextmenu.prevent
