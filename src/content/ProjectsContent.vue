@@ -100,6 +100,14 @@ const content = {
       },
       {
         id: "Project_02",
+        title: "AutoLanding",
+        github: "https://leosoftware.dev/en/sistemas/autolanding",
+        description:
+          'Internal Entreredes tool I built independently during my internship: landing pages for local businesses with Google Places data and Gemini copy and images. <strong>Laravel 12, Filament</strong>, Redis queues and Docker, 225 PHPUnit tests, in production. The code belongs to the company: the link goes to the case study.',
+        tags: ["Laravel", "Filament", "Redis", "Gemini"],
+      },
+      {
+        id: "Project_03",
         title: "DevConsole",
         github: "https://github.com/manzzaano/DevConsole",
         description:
@@ -107,7 +115,7 @@ const content = {
         tags: ["Vue 3", "Vite", "Typed.js", "Tailwind v4"],
       },
       {
-        id: "Project_03",
+        id: "Project_04",
         title: "Kairos",
         github: "https://github.com/manzzaano/Kairos",
         description:
@@ -115,7 +123,7 @@ const content = {
         tags: ["Flutter", "Bloc", "Supabase", "Gemini"],
       },
       {
-        id: "Project_04",
+        id: "Project_05",
         title: "PokeCore",
         github: "https://manzzaano.github.io/PokeCore",
         description:
@@ -123,7 +131,7 @@ const content = {
         tags: ["React 19", "Vite", "TanStack Query", "Zustand"],
       },
       {
-        id: "Project_05",
+        id: "Project_06",
         title: "Regicide",
         github: "https://github.com/manzzaano/Regicide",
         description:
@@ -131,7 +139,7 @@ const content = {
         tags: ["Spring Boot", "Angular", "PostgreSQL", "WebSockets"],
       },
       {
-        id: "Project_06",
+        id: "Project_07",
         title: "leo/",
         github: "https://leosoftware.dev",
         description:
@@ -152,6 +160,14 @@ const content = {
       },
       {
         id: "Proyecto_02",
+        title: "AutoLanding",
+        github: "https://leosoftware.dev/sistemas/autolanding",
+        description:
+          'Herramienta interna de Entreredes que desarrollé de forma autónoma en mis prácticas: landing pages para negocios locales con datos de Google Places y textos e imágenes de Gemini. <strong>Laravel 12, Filament</strong>, colas con Redis y Docker, 225 tests con PHPUnit, en producción. El código pertenece a la empresa: el enlace lleva al caso de estudio.',
+        tags: ["Laravel", "Filament", "Redis", "Gemini"],
+      },
+      {
+        id: "Proyecto_03",
         title: "DevConsole",
         github: "https://github.com/manzzaano/DevConsole",
         description:
@@ -159,7 +175,7 @@ const content = {
         tags: ["Vue 3", "Vite", "Typed.js", "Tailwind v4"],
       },
       {
-        id: "Proyecto_03",
+        id: "Proyecto_04",
         title: "Kairos",
         github: "https://github.com/manzzaano/Kairos",
         description:
@@ -167,7 +183,7 @@ const content = {
         tags: ["Flutter", "Bloc", "Supabase", "Gemini"],
       },
       {
-        id: "Proyecto_04",
+        id: "Proyecto_05",
         title: "PokeCore",
         github: "https://manzzaano.github.io/PokeCore",
         description:
@@ -175,7 +191,7 @@ const content = {
         tags: ["React 19", "Vite", "TanStack Query", "Zustand"],
       },
       {
-        id: "Proyecto_05",
+        id: "Proyecto_06",
         title: "Regicide",
         github: "https://github.com/manzzaano/Regicide",
         description:
@@ -183,7 +199,7 @@ const content = {
         tags: ["Spring Boot", "Angular", "PostgreSQL", "WebSockets"],
       },
       {
-        id: "Proyecto_06",
+        id: "Proyecto_07",
         title: "leo/",
         github: "https://leosoftware.dev",
         description:
