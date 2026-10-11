@@ -1,79 +1,63 @@
-# Ismael Manzano León — Terminal Portfolio
+# DevConsole
 
-> An interactive terminal emulator with a modern glassmorphism design, UNIX command system, and virtual filesystem — built with Vue 3 + TailwindCSS.
+My portfolio as a terminal in the browser. Each command opens a section of my profile: who I am, projects, experience, education, skills, contact and CV. Live at **[console.leosoftware.dev](https://console.leosoftware.dev)**.
 
-![Portfolio Terminal Demo](https://raw.githubusercontent.com/manzzaano/DevConsole/main/public/DemoPortafolio.gif)
+![DevConsole](public/og.png)
 
----
-
-## Description
-
-This portfolio replicates a full command-line interface (CLI) experience. Instead of clicking through menus, you navigate a virtual filesystem using real UNIX commands (`ls`, `cat`, `cd`, `pwd`, `clear`) combined with custom portfolio commands (`about`, `projects`, `skills`, `contact`, `cv`, `neofetch`).
-
-Built with a fluid animated glassmorphism background, monospace typography, and Bash/Zsh-inspired syntax coloring.
-
-## Features
-
-- **Terminal UI** — Realistic shell experience with command history (↑/↓ arrows), Tab autocompletion, and ghost text suggestions.
-- **UNIX Commands** — Full `ls` / `cat` / `cd` / `pwd` / `clear` support over a virtual filesystem.
-- **Virtual Filesystem** — Explore your `~/` home directory with files (`perfil.txt`, `contacto.sh`) and folders (`proyectos/`).
-- **Portfolio Commands** — `about`, `projects`, `skills`, `experience`, `education`, `contact`, `cv` open rich modal windows.
-- **Glassmorphism Design** — Fluid animated gradient background with `backdrop-filter: blur()` translucent panels and depth shadows.
-- **Syntax Highlighting** — Directories in cyan, executables in teal green, binary files in amber — like a real shell.
-- **Internationalization (i18n)** — English (`lang en`) and Spanish (`lang es`) with persistent preference.
-- **Keyboard Shortcuts** — `Ctrl+L` to clear, `Esc` to close modals / stop demo.
-- **Demo Mode** — Type `demo` for an automatic guided tour of all features.
-- **Responsive** — Mobile-friendly with on-screen TAB / UP / DWN / CLS buttons.
+It's built for technical readers: the terminal itself is the proof of how I work. The full profile, with case studies, is at [leosoftware.dev](https://leosoftware.dev).
 
 ## Commands
 
-### UNIX-style
-| Command | Description |
+| Command | Shows |
 |---|---|
-| `ls` / `ls -l` | List directory contents (long format with descriptions) |
-| `cat <file>` | Print file contents inline |
-| `cd <dir>` | Change directory (`cd ..`, `cd ~`, `cd proyectos/`) |
-| `pwd` | Print current working directory path |
-| `clear` | Clear terminal screen |
-
-### Portfolio
-| Command | Description |
-|---|---|
-| `about` | Profile, stats, and bio |
-| `projects` | Featured projects with links |
-| `skills` | Technical stack and tools |
-| `experience` | Work history timeline |
-| `education` | Academic record and certifications |
-| `contact` | Email, LinkedIn, GitHub channels |
-| `cv` | PDF resume viewer |
-| `neofetch` | System info as ASCII art |
-| `help` | Full command reference |
+| `about` | Who I am and what I'm looking for |
+| `projects` | Projects, with status and links |
+| `experience` | Where I've worked and what I did |
+| `education` | Training and certifications |
+| `skills` | Technologies I use |
+| `contact` | Email, LinkedIn and GitHub |
+| `cv` | My CV, viewable and downloadable |
+| `neofetch` | System and author info |
 | `lang <en\|es>` | Switch language |
-| `demo` | Auto-guided tour |
+| `demo` | Guided tour of the console |
+| `help` | Command list |
+| `clear` | Clear the screen (also `Ctrl+L`) |
+| `exit` / `leo/` | Back to leosoftware.dev |
 
-## Tech Stack
+**Keyboard:** `Tab` or `→` autocompletes, `↑` / `↓` browse history, `Esc` closes a window or stops the demo.
 
-- **Framework:** [Vue.js 3](https://vuejs.org/) (Composition API + Async Components)
-- **Styling:** [TailwindCSS 4](https://tailwindcss.com/) via Vite plugin
-- **Icons:** [Lucide Icons](https://lucide.dev/)
-- **Build Tool:** [Vite 7](https://vitejs.dev/)
-- **Typing Effect:** [Typed.js](https://github.com/mattboldt/typed.js/)
-- **PDF Rendering:** [vue-pdf-embed](https://github.com/hrynko/vue-pdf-embed)
+## How it's built
 
-## Run Locally
+- **Logic apart from the interface.** Everything that happens when you type a command lives in `src/composables/useTerminal.js`. The components only render what they're given, so the interface can change without touching the commands.
+- **Autocomplete** with ghost text: a prefix search over the command list (`src/constants/commands.js`).
+- **Two languages without reloading.** Texts live in `public/content.json` and in each section component; the choice is remembered in the browser.
+- **Sections on demand.** Each window is an async component, loaded only when opened.
+- **A real window on desktop:** drag, resize from any edge, maximize and minimize. On mobile, a card layout instead of the terminal.
+- **Background** shared with leosoftware.dev: a pattern of tiny slashes and the leo/ slash made of particles (canvas 2D). It stays faint and still on mobile and pauses when the tab is hidden.
+- **Analytics only with consent.** Google Analytics loads only if `VITE_GA_ID` is set and the visitor accepts.
+
+## Stack
+
+Vue 3 (Composition API) · Vite 7 · Tailwind CSS 4 · Typed.js (demo) · vue-pdf-embed (CV) · Lucide icons
+
+## Run locally
 
 ```bash
-git clone https://github.com/manzzaano/PortafolioTerminal.git
-cd PortafolioTerminal
+git clone https://github.com/manzzaano/DevConsole.git
+cd DevConsole
 npm install
-npm run dev
+npm run dev        # http://localhost:5173
+npm run build      # production build in dist/
 ```
 
-Open `http://localhost:5173` in your browser.
+## Deploy
 
-## Build & Deploy
+Deployed on Vercel with the CLI from the project folder:
 
 ```bash
-npm run build     # outputs to dist/
-npm run deploy    # deploys to GitHub Pages via gh-pages
+npx vercel deploy --prod
 ```
+
+---
+
+Built by [Ismael Manzano León](https://leosoftware.dev) · [LinkedIn](https://www.linkedin.com/in/ismael-manzano-leon/)
