@@ -119,7 +119,7 @@ const content = {
         title: "Kairos",
         github: "https://github.com/manzzaano/Kairos",
         description:
-          'A productivity app in <strong>Flutter</strong> rebuilt to work offline: from depending on a FastAPI server to storing tasks on the phone and syncing them with Supabase. Gemini prioritises them server-side, with no keys on the phone. In development.',
+          'A productivity app in <strong>Flutter</strong> rebuilt to work offline: from depending on a FastAPI server to storing tasks on the phone and syncing them with Supabase. Gemini prioritises them server-side, with no keys on the phone. Delivered as my final-year project.',
         tags: ["Flutter", "Bloc", "Supabase", "Gemini"],
       },
       {
@@ -179,7 +179,7 @@ const content = {
         title: "Kairos",
         github: "https://github.com/manzzaano/Kairos",
         description:
-          'App de productividad en <strong>Flutter</strong> rehecha para funcionar sin conexión: de depender de un servidor FastAPI a guardar las tareas en el móvil y sincronizarlas con Supabase. Gemini las prioriza desde el servidor, sin claves en el móvil. En desarrollo.',
+          'App de productividad en <strong>Flutter</strong> rehecha para funcionar sin conexión: de depender de un servidor FastAPI a guardar las tareas en el móvil y sincronizarlas con Supabase. Gemini las prioriza desde el servidor, sin claves en el móvil. Entregado como TFG.',
         tags: ["Flutter", "Bloc", "Supabase", "Gemini"],
       },
       {
