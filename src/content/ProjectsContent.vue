@@ -135,7 +135,7 @@ const content = {
         title: "Regicide",
         github: "https://github.com/manzzaano/Regicide",
         description:
-          'An online card game, from JavaFX to the web: <strong>Spring Boot</strong> validates every move on the server and WebSocket syncs it instantly. Accounts with JWT and a PostgreSQL leaderboard. In development.',
+          'An online card game, from JavaFX to the web: <strong>Spring Boot</strong> validates every move on the server and WebSocket syncs it instantly. Backend with JWT accounts and PostgreSQL. In development.',
         tags: ["Spring Boot", "Angular", "PostgreSQL", "WebSockets"],
       },
       {
@@ -195,7 +195,7 @@ const content = {
         title: "Regicide",
         github: "https://github.com/manzzaano/Regicide",
         description:
-          'Juego de cartas online, de JavaFX a la web: <strong>Spring Boot</strong> valida cada jugada en el servidor y WebSocket la sincroniza al momento. Cuentas con JWT y clasificación en PostgreSQL. En desarrollo.',
+          'Juego de cartas online, de JavaFX a la web: <strong>Spring Boot</strong> valida cada jugada en el servidor y WebSocket la sincroniza al momento. Backend con cuentas JWT y PostgreSQL. En desarrollo.',
         tags: ["Spring Boot", "Angular", "PostgreSQL", "WebSockets"],
       },
       {
