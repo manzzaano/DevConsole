@@ -1,58 +1,58 @@
 # DevConsole
 
-My portfolio as a terminal in the browser. Each command opens a section of my profile: who I am, projects, experience, education, skills, contact and CV. Live at **[console.leosoftware.dev](https://console.leosoftware.dev)**.
+Mi portfolio en forma de terminal en el navegador. Cada comando abre una sección de mi perfil: quién soy, proyectos, experiencia, formación, tecnologías, contacto y CV. Está en producción en **[console.leosoftware.dev](https://console.leosoftware.dev)**.
 
 ![DevConsole](public/og.png)
 
-It's built for technical readers: the terminal itself is the proof of how I work. The full profile, with case studies, is at [leosoftware.dev](https://leosoftware.dev).
+Está pensado para perfiles técnicos: la propia terminal es la prueba de cómo trabajo. El perfil completo, con los casos de estudio, está en [leosoftware.dev](https://leosoftware.dev).
 
-## Commands
+## Comandos
 
-| Command | Shows |
+| Comando | Muestra |
 |---|---|
-| `about` | Who I am and what I'm looking for |
-| `projects` | Projects, with status and links |
-| `experience` | Where I've worked and what I did |
-| `education` | Training and certifications |
-| `skills` | Technologies I use |
-| `contact` | Email, LinkedIn and GitHub |
-| `cv` | My CV, viewable and downloadable |
-| `neofetch` | System and author info |
-| `lang <en\|es>` | Switch language |
-| `demo` | Guided tour of the console |
-| `help` | Command list |
-| `clear` | Clear the screen (also `Ctrl+L`) |
-| `exit` / `leo/` | Back to leosoftware.dev |
+| `about` | Quién soy y qué busco |
+| `projects` | Proyectos, con estado y enlaces |
+| `experience` | Dónde he trabajado y qué hice |
+| `education` | Formación y certificaciones |
+| `skills` | Tecnologías que uso |
+| `contact` | Email, LinkedIn y GitHub |
+| `cv` | Mi CV, para verlo y descargarlo |
+| `neofetch` | Información del sistema y del autor |
+| `lang <en\|es>` | Cambiar de idioma |
+| `demo` | Recorrido guiado por la consola |
+| `help` | Lista de comandos |
+| `clear` | Limpiar la pantalla (también `Ctrl+L`) |
+| `exit` / `leo/` | Volver a leosoftware.dev |
 
-**Keyboard:** `Tab` or `→` autocompletes, `↑` / `↓` browse history, `Esc` closes a window or stops the demo.
+**Teclado:** `Tab` o `→` autocompletan, `↑` / `↓` recorren el historial y `Esc` cierra una ventana o para la demo.
 
-## How it's built
+## Cómo está hecho
 
-- **Logic apart from the interface.** Everything that happens when you type a command lives in `src/composables/useTerminal.js`. The components only render what they're given, so the interface can change without touching the commands.
-- **Autocomplete** with ghost text: a prefix search over the command list (`src/constants/commands.js`).
-- **Two languages without reloading.** Texts live in `public/content.json` and in each section component; the choice is remembered in the browser.
-- **Sections on demand.** Each window is an async component, loaded only when opened.
-- **A real window on desktop:** drag, resize from any edge, maximize and minimize. On mobile, a card layout instead of the terminal.
-- **Background** shared with leosoftware.dev: a pattern of tiny slashes and the leo/ slash made of particles (canvas 2D). It stays faint and still on mobile and pauses when the tab is hidden.
-- **Analytics only with consent.** Google Analytics loads only if `VITE_GA_ID` is set and the visitor accepts.
+- **La lógica, separada de la interfaz.** Todo lo que pasa al escribir un comando está en `src/composables/useTerminal.js`. Los componentes solo pintan lo que reciben, así que la interfaz puede cambiar sin tocar los comandos.
+- **Autocompletado** con texto en gris: una búsqueda por prefijo sobre la lista de comandos (`src/constants/commands.js`).
+- **Dos idiomas sin recargar.** Los textos están en `public/content.json` y en cada componente de sección; el idioma elegido se recuerda en el navegador.
+- **Secciones bajo demanda.** Cada ventana es un componente asíncrono que solo se carga al abrirla.
+- **Una ventana real en escritorio:** se arrastra, se redimensiona desde cualquier borde, se maximiza y se minimiza. En móvil, una vista de tarjetas en lugar de la terminal.
+- **El fondo**, compartido con leosoftware.dev: un patrón de barras diminutas y la barra de leo/ hecha de partículas en canvas 2D. En móvil queda tenue y quieto, y se detiene cuando la pestaña no se ve.
+- **Analítica solo con consentimiento.** Google Analytics se carga únicamente si `VITE_GA_ID` está definida y el visitante la acepta.
 
 ## Stack
 
-Vue 3 (Composition API) · Vite 7 · Tailwind CSS 4 · Typed.js (demo) · vue-pdf-embed (CV) · Lucide icons
+Vue 3 (Composition API) · Vite 7 · Tailwind CSS 4 · Typed.js (demo) · vue-pdf-embed (CV) · iconos Lucide
 
-## Run locally
+## En local
 
 ```bash
 git clone https://github.com/manzzaano/DevConsole.git
 cd DevConsole
 npm install
 npm run dev        # http://localhost:5173
-npm run build      # production build in dist/
+npm run build      # build de producción en dist/
 ```
 
-## Deploy
+## Despliegue
 
-Deployed on Vercel with the CLI from the project folder:
+Se despliega en Vercel con la CLI desde la carpeta del proyecto:
 
 ```bash
 npx vercel deploy --prod
@@ -60,4 +60,4 @@ npx vercel deploy --prod
 
 ---
 
-Built by [Ismael Manzano León](https://leosoftware.dev) · [LinkedIn](https://www.linkedin.com/in/ismael-manzano-leon/)
+Hecho por [Ismael Manzano León](https://leosoftware.dev) · [LinkedIn](https://www.linkedin.com/in/ismael-manzano-leon/)
