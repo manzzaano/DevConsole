@@ -53,6 +53,7 @@
 </template>
 
 <script setup>
+import { renderIcons } from "../icons";
 import { ref, watch, nextTick, shallowRef, defineAsyncComponent } from "vue";
 
 const props = defineProps({
@@ -122,7 +123,7 @@ watch(
   async ([hidden, comp]) => {
     if (!hidden && comp) {
       await nextTick();
-      if (window.lucide) window.lucide.createIcons();
+      renderIcons();
       setTimeout(applyTiltEffect, 100);
     }
   },
