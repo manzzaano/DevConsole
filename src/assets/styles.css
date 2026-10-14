@@ -157,7 +157,7 @@
     text-shadow: none;
   }
 
-  /* ── Syntax accents ── */
+  /* Syntax accents */
   .accent-teal,
   .accent-cyan {
     color: var(--accent-text);
@@ -177,7 +177,7 @@
     font-family: var(--font-headline);
   }
 
-  /* ── Block inversion hover ── */
+  /* Block inversion hover */
   .block-invert {
     transition: background-color 0.15s ease, color 0.15s ease;
   }

@@ -1,7 +1,6 @@
 <template>
   <div class="relative z-10 min-h-screen flex flex-col items-center justify-between gap-5 px-4 py-10">
 
-    <!-- Profile -->
     <div class="glass-panel w-full max-w-xs p-6 flex flex-col items-center text-center">
       <img
         src="../assets/foto-perfil.jpg"
@@ -17,7 +16,6 @@
       <p class="font-mono text-xs text-white/35 mt-0.5">{{ currentLang === 'es' ? 'España · remoto o presencial' : 'Spain · remote or on-site' }}</p>
     </div>
 
-    <!-- Command grid -->
     <div class="grid grid-cols-2 gap-3 w-full max-w-xs">
       <button
         v-for="cmd in commands"
@@ -30,7 +28,6 @@
       </button>
     </div>
 
-    <!-- CTA leosoftware.dev -->
     <a
       href="https://leosoftware.dev"
       class="glass-panel w-full max-w-xs px-5 py-4 flex items-center justify-between"
@@ -43,7 +40,6 @@
       <span class="font-mono text-lg" style="color: rgba(74,222,128,0.7)">→</span>
     </a>
 
-    <!-- Lang toggle -->
     <div class="flex items-center gap-3 font-mono text-xs">
       <button
         @click="$emit('setLang', 'es')"

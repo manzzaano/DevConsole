@@ -5,7 +5,6 @@
     </p>
 
     <div class="grid grid-cols-1 gap-6">
-      <!-- Entreredes -->
       <div
         class="glass-card p-5 flex flex-col group"
       >
@@ -43,7 +42,6 @@
         </div>
       </div>
 
-      <!-- Savia -->
       <div
         class="glass-card p-5 flex flex-col group"
       >
@@ -111,6 +109,7 @@
 </template>
 
 <script setup>
+import { renderIcons } from "../icons";
 import { computed, onMounted, nextTick } from "vue";
 
 const props = defineProps({
@@ -176,7 +175,7 @@ const t = computed(() => content[props.lang] || content.en);
 
 onMounted(() => {
   nextTick(() => {
-    if (window.lucide) window.lucide.createIcons();
+    renderIcons();
   });
 });
 </script>
