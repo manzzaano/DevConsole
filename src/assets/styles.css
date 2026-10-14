@@ -10,8 +10,9 @@
   --text-secondary: #b4b4bc;
   --shadow-drop: 0 24px 60px rgba(0, 0, 0, 0.6);
 
-  --font-sans: 'Space Grotesk', system-ui, -apple-system, sans-serif;
-  --font-headline: 'Inter', system-ui, sans-serif;
+  /* Same type as leosoftware.dev: Archivo for headings, IBM Plex Sans for text */
+  --font-sans: 'IBM Plex Sans', system-ui, -apple-system, sans-serif;
+  --font-headline: 'Archivo', system-ui, sans-serif;
   /* console green: #22c55e for fills (black text on top), #4ade80 for text on dark */
   --accent: #22c55e;
   --accent-text: #4ade80;
