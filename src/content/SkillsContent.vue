@@ -89,6 +89,7 @@
 </template>
 
 <script setup>
+import { renderIcons } from "../icons";
 import { computed, onMounted } from "vue";
 
 const props = defineProps({
@@ -193,8 +194,6 @@ const content = {
 const t = computed(() => content[props.lang] || content.en);
 
 onMounted(() => {
-  if (window.lucide) {
-    window.lucide.createIcons();
-  }
+  renderIcons();
 });
 </script>

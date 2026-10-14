@@ -70,6 +70,7 @@
 </template>
 
 <script setup>
+import { renderIcons } from "../icons";
 import { ref, onMounted, nextTick, computed } from "vue";
 import VuePdfEmbed from "vue-pdf-embed";
 
@@ -127,7 +128,7 @@ const forceDownload = async () => {
 
 onMounted(() => {
   nextTick(() => {
-    if (window.lucide) window.lucide.createIcons();
+    renderIcons();
   });
 });
 </script>
