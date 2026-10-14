@@ -22,7 +22,6 @@
             class="text-white/40 hover:text-[#4ade80] transition-colors block accent-cyan"
             :aria-label="project.github.includes('github') ? 'View ' + project.title + ' on GitHub' : 'View ' + project.title"
           >
-            <!-- GitHub Icon -->
             <svg
               v-if="project.github.includes('github')"
               xmlns="http://www.w3.org/2000/svg"
@@ -40,7 +39,6 @@
               />
               <path d="M9 18c-4.51 2-5-2-7-2" />
             </svg>
-            <!-- Web/External Link Icon -->
             <svg
               v-else
               xmlns="http://www.w3.org/2000/svg"

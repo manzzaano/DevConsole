@@ -4,7 +4,6 @@
     <div class="slash-glow" :class="{ on: glowOn }" aria-hidden="true" />
     <ParticleSlash />
 
-    <!-- Mobile: card view -->
     <MobileView
       v-if="isMobile"
       :currentLang="currentLang"
@@ -29,7 +28,6 @@
       :style="windowStyle"
       @mousedown="onWindowMouseDown"
     >
-      <!-- Title bar -->
       <div
         class="bg-white/[3%] rounded-t-[16px] p-3 flex items-center gap-2 flex-shrink-0 z-10"
         :class="[
@@ -39,7 +37,6 @@
         @mousedown="onTitleBarMouseDown"
         @dblclick="onTitleBarDblClick"
       >
-        <!-- Window controls -->
         <div class="flex items-center gap-2">
           <button
             @click.stop="handleClose"
@@ -82,7 +79,6 @@
         </div>
       </div>
 
-      <!-- Terminal content -->
       <div
         v-show="!isMinimized"
         id="terminal"
@@ -166,7 +162,7 @@ const {
   terminalRef:  terminalElement,
 });
 
-/* ── Window state ─────────────────────────────────────────── */
+/* Window state */
 
 const isMobile    = ref(false);
 const isMinimized = ref(false);
@@ -217,7 +213,7 @@ const windowStyle = computed(() => ({
     : 'left 0.22s ease, top 0.22s ease, width 0.22s ease, height 0.22s ease',
 }));
 
-/* ── Drag ─────────────────────────────────────────────────── */
+/* Drag */
 
 let dragOffX = 0;
 let dragOffY = 0;
@@ -243,7 +239,7 @@ function onTitleBarDblClick(e) {
   handleMaximize();
 }
 
-/* ── Resize (8 directions) ────────────────────────────────── */
+/* Resize (8 directions) */
 
 let resizeDir  = '';
 let resStartX  = 0;
@@ -264,7 +260,7 @@ function onResizeStart(e, dir) {
   resStartTop  = winY.value;
 }
 
-/* ── Global mouse handlers ────────────────────────────────── */
+/* Global mouse handlers */
 
 function onMouseMove(e) {
   // cursor position for the background glow (CSS vars, no re-render)
@@ -333,8 +329,6 @@ function onMouseUp() {
   resizing.value = false;
   draggingFromMaximized = false;
 }
-
-/* ── Window controls ──────────────────────────────────────── */
 
 function handleClose() {
   window.location.href = 'https://leosoftware.dev';
@@ -416,21 +410,21 @@ function onWindowResize() {
   }
 }
 
-/* ── Always-on focus ─────────────────────────────────────── */
+/* Always-on focus */
 
 function onWindowMouseDown() {
   if (isMinimized.value) return;
   setTimeout(focusInput, 0);
 }
 
-/* ── Mobile keys ──────────────────────────────────────────── */
+/* Mobile keys */
 
 const handleMobileKey = (key, ctrl = false) => {
   onKeyDown({ key, ctrlKey: ctrl, preventDefault: () => {} });
   focusInput();
 };
 
-/* ── Lifecycle ────────────────────────────────────────────── */
+/* Lifecycle */
 
 onMounted(() => {
   initWindow();

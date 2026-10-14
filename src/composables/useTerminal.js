@@ -11,14 +11,12 @@ export function useTerminal({
   inputLineRef,
   terminalRef,
 }) {
-  // --- Estado Reactivo ---
   const inputText = ref("");
   const isFocused = ref(true);
   const isDemoMode = ref(false);
 
   const promptPath = "~";
 
-  // --- Lógica para sugerencia visual (Ghost text) ---
   const suggestionRemainder = computed(() => {
     const val = inputText.value.toLowerCase();
     if (!val || val.includes(" ")) return "";
@@ -26,16 +24,13 @@ export function useTerminal({
     return match ? match.slice(val.length) : "";
   });
 
-  // --- Estado del Modal (Refactorizado para Componentes) ---
   const modalHidden = ref(true);
   const modalTitle = ref("");
-  const modalComponent = ref(null); // Ahora almacena el nombre del componente
+  const modalComponent = ref(null); // name of the content component, e.g. 'about'
 
-  // --- Historial de Comandos ---
   let commandHistory = [];
   let historyIndex = -1;
 
-  // --- Internacionalización (i18n) ---
   const getInitialLang = () => {
     const savedLang = localStorage.getItem("portfolioLang");
     return savedLang === "en" || savedLang === "es" ? savedLang : "en";
@@ -49,27 +44,21 @@ export function useTerminal({
       translations.value[currentLang.value][key]) ||
     key;
 
-  // --- Lógica de Scroll Automático ---
   const scrollToBottom = () => {
     nextTick(() => {
-      if (terminalRef && terminalRef.value) {
-        terminalRef.value.scrollTop = terminalRef.value.scrollHeight;
-      }
+      const el = terminalRef.value;
+      if (el) el.scrollTop = el.scrollHeight;
     });
   };
 
-  // --- Manipulación del Output ---
   const appendHtml = (html) => {
-    if (outputRef && outputRef.value && outputRef.value.appendHtml) {
-      outputRef.value.appendHtml(html);
-      scrollToBottom();
-    }
+    if (!outputRef.value) return;
+    outputRef.value.appendHtml(html);
+    scrollToBottom();
   };
 
   const clearOutput = () => {
-    if (outputRef && outputRef.value && outputRef.value.clear) {
-      outputRef.value.clear();
-    }
+    outputRef.value?.clear();
   };
 
   let isFirstWelcome = true;
@@ -106,19 +95,12 @@ export function useTerminal({
     }
   };
 
-  // --- Lógica de Ventana/Modal ---
   const openWindow = (command) => {
-    if (inputLineRef && inputLineRef.value && inputLineRef.value.classList)
-      inputLineRef.value.classList.remove("is-focused");
+    inputLineRef.value?.classList.remove("is-focused");
+    if (inputRef.value?.inputRefLocal) inputRef.value.inputRefLocal.disabled = true;
 
-    if (inputRef && inputRef.value && inputRef.value.inputRefLocal) {
-      inputRef.value.inputRefLocal.disabled = true;
-    }
-
-    // Seteamos el título desde el JSON (solo texto plano ahora)
     modalTitle.value = getText(`${command}_title`);
 
-    // Identificamos qué componente cargar (p.e. 'about', 'projects')
     modalComponent.value = command;
     modalHidden.value = false;
   };
@@ -128,12 +110,8 @@ export function useTerminal({
     modalComponent.value = null;
 
     if (!isDemoMode.value) {
-      if (inputLineRef && inputLineRef.value && inputLineRef.value.classList)
-        inputLineRef.value.classList.add("is-focused");
-
-      if (inputRef && inputRef.value && inputRef.value.inputRefLocal) {
-        inputRef.value.inputRefLocal.disabled = false;
-      }
+      inputLineRef.value?.classList.add("is-focused");
+      if (inputRef.value?.inputRefLocal) inputRef.value.inputRefLocal.disabled = false;
 
       isFocused.value = true;
       nextTick(focusInput);
@@ -156,7 +134,6 @@ export function useTerminal({
     }
   };
 
-  // --- Lógica de Demo ---
   let typedInstance = null;
 
   const stopDemo = () => {
@@ -218,7 +195,6 @@ export function useTerminal({
     }
   }
 
-  // --- Ejecución de Comandos ---
   const executeCommand = (cmdRaw) => {
     const cmd = String(cmdRaw);
     const [command, ...args] = cmd.split(" ").filter(Boolean);
