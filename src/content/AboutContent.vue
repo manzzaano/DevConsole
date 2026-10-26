@@ -98,7 +98,7 @@ const content = {
     statusValue: "DAM (2024-2026)",
     ageLabel: "AGE",
     logTitle: "Hi, I'm Ismael.",
-    lead: (age) => `I'm ${age} and a full stack developer, trained in Multiplatform Application Development (DAM). I'm open to job offers and can start right away, remotely or on-site from Spain.`,
+    lead: (age) => `I'm ${age} and a full stack developer, trained in Multiplatform Application Development (DAM).`,
     bio: [
       "During my internship at Entreredes I ran one of their projects on my own: <strong class='text-white'>a SaaS that generates landing pages, built with Laravel and Filament</strong>, which I took to production with Docker and Gemini integrated through queues. Before that I did frontend with React at Savia and QA at Cojali.",
       "My supervisor put it this way: I wasn't <strong class='text-white'>\"the typical intern profile\"</strong>; I could take on work on my own without anyone watching over me.",
@@ -119,7 +119,7 @@ const content = {
     statusValue: "DAM (2024-2026)",
     ageLabel: "EDAD",
     logTitle: "Hola, soy Ismael.",
-    lead: (age) => `Tengo ${age} años y soy desarrollador full stack, formado en Desarrollo de Aplicaciones Multiplataforma (DAM). Estoy abierto a ofertas de trabajo y puedo incorporarme ya, en remoto o presencial desde España.`,
+    lead: (age) => `Tengo ${age} años y soy desarrollador full stack, formado en Desarrollo de Aplicaciones Multiplataforma (DAM).`,
     bio: [
       "En mis prácticas en Entreredes llevé yo solo uno de sus desarrollos: <strong class='text-white'>un SaaS que genera landing pages, con Laravel y Filament</strong>, que dejé en producción con Docker y con Gemini integrado mediante colas. Antes hice frontend con React en Savia y QA en Cojali.",
       "Mi supervisor lo resumió así: no era <strong class='text-white'>\"el perfil típico de prácticas\"</strong>; podía llevar trabajo por mi cuenta sin que nadie estuviera encima.",
