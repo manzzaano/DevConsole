@@ -9,7 +9,7 @@ export const neofetchData = {
   `,
   stats: [
     { label: "OS", value: "ManzanoOS v1.1" },
-    { label: "Role", value: "Full Stack Developer" },
+    { label: "Role", value: "Junior AI Engineer" },
     {
       label: "Github",
       value: "github.com/manzzaano",
@@ -23,6 +23,6 @@ export const neofetchData = {
     { label: "Kernel", value: "Vue 3.5.x" },
     { label: "Uptime", value: "Since 2024" },
     { label: "Packages", value: "Tailwind, Vite, Lucide" },
-    { label: "Location", value: "Spain · remote or on-site" },
+    { label: "Location", value: "Spain" },
   ],
 };
