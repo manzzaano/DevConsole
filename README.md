@@ -1,10 +1,10 @@
 # DevConsole
 
-Mi portfolio en forma de terminal en el navegador. Cada comando abre una sección de mi perfil: quién soy, proyectos, experiencia, formación, tecnologías, contacto y CV. Está en producción en **[console.leosoftware.dev](https://console.leosoftware.dev)**.
+Mi portfolio en forma de terminal en el navegador. Cada comando abre una sección de mi perfil: quién soy, proyectos, experiencia, formación, tecnologías, contacto y CV. Está en producción en **[console.ismaelmanzano.com](https://console.ismaelmanzano.com)**.
 
 ![DevConsole](public/og.png)
 
-Está pensado para perfiles técnicos: la propia terminal es la prueba de cómo trabajo. El perfil completo, con los casos de estudio, está en [leosoftware.dev](https://leosoftware.dev).
+Está pensado para perfiles técnicos: la propia terminal es la prueba de cómo trabajo. El perfil completo, con los casos de estudio, está en [ismaelmanzano.com](https://ismaelmanzano.com).
 
 ## Comandos
 
@@ -22,7 +22,7 @@ Está pensado para perfiles técnicos: la propia terminal es la prueba de cómo 
 | `demo` | Recorrido guiado por la consola |
 | `help` | Lista de comandos |
 | `clear` | Limpiar la pantalla (también `Ctrl+L`) |
-| `exit` / `leo/` | Volver a leosoftware.dev |
+| `exit` / `leo/` | Volver a ismaelmanzano.com |
 
 **Teclado:** `Tab` o `→` autocompletan, `↑` / `↓` recorren el historial y `Esc` cierra una ventana o para la demo.
 
@@ -33,7 +33,7 @@ Está pensado para perfiles técnicos: la propia terminal es la prueba de cómo 
 - **Dos idiomas sin recargar.** Los textos están en `public/content.json` y en cada componente de sección; el idioma elegido se recuerda en el navegador.
 - **Secciones bajo demanda.** Cada ventana es un componente asíncrono que solo se carga al abrirla.
 - **Una ventana real en escritorio:** se arrastra, se redimensiona desde cualquier borde, se maximiza y se minimiza. En móvil, una vista de tarjetas en lugar de la terminal.
-- **El fondo**, compartido con leosoftware.dev: un patrón de barras diminutas y la barra de leo/ hecha de partículas en canvas 2D. En móvil queda tenue y quieto, y se detiene cuando la pestaña no se ve.
+- **El fondo**, compartido con ismaelmanzano.com: un patrón de barras diminutas y la barra de leo/ hecha de partículas en canvas 2D. En móvil queda tenue y quieto, y se detiene cuando la pestaña no se ve.
 - **Analítica solo con consentimiento.** Google Analytics se carga únicamente si `VITE_GA_ID` está definida y el visitante la acepta.
 
 ## Stack
@@ -60,4 +60,4 @@ npx vercel deploy --prod
 
 ---
 
-Hecho por [Ismael Manzano León](https://leosoftware.dev) · [LinkedIn](https://www.linkedin.com/in/ismael-manzano-leon/)
+Hecho por [Ismael Manzano León](https://ismaelmanzano.com) · [LinkedIn](https://www.linkedin.com/in/ismael-manzano-leon/)

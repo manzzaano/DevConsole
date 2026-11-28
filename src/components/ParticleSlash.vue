@@ -3,7 +3,7 @@
 </template>
 
 <script setup>
-// The leo/ slash from leosoftware.dev's hero, built from particles that assemble on load,
+// The leo/ slash from ismaelmanzano.com's hero, built from particles that assemble on load,
 // dodge the cursor and burst on click. Plain 2D canvas: each particle eases back home plus
 // a decaying velocity. Green here, and drawn in the free space right of the terminal window.
 import { ref, onMounted, onBeforeUnmount } from 'vue'

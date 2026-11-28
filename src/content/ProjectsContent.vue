@@ -84,7 +84,7 @@ const props = defineProps({
   lang: { type: String, default: "en" },
 });
 
-// Same descriptions as the project cards of leosoftware.dev
+// Same descriptions as the project cards of ismaelmanzano.com
 const content = {
   en: {
     projectList: [
@@ -99,7 +99,7 @@ const content = {
       {
         id: "Project_02",
         title: "AutoLanding",
-        github: "https://leosoftware.dev/en/sistemas/autolanding",
+        github: "https://ismaelmanzano.com/en/sistemas/autolanding",
         description:
           'Internal Entreredes tool I built independently during my internship: landing pages for local businesses with Google Places data and Gemini copy and images. <strong>Laravel 12, Filament</strong>, Redis queues and Docker, 225 PHPUnit tests, in production. The code belongs to the company: the link goes to the case study.',
         tags: ["Laravel", "Filament", "Redis", "Gemini"],
@@ -139,7 +139,7 @@ const content = {
       {
         id: "Project_07",
         title: "leo/",
-        github: "https://leosoftware.dev",
+        github: "https://ismaelmanzano.com",
         description:
           'My personal site, with the projects told in depth and what I keep learning. Built with <strong>Next.js 15</strong>, TypeScript and Tailwind v4, in Spanish and English.',
         tags: ["Next.js 15", "TypeScript", "Tailwind v4"],
@@ -159,7 +159,7 @@ const content = {
       {
         id: "Proyecto_02",
         title: "AutoLanding",
-        github: "https://leosoftware.dev/sistemas/autolanding",
+        github: "https://ismaelmanzano.com/sistemas/autolanding",
         description:
           'Herramienta interna de Entreredes que desarrollé de forma autónoma en mis prácticas: landing pages para negocios locales con datos de Google Places y textos e imágenes de Gemini. <strong>Laravel 12, Filament</strong>, colas con Redis y Docker, 225 tests con PHPUnit, en producción. El código pertenece a la empresa: el enlace lleva al caso de estudio.',
         tags: ["Laravel", "Filament", "Redis", "Gemini"],
@@ -199,7 +199,7 @@ const content = {
       {
         id: "Proyecto_07",
         title: "leo/",
-        github: "https://leosoftware.dev",
+        github: "https://ismaelmanzano.com",
         description:
           'Mi web personal, con los proyectos contados a fondo y lo que voy aprendiendo. Hecha con <strong>Next.js 15</strong>, TypeScript y Tailwind v4, en español y en inglés.',
         tags: ["Next.js 15", "TypeScript", "Tailwind v4"],

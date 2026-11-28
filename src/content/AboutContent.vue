@@ -83,7 +83,7 @@ function calcAge() {
   return age;
 }
 
-// Same copy and voice as the "Sobre mí" section of leosoftware.dev
+// Same copy and voice as the "Sobre mí" section of ismaelmanzano.com
 const content = {
   en: {
     userLabel: "USER",
