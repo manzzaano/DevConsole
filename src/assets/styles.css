@@ -1,4 +1,4 @@
-/* Same look as leosoftware.dev (black hero background with the tiny "/" pattern, flat cards
+/* Same look as ismaelmanzano.com (black hero background with the tiny "/" pattern, flat cards
    with hairline borders) but with the console's own green accent. */
 :root {
   --bg: #000;
@@ -10,7 +10,7 @@
   --text-secondary: #b4b4bc;
   --shadow-drop: 0 24px 60px rgba(0, 0, 0, 0.6);
 
-  /* Same type as leosoftware.dev: Archivo for headings, IBM Plex Sans for text */
+  /* Same type as ismaelmanzano.com: Archivo for headings, IBM Plex Sans for text */
   --font-sans: 'IBM Plex Sans', system-ui, -apple-system, sans-serif;
   --font-headline: 'Archivo', system-ui, sans-serif;
   /* console green: #22c55e for fills (black text on top), #4ade80 for text on dark */
@@ -203,7 +203,7 @@
   }
 }
 
-/* Hero background of leosoftware.dev: tiny "/" pattern. No centre-to-edge fade here: the
+/* Hero background of ismaelmanzano.com: tiny "/" pattern. No centre-to-edge fade here: the
    terminal window covers the centre, so the pattern has to show in the margins around it. */
 .slash-pattern {
   position: fixed;

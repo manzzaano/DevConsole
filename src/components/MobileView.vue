@@ -29,13 +29,13 @@
     </div>
 
     <a
-      href="https://leosoftware.dev"
+      href="https://ismaelmanzano.com"
       class="glass-panel w-full max-w-xs px-5 py-4 flex items-center justify-between"
       style="border-color: rgba(74,222,128,0.28)"
     >
       <div>
         <p class="text-white font-semibold text-sm">{{ currentLang === 'es' ? 'Ver portfolio completo' : 'Full portfolio' }}</p>
-        <p class="font-mono text-xs text-white/35 mt-0.5">leosoftware.dev</p>
+        <p class="font-mono text-xs text-white/35 mt-0.5">ismaelmanzano.com</p>
       </div>
       <span class="font-mono text-lg" style="color: rgba(74,222,128,0.7)">→</span>
     </a>

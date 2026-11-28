@@ -8,7 +8,7 @@
     <div class="glass-panel max-w-3xl mx-auto flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-6 px-5 py-4">
       <p class="font-sans text-sm leading-relaxed flex-1 text-white/80">
         {{ t.text }}
-        <a href="https://www.leosoftware.dev/cookies" class="underline hover:no-underline" style="color:#4ade80">{{ t.policy }}</a>
+        <a href="https://ismaelmanzano.com/cookies" class="underline hover:no-underline" style="color:#4ade80">{{ t.policy }}</a>
       </p>
       <!-- Both choices look the same: rejecting must be as easy as accepting (AEPD) -->
       <div class="flex items-center gap-3 shrink-0">
@@ -20,7 +20,7 @@
 </template>
 
 <script setup>
-// Google Analytics only loads after explicit consent (LSSI / RGPD), like leosoftware.dev.
+// Google Analytics only loads after explicit consent (LSSI / RGPD), like ismaelmanzano.com.
 // The measurement ID comes from VITE_GA_ID; without it nothing is shown or loaded.
 import { ref, computed, onMounted } from 'vue'
 

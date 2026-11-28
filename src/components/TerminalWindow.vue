@@ -75,7 +75,7 @@
         </div>
 
         <div class="ml-2 text-xs font-mono hidden sm:block">
-          <span class="accent-teal">ismael@leosoftware</span><span class="text-white/30">:</span><span class="accent-warm">~</span>
+          <span class="accent-teal">ismael@leo</span><span class="text-white/30">:</span><span class="accent-warm">~</span>
         </div>
       </div>
 
@@ -92,7 +92,7 @@
           v-if="isDemoMode"
           class="flex items-center mt-2 flex-shrink-0 text-sm md:text-base"
         >
-          <span class="accent-teal font-bold text-xs sm:text-sm md:text-base">ismael@leosoftware</span><span class="text-white/70 text-xs sm:text-sm md:text-base">:</span><span class="accent-warm text-xs sm:text-sm md:text-base">{{ promptPath }}</span><span class="text-white/70 text-xs sm:text-sm md:text-base">$</span>
+          <span class="accent-teal font-bold text-xs sm:text-sm md:text-base">ismael@leo</span><span class="text-white/70 text-xs sm:text-sm md:text-base">:</span><span class="accent-warm text-xs sm:text-sm md:text-base">{{ promptPath }}</span><span class="text-white/70 text-xs sm:text-sm md:text-base">$</span>
           <span id="demo-typing" class="ml-2 whitespace-pre text-white text-xs sm:text-sm md:text-base"></span>
         </div>
 
@@ -331,7 +331,7 @@ function onMouseUp() {
 }
 
 function handleClose() {
-  window.location.href = 'https://leosoftware.dev';
+  window.location.href = 'https://ismaelmanzano.com';
 }
 
 const TRANSITION_MS = 240; // matches CSS 0.22s + buffer

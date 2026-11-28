@@ -157,7 +157,7 @@ const stackStormbringer = ["Python", "AI Agents", "Docker", "Git", "Testing"];
 const stackEntreredes = ["Laravel", "Filament PHP", "PHP", "Gemini AI", "PHPUnit", "Docker"];
 const stackSavia      = ["React 19", "Vite", "JavaScript", "TypeScript", "Git"];
 
-// Same facts and voice as the Experience section of leosoftware.dev
+// Same facts and voice as the Experience section of ismaelmanzano.com
 const content = {
   en: {
     initMessage: "Loading work history...",

@@ -206,7 +206,7 @@ export function useTerminal({
     }
 
     appendHtml(
-      `<div class="flex"><span class="accent-teal font-bold">ismael@leosoftware</span><span class="text-white/70">:</span><span class="accent-warm">${escapeHtml(promptPath)}</span><span class="text-white/70">$</span><p class="ml-2 text-white">${escapeHtml(cmd)}</p></div>`,
+      `<div class="flex"><span class="accent-teal font-bold">ismael@leo</span><span class="text-white/70">:</span><span class="accent-warm">${escapeHtml(promptPath)}</span><span class="text-white/70">$</span><p class="ml-2 text-white">${escapeHtml(cmd)}</p></div>`,
     );
 
     if (windowCommands.includes(command)) {
@@ -261,10 +261,10 @@ export function useTerminal({
       appendHtml(`<div>${helpText}</div>`);
     } else if (command === "exit" || command === "leo/") {
       appendHtml(
-        `<div><p class="text-white/50">Navegando a leosoftware.dev...</p></div>`,
+        `<div><p class="text-white/50">Navegando a ismaelmanzano.com...</p></div>`,
       );
       setTimeout(() => {
-        window.location.href = "https://leosoftware.dev";
+        window.location.href = "https://ismaelmanzano.com";
       }, 800);
     } else if (command === "ls" || command === "cat" || command === "cd" || command === "pwd") {
       appendHtml(
@@ -335,7 +335,7 @@ export function useTerminal({
           inputText.value = matches[0];
         } else if (matches.length > 1) {
           appendHtml(
-            `<div class="flex"><span class="accent-teal font-bold">ismael@leosoftware</span><span class="text-white/70">:</span><span class="accent-warm">${escapeHtml(promptPath)}</span><span class="text-white/70">$</span><p class="ml-2 text-white/70">${escapeHtml(partialCommand)}</p></div>`,
+            `<div class="flex"><span class="accent-teal font-bold">ismael@leo</span><span class="text-white/70">:</span><span class="accent-warm">${escapeHtml(promptPath)}</span><span class="text-white/70">$</span><p class="ml-2 text-white/70">${escapeHtml(partialCommand)}</p></div>`,
           );
           appendHtml(
             `<div class="flex flex-wrap gap-x-4 text-white/60">${matches.join(" ")}</div>`,
